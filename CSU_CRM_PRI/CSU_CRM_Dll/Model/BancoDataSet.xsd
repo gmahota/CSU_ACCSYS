@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="BancoDataSet" targetNamespace="http://tempuri.org/BancoDataSet.xsd" xmlns:mstns="http://tempuri.org/BancoDataSet.xsd" xmlns="http://tempuri.org/BancoDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="BancoDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="BancoDataSet" msprop:Generator_UserDSName="BancoDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Bancos" msprop:Generator_TableClassName="BancosDataTable" msprop:Generator_TableVarName="tableBancos" msprop:Generator_RowChangedName="BancosRowChanged" msprop:Generator_TablePropName="Bancos" msprop:Generator_RowDeletingName="BancosRowDeleting" msprop:Generator_RowChangingName="BancosRowChanging" msprop:Generator_RowEvHandlerName="BancosRowChangeEventHandler" msprop:Generator_RowDeletedName="BancosRowDeleted" msprop:Generator_RowClassName="BancosRow" msprop:Generator_UserTableName="Bancos" msprop:Generator_RowEvArgName="BancosRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Banco" msprop:Generator_ColumnVarNameInTable="columnBanco" msprop:Generator_ColumnPropNameInRow="Banco" msprop:Generator_ColumnPropNameInTable="BancoColumn" msprop:Generator_UserColumnName="Banco" type="xs:string" minOccurs="0" />
+              <xs:element name="Descricao" msprop:Generator_ColumnVarNameInTable="columnDescricao" msprop:Generator_ColumnPropNameInRow="Descricao" msprop:Generator_ColumnPropNameInTable="DescricaoColumn" msprop:Generator_UserColumnName="Descricao" type="xs:string" minOccurs="0" />
+              <xs:element name="NumConta" msprop:Generator_ColumnVarNameInTable="columnNumConta" msprop:Generator_ColumnPropNameInRow="NumConta" msprop:Generator_ColumnPropNameInTable="NumContaColumn" msprop:Generator_UserColumnName="NumConta" type="xs:string" minOccurs="0" />
+              <xs:element name="Nib" msprop:Generator_ColumnVarNameInTable="columnNib" msprop:Generator_ColumnPropNameInRow="Nib" msprop:Generator_ColumnPropNameInTable="NibColumn" msprop:Generator_UserColumnName="Nib" type="xs:string" minOccurs="0" />
+              <xs:element name="Iban" msprop:Generator_ColumnVarNameInTable="columnIban" msprop:Generator_ColumnPropNameInRow="Iban" msprop:Generator_ColumnPropNameInTable="IbanColumn" msprop:Generator_UserColumnName="Iban" type="xs:string" minOccurs="0" />
+              <xs:element name="Moeda" msprop:Generator_ColumnVarNameInTable="columnMoeda" msprop:Generator_ColumnPropNameInRow="Moeda" msprop:Generator_ColumnPropNameInTable="MoedaColumn" msprop:Generator_UserColumnName="Moeda" type="xs:string" minOccurs="0" />
+              <xs:element name="Swift" msprop:Generator_ColumnVarNameInTable="columnSwift" msprop:Generator_ColumnPropNameInRow="Swift" msprop:Generator_ColumnPropNameInTable="SwiftColumn" msprop:Generator_UserColumnName="Swift" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

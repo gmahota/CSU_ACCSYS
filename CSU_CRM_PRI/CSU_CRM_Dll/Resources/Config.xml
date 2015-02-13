@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Configuracao>
+  <Instancia instancia ="1" empresa ="Acc" usuario="gmahota" password ="ei2010" instanciaSql ="SERVERPRIMAVERA\PRIMAVERA" empresaSql ="PRIACC" usuarioSql="sa" passwordSql ="Accsys2011"/>
+</Configuracao>
