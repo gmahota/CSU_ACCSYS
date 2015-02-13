@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<instancias>
+  <Instancia instancia ="1" empresa ="Clone" usuario="accsys" password ="accsys2011" instanciaSql ="ACCPRI08\PRIMAVERAV810" empresaSql ="PRIClone" usuarioSql="sa" passwordSql ="accsys2011"/>
+  
+</instancias>
