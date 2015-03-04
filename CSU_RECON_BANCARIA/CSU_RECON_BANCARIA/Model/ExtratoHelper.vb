@@ -13,8 +13,8 @@ Public Class ExtratoHelper
     Public codEmpresa As String
     Public codUsuario As String
     Public password As String
-    Public objmotor As ErpBS
-    Public objLista As StdBELista
+    'Public objmotor As ErpBS
+    'Public objLista As StdBELista
 
     Dim i As Long
     Dim xlApp As Object
@@ -46,60 +46,71 @@ Sair:
         MsgBox(Err.Description, vbInformation, "erro: " & Err.Number)
     End Sub
 
-    Public Sub incializarMotorPrimavera(tipoPlataforma As Integer, codEmpresa As String, codUsuario As String, password As String, con As String)
-        On Error GoTo trataerro
-        Me.tipoPlataforma = tipoPlataforma
-        Me.codUsuario = codUsuario
-        Me.codEmpresa = codEmpresa
-        Me.password = password
-        Me.connectionString = con
+    '    Public Sub incializarMotorPrimavera(tipoPlataforma As Integer, codEmpresa As String, codUsuario As String, password As String, con As String)
+    '        On Error GoTo trataerro
+    '        Me.tipoPlataforma = tipoPlataforma
+    '        Me.codUsuario = codUsuario
+    '        Me.codEmpresa = codEmpresa
+    '        Me.password = password
+    '        Me.connectionString = con
 
-        'objmotor = CreateObject("ErpBS800.ErpBs")
-        objmotor = New ErpBS
-        objmotor.AbreEmpresaTrabalho(tipoPlataforma, codEmpresa, codUsuario, password)
-        Exit Sub
-trataerro:
-        MsgBox(Err.Description)
-    End Sub
+    '        'objmotor = CreateObject("ErpBS800.ErpBs")
+    '        objmotor = New ErpBS
+    '        objmotor.AbreEmpresaTrabalho(tipoPlataforma, codEmpresa, codUsuario, password)
+    '        Exit Sub
+    'trataerro:
+    '        MsgBox(Err.Description)
+    '    End Sub
 
     Public Function daListaBancos() As IEnumerable(Of Bancos)
         Dim lista As New List(Of Bancos)
-        objLista = objmotor.Consulta("select * from Bancos")
+       
+        Dim dt = search_Query("select * from Bancos")
 
-        While Not (objLista.NoFim Or objLista.Vazia)
-            lista.Add(New Bancos(objLista.Valor("Banco"), objLista.Valor("Descricao")))
+        For Each row As DataRow In dt.Rows
+            lista.Add(New Bancos(row("Banco"), row("Descricao")))
 
-            objLista.Seguinte()
-        End While
+        Next
 
         Return lista
     End Function
 
+    Public Function daListaContasBancarias() As IEnumerable(Of ContasBancarias)
+        Dim lista As New List(Of ContasBancarias)
+        Dim dt = search_Query("select * from ContasBancarias ")
+
+        For Each row As DataRow In dt.Rows
+            lista.Add(New ContasBancarias(row("Conta").ToString(), row("NumConta").ToString(),
+                                          row("Banco").ToString(), row("DescBanco").ToString(), row("Moeda").ToString()))
+
+        Next
+
+        Return lista
+    End Function
 
     Public Function daListaContasBancarias(banco As String) As IEnumerable(Of ContasBancarias)
         Dim lista As New List(Of ContasBancarias)
-        objLista = objmotor.Consulta("select * from ContasBancarias where banco = '" & banco & "'")
+        Dim dt = search_Query("select * from ContasBancarias where banco = '" & banco & "'")
+        
+        For Each row As DataRow In dt.Rows
+            lista.Add(New ContasBancarias(row("Conta").ToString(), row("NumConta").ToString(), row("Banco").ToString(),
+                                          row("DescBanco").ToString(), row("Moeda").ToString()))
 
-        While Not (objLista.NoFim Or objLista.Vazia)
-            lista.Add(New ContasBancarias(objLista.Valor("Conta"), objLista.Valor("NumConta"), objLista.Valor("Banco"), objLista.Valor("DescBanco")))
-
-            objLista.Seguinte()
-        End While
-
+        Next
+    
         Return lista
     End Function
 
     Public Function daLinhasFormatoBancario(formato As String, ByRef tipoItem As String) As IEnumerable(Of LinhasFormatoBancario)
         Dim lista As New List(Of LinhasFormatoBancario)
-        objLista = objmotor.Consulta("select * from LinhasFormatosImportacao where formato = '" & formato & "'")
 
-        While Not (objLista.NoFim Or objLista.Vazia)
+        Dim dt = search_Query("select * from LinhasFormatosImportacao where formato = '" & formato & "'")
+
+        For Each row As DataRow In dt.Rows
             lista.Add(
-                New LinhasFormatoBancario(objLista.Valor("Formato"), objLista.Valor("TipoItem"), objLista.Valor("Campo"),
-                                          objLista.Valor("Posicao"), objLista.Valor("Comprimento"), objLista.Valor("FormatoEspecial")))
-
-            objLista.Seguinte()
-        End While
+                New LinhasFormatoBancario(row("Formato").ToString(), row("TipoItem").ToString(), row("Campo").ToString(),
+                                          row("Posicao").ToString(), row("Comprimento").ToString(), row("FormatoEspecial").ToString()))
+        Next
 
         Return lista
     End Function
@@ -108,16 +119,17 @@ trataerro:
         Dim lista As New List(Of LinhasFormatoBancario)
         Dim linhasFormatoBancario As LinhasFormatoBancario
 
-        objLista = objmotor.Consulta("select * from LinhasFormatosImportacao where formato = '" & formatoBancario.Formato & "'")
+        Dim dt = search_Query("select * from LinhasFormatosImportacao where formato = '" & formatoBancario.Formato & "'")
 
-        While Not (objLista.NoFim Or objLista.Vazia)
-            linhasFormatoBancario = New LinhasFormatoBancario(objLista.Valor("Formato"), objLista.Valor("TipoItem"), objLista.Valor("Campo"),
-                                          objLista.Valor("Posicao"), objLista.Valor("Comprimento"), objLista.Valor("FormatoEspecial"))
+        For Each row As DataRow In dt.Rows
+            
+            linhasFormatoBancario = New LinhasFormatoBancario(row("Formato").ToString(), row("TipoItem").ToString(),
+                                                              row("Campo").ToString(),
+                                          row("Posicao").ToString(), row("Comprimento").ToString(), row("FormatoEspecial").ToString())
+
             linhasFormatoBancario.FormatoBancario = formatoBancario
             lista.Add(linhasFormatoBancario)
-
-            objLista.Seguinte()
-        End While
+        Next
 
         Return lista
     End Function
@@ -125,390 +137,280 @@ trataerro:
     Public Function daFormatoBancario() As IEnumerable(Of FormatoBancario)
         Dim lista As New List(Of FormatoBancario)
         Dim formatoBancario As FormatoBancario
-        objLista = objmotor.Consulta("select * from FormatosImportacao")
+        
+        Dim dt = search_Query("select * from FormatosImportacao")
 
-        While Not (objLista.NoFim Or objLista.Vazia)
-            formatoBancario = New FormatoBancario(objLista.Valor("Formato"), objLista.Valor("Descricao"), objLista.Valor("SeparadorDecimal"),
-                                          objLista.Valor("SeparadorMilhares"), objLista.Valor("SeparadorDatas"))
-            'formatoBancario.LinhasFormatosBancarios = daLinhasFormatoBancario(formatoBancario)
+        For Each row As DataRow In dt.Rows
+
+            formatoBancario = New FormatoBancario(row("Formato").ToString(), row("Descricao").ToString(),
+                                                  row("SeparadorDecimal").ToString(),
+                                          row("SeparadorMilhares").ToString(), row("SeparadorDatas").ToString())
+
             lista.Add(formatoBancario)
-
-            objLista.Seguinte()
-        End While
+        Next
 
         Return lista
     End Function
 
+    Public Function daListaCabecExtractoBancario(query As String) As IEnumerable(Of CabecExtractoBancario)
+        Dim lista As New List(Of CabecExtractoBancario)
+        Dim cabecExtratoBancario As CabecExtractoBancario
+
+        Dim dt = search_Query(query)
+
+        For Each row As DataRow In dt.Rows
+
+            cabecExtratoBancario = New CabecExtractoBancario(row("Conta").ToString(), row("NumeroConta").ToString(),
+                                                             row("NumeroExtracto").ToString(), row("Origem").ToString(),
+                                                             Convert.ToDateTime(row("DataInicial")).Date,
+                                                             Convert.ToDateTime(row("DataFinal")).Date, row("Id"))
+
+            lista.Add(cabecExtratoBancario)
+        Next
+
+        Return lista
+    End Function
+
+    Public Function daCabecExtractoBancario(query As String) As CabecExtractoBancario
+        Dim lista As New List(Of CabecExtractoBancario)
+        Dim cabecExtratoBancario As CabecExtractoBancario
+
+        Dim dt = search_Query(query)
+
+        For Each row As DataRow In dt.Rows
+            
+            cabecExtratoBancario = New CabecExtractoBancario(row("Conta").ToString(), row("NumeroConta").ToString(),
+                                                             row("NumeroExtracto").ToString(), row("Origem").ToString(),
+                                                             Convert.ToDateTime(row("DataInicial")).Date,
+                                                             Convert.ToDateTime(row("DataFinal")).Date, row("Id"))
+
+            lista.Add(cabecExtratoBancario)
+        Next
+        If lista.Count > 0 Then Return lista(0)
+
+        Return New CabecExtractoBancario()
+
+    End Function
+
     Public Sub importarExtrato2(caminhoexcel As String, folhaexcel As Integer, linhaInicial As Integer, linhaFinal As Integer, banco As String, Conta As String, formatobanco As String, NumConta As String, NumExtrato As String, ByVal DataIniEx As Date, ByVal DataFimEx As Date, ByVal SaldoIni As String, ByVal SaldoFim As String)
-        On Error GoTo Erro
+        Try
 
-        Dim objLista1 As StdBELista
-        Dim objLista2 As StdBELista
-        Dim objLista3 As StdBELista
-        Dim objLista4 As StdBELista
+            Dim i As Long
+            Dim sqlstr As String
+            Dim sqlstr1 As String
+            Dim sqlstr2 As String
+            Dim sqlstr3 As String
+            Dim sqlstr4 As String
 
-        Dim objMotorErp As ErpBS
-        Dim objListaContas As GcpBEContaBancaria
-        Dim objConta As GcpBEContaBancaria
-        Dim objCabecExtrato As GcpBEExtractoBancario
-        Dim objLinhaExtrato As GcpBELinhaExtractoBancario
+            Dim xlApp As Object
+            Dim xlBook As Object
+            Dim xlSheet As Object
 
-        Dim i As Long
-        Dim sqlstr As String
-        Dim sqlstr1 As String
-        Dim sqlstr2 As String
-        Dim sqlstr3 As String
-        Dim sqlstr4 As String
+            Dim IdCabec As String
 
-        Dim xlApp As Object
-        Dim xlBook As Object
-        Dim xlSheet As Object
+            Dim IdLinhas As String
+            Dim DataMovimEx As New String("")
+            Dim DataValorEx As New String("")
+            Dim Movimento As New String("")
+            Dim Natureza As New String("")
+            Dim MovBnc As New String("")
+            Dim Numero As New String("")
+            Dim Obs As New String("")
 
-        Dim IdCabec As String
+            Dim ValorMov As Double
+            Dim ValorConta As Double
+            Dim MoedaMov As String
+            Dim MoedaConta As String
+            Dim Ini As Integer
+            Dim Fim As Integer
+            Dim Valor As Double
 
-        Dim IdLinhas As String
-        Dim DataMovimEx As New String("")
-        Dim DataValorEx As New String("")
-        Dim Movimento As New String("")
-        Dim Natureza As New String("")
-        Dim MovBnc As New String("")
-        Dim Numero As New String("")
-        Dim Obs As New String("")
+            Dim linhasFormatoBancario As List(Of LinhasFormatoBancario)
 
-        Dim ValorMov As Double
-        Dim ValorConta As Double
-        Dim MoedaMov As String
-        Dim MoedaConta As String
-        Dim Ini As Integer
-        Dim Fim As Integer
-        Dim Valor As Double
+            openExcell(caminhoexcel)
+
+            'variavel temporaria
+            Dim temp As LinhasFormatoBancario
+
+            linhasFormatoBancario = daLinhasFormatoBancario(formatobanco, "")
+
+            Thread.CurrentThread.CurrentCulture = New CultureInfo("pt-PT")
+
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("pt-PT")
+
+            'objMotorErp = objmotor
+            Dim varConta As ContasBancarias
+            varConta = daListaContasBancarias().Where(Function(x) x.Conta = Conta).First()
+
+            If Not IsNothing(varConta) Then
+
+                If Len(Trim(caminhoexcel)) > 0 Then
+
+                    IdCabec = ""
+
+                    'Verifica CabecExtrato
+                    Dim lista As New List(Of ContasBancarias)
+                    sqlstr2 = "SELECT * FROM CABECEXTRACTOBANCARIO where Conta ='" & Conta & "' and NumeroConta ='" & NumConta & "' and NumeroExtracto ='" & NumExtrato & "' and Origem='F' and DataInicial='" & DataIniEx.ToString("MM/dd/yyyy") & "' and DataFinal='" & DataFimEx.ToString("MM/dd/yyyy") & "'"
+
+                    Dim dt2 = search_Query(sqlstr2)
+
+                    Dim cbextrato = daCabecExtractoBancario(sqlstr2)
+                    'objLista2 = objMotorErp.Consulta(sqlstr2)
+
+                    'For Each row As DataRow In dt.Rows
+                    'lista.Add(New ContasBancarias(row("Conta"), row("NumConta"), row("Banco"), row("DescBanco")))
+
+                    'Next
+
+                    Dim valor1, valor2 As String
+                    valor1 = Replace(SaldoIni, ".", "")
+                    valor2 = Replace(SaldoFim, ".", "")
+
+                    If cbextrato.id = New Guid("{00000000-0000-0000-0000-000000000000}") Then
+
+                        sqlstr = "INSERT INTO CabecExtractoBancario([Id],[DataInicial],[DataFinal],[Conta],[NumeroConta],[NumeroExtracto],[SaldoInicial],[SaldoFinal],[Origem]) VALUES (newid(), '" & DataIniEx.ToString("MM/dd/yyyy") & "', '" _
+                            & DataFimEx.ToString("MM/dd/yyyy") & "', '" & Conta & "', '" & NumConta & "', '" & NumExtrato & "', '" & _
+                            Replace(valor1, ",", ".") & "', '" & _
+                            Replace(valor2, ",", ".") & "', 'F')"
+
+                        insert_Query(sqlstr)
+
+                        'Get CabecExtratoID
+                        sqlstr3 = "SELECT * FROM CabecExtractoBancario where Conta ='" & Conta & "' and NumeroConta ='" & NumConta & "' and NumeroExtracto ='" & NumExtrato & "' and Origem='F' and DataInicial='" & DataIniEx.ToString("MM/dd/yyyy") & "' and DataFinal='" & DataFimEx.ToString("MM/dd/yyyy") & "'"
+                        'objLista3 = objMotorErp.Consulta(sqlstr3) ''adLockReadOnly
+
+                        cbextrato = daCabecExtractoBancario(sqlstr3)
+                        'Dim dt3 = search_Query(sqlstr3)
+
+                        IdCabec = cbextrato.id.ToString()
+
+                        'Carrega Dados da folha de Excel
+
+                        xlApp = CreateObject("Excel.Application")
+                        xlBook = xlApp.Workbooks.Open(caminhoexcel)
+                        xlSheet = xlBook.Worksheets(folhaexcel)
+
+                        Ini = linhaInicial
+                        Fim = linhaFinal
+                        Dim valorDebito As Double = 0
+                        Dim valorCredito As Double = 0
+                        Dim formatoBancario As FormatoBancario
+                        formatoBancario = daFormatoBancario().Where(Function(x) x.Formato = linhasFormatoBancario(i).Formato).First
+
+                        For i = Ini To Fim
+
+                            For Each linhas As LinhasFormatoBancario In linhasFormatoBancario
+
+                                Select Case linhas.Campo
+
+                                    Case "DataMovimento"
+                                        If linhas.Coluna > 0 Then
+                                            DataMovimEx = daData(daValorExcell(i, linhas.Coluna), linhas.FormatoEspecial)
+                                        End If
+                                    Case "DataValor"
+                                        If linhas.Coluna > 0 Then
+                                            DataValorEx = daData(daValorExcell(i, linhas.Coluna), linhas.FormatoEspecial)
+
+                                        End If
+                                    Case "ValorMov"
+                                        If linhas.Coluna > 0 Then
+
+                                            Select Case linhas.FormatoEspecial
+                                                Case "D"
+                                                    valorDebito = daDouble(daValorExcell(i, linhas.Coluna), formatoBancario.SeparadorMilhares, formatoBancario.SeparadorDecimal) '( IIf(daValorExcell(i, linhas.Coluna) > 0, daValorExcell(i, linhas.Coluna), daValorExcell(i, linhas.Coluna) * -1)
+                                                    MovBnc = "DVD"
+                                                    Natureza = "D"
+                                                Case "C"
+                                                    valorCredito = daDouble(daValorExcell(i, linhas.Coluna), formatoBancario.SeparadorMilhares, formatoBancario.SeparadorDecimal)
+                                                    MovBnc = "DVC"
+                                                    Natureza = "C"
+                                                Case Else
+                                                    Valor = daDouble(daValorExcell(i, linhas.Coluna), formatoBancario.SeparadorMilhares, formatoBancario.SeparadorDecimal)
+                                                    MovBnc = IIf(daValorExcell(i, linhas.Coluna) > 0, "DVC", "DVD")
+                                                    Natureza = IIf(daValorExcell(i, linhas.Coluna) > 0, "C", "D")
+
+                                            End Select
+                                        End If
+                                    Case "Obs"
+                                        If linhas.Coluna > 0 Then
+                                            Obs = Left(daValorExcell(i, linhas.Coluna), 250)
+                                        End If
+                                    Case "Numero"
+                                        If linhas.Coluna > 0 Then
+                                            Numero = Left(daValorExcell(i, linhas.Coluna), 15)
+                                        End If
+
+                                End Select
+                            Next
 
 
-        Dim linhasFormatoBancario As List(Of LinhasFormatoBancario)
-        openExcell(caminhoexcel)
-        'variavel temporaria
-        Dim temp As LinhasFormatoBancario
+                            'If Left(Obs, 10) = "Pag. Serv." Then Numero = Right(Obs, 11)
 
-        linhasFormatoBancario = daLinhasFormatoBancario(formatobanco, "")
+                            Valor = IIf(valorCredito - valorDebito > 0, valorCredito, valorDebito)
+                            MovBnc = IIf(valorCredito - valorDebito > 0, "DVD", "DVC")
+                            Natureza = IIf(valorCredito - valorDebito > 0, "D", "C")
 
-        Thread.CurrentThread.CurrentCulture = New CultureInfo("pt-PT")
+                            valorCredito = 0
+                            valorDebito = 0
 
-        Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("pt-PT")
+                            ValorMov = IIf(Valor > 0, Valor, Valor * -1)
+                            ValorConta = IIf(Valor > 0, Valor, Valor * -1)
+                            MoedaMov = varConta.Moeda
+                            MoedaConta = varConta.Moeda
 
-        objMotorErp = objmotor
+                            'Insere Linhas
 
-        If objMotorErp.Comercial.ContasBancarias.Existe(Conta) Then
+                            'sqlstr4 = "INSERT INTO LINHASEXTRACTOBANCARIO([Id],[IdCabecExtractoBancario],[DataMovimento],[DataValor]," & _
+                            '"[Movimento],[Natureza],[Numero],[Obs],[ValorMov],[ValorConta],[MoedaMov],[MoedaConta]) VALUES (newid(), '" _
+                            '& IdCabec & "', '" & DataMovimEx & "', '" & DataValorEx & "', '" & MovBnc & "', '" & Natureza & "', '" & Numero _
+                            '& "', '" & Obs & "', '" & Replace(ValorMov, ",", ".") & "', '" & Replace(ValorConta, ",", ".") & "', '" & MoedaMov & "', '" & MoedaConta & "')"
 
-            If Len(Trim(caminhoexcel)) > 0 Then
 
-                IdCabec = ""
+                            sqlstr4 = "INSERT INTO LINHASEXTRACTOBANCARIO([Id],[IdCabecExtractoBancario],[DataMovimento],[DataValor]," & _
+                            "[Movimento],[Natureza],[Numero],[Obs],[ValorMov],[ValorConta],[MoedaMov],[MoedaConta]) VALUES (newid(), '" _
+                            & IdCabec & "', '" & DataMovimEx & "', '" & DataValorEx & "', '" & MovBnc & "', '" & Natureza & "', '" & Numero _
+                            & "', '" & Obs & "', '" & Replace(ValorMov, ",", ".") & "', '" & Replace(ValorConta, ",", ".") & "', '" & MoedaMov & "', '" & MoedaConta & "')"
 
-                'Verifica CabecExtrato
 
-                sqlstr2 = "SELECT ID FROM CABECEXTRACTOBANCARIO where Conta ='" & Conta & "' and NumeroConta ='" & NumConta & "' and NumeroExtracto ='" & NumExtrato & "' and Origem='F' and DataInicial='" & DataIniEx.ToString("MM/dd/yyyy") & "' and DataFinal='" & DataFimEx.ToString("MM/dd/yyyy") & "'"
-                objLista2 = objMotorErp.Consulta(sqlstr2)
+                            insert_Query(sqlstr4) ''adLockReadOnly
 
-                Dim valor1, valor2 As String
-                valor1 = Replace(SaldoIni, ".", "")
-                valor2 = Replace(SaldoFim, ".", "")
+                        Next i
 
-                If objLista2.Vazia = True Then
 
-                    sqlstr = "INSERT INTO CabecExtractoBancario([Id],[DataInicial],[DataFinal],[Conta],[NumeroConta],[NumeroExtracto],[SaldoInicial],[SaldoFinal],[Origem]) VALUES (newid(), '" & DataIniEx.ToString("MM/dd/yyyy") & "', '" _
-                        & DataFimEx.ToString("MM/dd/yyyy") & "', '" & Conta & "', '" & NumConta & "', '" & NumExtrato & "', '" & _
-                        Replace(valor1, ",", ".") & "', '" & _
-                        Replace(valor2, ",", ".") & "', 'F')"
-                    'objMotorErp.Comercial.ExtractosBancarios.DaValorAtributo()
-                    insert_Query(sqlstr) ''adLockReadOnly
+                        MsgBox("Importação realizada com sucesso.", vbInformation, "Aviso")
+                        xlBook.Close()
+                        'Quit excel (automatically closes all workbooks)
+                        xlApp.Quit()
 
-                    'Get CabecExtratoID
-                    sqlstr3 = "SELECT ID FROM CabecExtractoBancario where Conta ='" & Conta & "' and NumeroConta ='" & NumConta & "' and NumeroExtracto ='" & NumExtrato & "' and Origem='F' and DataInicial='" & DataIniEx.ToString("MM/dd/yyyy") & "' and DataFinal='" & DataFimEx.ToString("MM/dd/yyyy") & "'"
-                    objLista3 = objMotorErp.Consulta(sqlstr3) ''adLockReadOnly
+                        xlApp = Nothing
+                        xlBook = Nothing
+                        xlSheet = Nothing
 
-                    If objLista3.Vazia = False Then
-                        IdCabec = objLista3.Valor("ID")
+
+
+                        'rst3.Close()
                     Else
-                        IdCabec = ""
+                        MsgBox(" O extracto já importado!", vbInformation, "Aviso")
+
                     End If
 
-                    'Carrega Dados da folha de Excel
-
-                    xlApp = CreateObject("Excel.Application")
-                    xlBook = xlApp.Workbooks.Open(caminhoexcel)
-                    xlSheet = xlBook.Worksheets(folhaexcel)
-
-                    Ini = linhaInicial
-                    Fim = linhaFinal
-
-                    For i = Ini To Fim
-
-                        For Each linhas As LinhasFormatoBancario In linhasFormatoBancario
-
-                            Select Case linhas.Campo
-                               
-                                Case "DataMovimento"
-                                    If linhas.Coluna > 0 Then
-                                        DataMovimEx = DateTime.ParseExact(daValorExcell(i, linhas.Coluna), "dd/MM/yyyy",
-                                    CultureInfo.InvariantCulture).ToString("MM/dd/yyyy")
-                                    End If
-                                Case "DataValor"
-                                    If linhas.Coluna > 0 Then
-                                        DataValorEx = DateTime.ParseExact(daValorExcell(i, linhas.Coluna), "dd/MM/yyyy",
-                                   CultureInfo.InvariantCulture).ToString("MM/dd/yyyy")
-                                    End If
-                                Case "ValorMov"
-                                    If linhas.Coluna > 0 Then
-                                        Valor = daValorExcell(i, linhas.Coluna)
-                                        MovBnc = IIf(daValorExcell(i, linhas.Coluna) > 0, "DVC", "DVD")
-                                        Natureza = IIf(daValorExcell(i, linhas.Coluna) > 0, "C", "D")
-                                    End If
-                                Case "Obs"
-                                    If linhas.Coluna > 0 Then
-                                        Obs = Left(daValorExcell(i, linhas.Coluna), 250)
-                                    End If
-                                Case "Numero"
-                                    If linhas.Coluna > 0 Then
-                                        Numero = Left(daValorExcell(i, linhas.Coluna), 15)
-                                    End If
-
-                            End Select
-                        Next
-
-                        If Left(Obs, 10) = "Pag. Serv." Then Numero = Right(Obs, 11)
-
-                        ValorMov = IIf(Valor > 0, Valor, Valor * -1)
-                        ValorConta = IIf(Valor > 0, Valor, Valor * -1)
-                        MoedaMov = objmotor.Comercial.ContasBancarias.Edita(Conta).Moeda
-                        MoedaConta = objmotor.Comercial.ContasBancarias.Edita(Conta).Moeda
-
-                        'Insere Linhas
-
-                        sqlstr4 = "INSERT INTO LINHASEXTRACTOBANCARIO([Id],[IdCabecExtractoBancario],[DataMovimento],[DataValor]," & _
-                        "[Movimento],[Natureza],[Numero],[Obs],[ValorMov],[ValorConta],[MoedaMov],[MoedaConta]) VALUES (newid(), '" _
-                        & IdCabec & "', '" & DataMovimEx & "', '" & DataValorEx & "', '" & MovBnc & "', '" & Natureza & "', '" & Numero _
-                        & "', '" & Obs & "', '" & Replace(ValorMov, ",", ".") & "', '" & Replace(ValorConta, ",", ".") & "', '" & MoedaMov & "', '" & MoedaConta & "')"
-                        insert_Query(sqlstr4) ''adLockReadOnly
-
-                    Next i
-
-
-                    MsgBox("Importação realizada com sucesso.", vbInformation, "Aviso")
-                    xlBook.Close()
-                    'Quit excel (automatically closes all workbooks)
-                    xlApp.Quit()
-
-                    xlApp = Nothing
-                    xlBook = Nothing
-                    xlSheet = Nothing
-
-
-
-                    'rst3.Close()
                 Else
-                    MsgBox(" O extracto já importado!", vbInformation, "Aviso")
 
+                    MsgBox("Seleccione p.f. o ficheiro Excel a reconciliar.", vbInformation, "Aviso")
+                    Exit Sub
                 End If
-
-                objLista2.Vazia()
-
-
 
             Else
 
-                MsgBox("Seleccione p.f. o ficheiro Excel a reconciliar.", vbInformation, "Aviso")
+                MsgBox("Seleccione p.f. a conta bancária a reconciliar.", vbInformation, "Aviso")
                 Exit Sub
             End If
 
-        Else
+        Catch ex As Exception
+            MsgBox("Erro: " & Err.Number & " - " & Err.Description)
+        End Try
 
-            MsgBox("Seleccione p.f. a conta bancária a reconciliar.", vbInformation, "Aviso")
-            Exit Sub
-        End If
-
-        'objMotorErp.FechaEmpresaTrabalho
-        objMotorErp = Nothing
         Exit Sub
-
-Erro:
-        MsgBox("Erro: " & Err.Number & " - " & Err.Description)
-
-    End Sub
-
-    Public Sub importarExtrato(caminhoexcel As String, folhaexcel As Integer, linhaInicial As Integer, linhaFinal As Integer, banco As String, Conta As String, NumConta As String, NumExtrato As String, ByVal DataIniEx As Date, ByVal DataFimEx As Date, ByVal SaldoIni As String, ByVal SaldoFim As String)
-        On Error GoTo Erro
-
-        Dim objLista1 As StdBELista
-        Dim objLista2 As StdBELista
-        Dim objLista3 As StdBELista
-        Dim objLista4 As StdBELista
-
-        Dim objMotorErp As ErpBS
-        Dim objListaContas As GcpBEContaBancaria
-        Dim objConta As GcpBEContaBancaria
-        Dim objCabecExtrato As GcpBEExtractoBancario
-        Dim objLinhaExtrato As GcpBELinhaExtractoBancario
-
-        Dim i As Long
-        Dim sqlstr As String
-        Dim sqlstr1 As String
-        Dim sqlstr2 As String
-        Dim sqlstr3 As String
-        Dim sqlstr4 As String
-
-        Dim xlApp As Object
-        Dim xlBook As Object
-        Dim xlSheet As Object
-
-        Dim IdCabec As String
-
-        Dim IdLinhas As String
-        Dim DataMovimEx As String
-        Dim DataValorEx As String
-        Dim Movimento As String
-        Dim Natureza As String
-        Dim MovBnc As String
-        Dim Numero As String
-        Dim Obs As String
-
-        Dim ValorMov As Double
-        Dim ValorConta As Double
-        Dim MoedaMov As String
-        Dim MoedaConta As String
-        Dim Ini As Integer
-        Dim Fim As Integer
-        Dim Valor As Double
-
-
-        If Not (objMotorErp Is Nothing) Then objMotorErp.FechaEmpresaTrabalho()
-        objMotorErp = Nothing
-        objMotorErp = objmotor
-
-        'objMotorErp.AbreEmpresaTrabalho 0, REG_BD, REG_UTL, REG_UTLPWS, Nothing, "DEFAULT", False
-        'objMotorErp.AbreEmpresaTrabalho 0, REG_BD, REG_UTL, REG_UTLPWS, Nothing, BSO.Contexto.Instancia, False
-
-
-        'If objMotorErp.Comercial.ContasBancarias.Existe(Me.CmbCodConta.Text) Then
-        If objMotorErp.Comercial.ContasBancarias.Existe(Conta) Then
-
-            If Len(Trim(caminhoexcel)) > 0 Then
-
-                IdCabec = ""
-
-                'Verifica CabecExtrato
-
-                sqlstr2 = "SELECT ID FROM CABECEXTRACTOBANCARIO where Conta ='" & Conta & "' and NumeroConta ='" & NumConta & "' and NumeroExtracto ='" & NumExtrato & "' and Origem='F' and DataInicial='" & DataIniEx.ToString("MM/dd/yyyy") & "' and DataFinal='" & DataFimEx.ToString("MM/dd/yyyy") & "'"
-                objLista2 = objMotorErp.Consulta(sqlstr2)
-
-
-                If objLista2.Vazia = True Then
-
-                    sqlstr = "INSERT INTO CabecExtractoBancario([Id],[DataInicial],[DataFinal],[Conta],[NumeroConta],[NumeroExtracto],[SaldoInicial],[SaldoFinal],[Origem]) VALUES (newid(), '" & DataIniEx.ToString("MM/dd/yyyy") & "', '" & DataFimEx.ToString("MM/dd/yyyy") & "', '" & Conta & "', '" & NumConta & "', '" & NumExtrato & "', '" & SaldoIni & "', '" & SaldoFim & "', 'F')"
-                    'objMotorErp.Comercial.ExtractosBancarios.DaValorAtributo()
-                    insert_Query(sqlstr) ''adLockReadOnly
-
-
-
-                    'Get CabecExtratoID
-                    sqlstr3 = "SELECT ID FROM CabecExtractoBancario where Conta ='" & Conta & "' and NumeroConta ='" & NumConta & "' and NumeroExtracto ='" & NumExtrato & "' and Origem='F' and DataInicial='" & DataIniEx.ToString("MM/dd/yyyy") & "' and DataFinal='" & DataFimEx.ToString("MM/dd/yyyy") & "'"
-                    objLista3 = objMotorErp.Consulta(sqlstr3) ''adLockReadOnly
-
-                    If objLista3.Vazia = False Then
-                        IdCabec = objLista3.Valor("ID")
-                    Else
-                        IdCabec = ""
-                    End If
-
-
-
-                    'Carrega Dados da folha de Excel
-
-                    xlApp = CreateObject("Excel.Application")
-                    xlBook = xlApp.Workbooks.Open(caminhoexcel)
-                    xlSheet = xlBook.Worksheets(folhaexcel) '(Me.CmbFolha.ListIndex + 1)
-
-
-                    Ini = linhaInicial
-                    Fim = linhaFinal
-
-
-
-                    For i = Ini To Fim
-
-                        'Banco BCI
-                        ' If Conta = "BCI" Then
-
-                        Valor = xlSheet.cells(i, 6).Value
-                        'Valor = Replace(Valor, ",", ".")
-
-                        DataMovimEx = Convert.ToDateTime(xlSheet.cells(i, 1).Value)
-                        DataValorEx = Convert.ToDateTime(xlSheet.cells(i, 4).Value)
-                        MovBnc = IIf(xlSheet.cells(i, 6).Value > 0, "DVC", "DVD")
-                        Natureza = IIf(xlSheet.cells(i, 6).Value > 0, "C", "D")
-
-                        If Left(xlSheet.cells(i, 5).Value, 10) = "Pag. Serv." Then
-                            Numero = Right(xlSheet.cells(i, 5).Value, 11)
-                        Else
-                            Numero = Left(xlSheet.cells(i, 2).Value, 15)
-                        End If
-
-                        Obs = Left(xlSheet.cells(i, 5).Value, 250)
-
-                        ValorMov = IIf(Valor > 0, Valor, Valor * -1)
-                        ValorConta = IIf(Valor > 0, Valor, Valor * -1)
-                        MoedaMov = objmotor.Comercial.ContasBancarias.Edita(Conta).Moeda
-                        MoedaConta = objmotor.Comercial.ContasBancarias.Edita(Conta).Moeda
-
-                        'Insere Linhas
-
-                        sqlstr4 = "INSERT INTO LINHASEXTRACTOBANCARIO([Id],[IdCabecExtractoBancario],[DataMovimento],[DataValor]," & _
-                        "[Movimento],[Natureza],[Numero],[Obs],[ValorMov],[ValorConta],[MoedaMov],[MoedaConta]) VALUES (newid(), '" _
-                        & IdCabec & "', '" & DataMovimEx & "', '" & DataValorEx & "', '" & MovBnc & "', '" & Natureza & "', '" & Numero _
-                        & "', '" & Obs & "', '" & Replace(ValorMov, ",", ".") & "', '" & Replace(ValorConta, ",", ".") & "', '" & MoedaMov & "', '" & MoedaConta & "')"
-                        insert_Query(sqlstr4) ''adLockReadOnly
-
-                    Next i
-
-
-                    MsgBox("Importação realizada com sucesso.", vbInformation, "Aviso")
-                    xlBook.Close()
-                    'Quit excel (automatically closes all workbooks)
-                    xlApp.Quit()
-
-                    xlApp = Nothing
-                    xlBook = Nothing
-                    xlSheet = Nothing
-
-
-
-                    'rst3.Close()
-                Else
-                    MsgBox(" O extracto já importado!", vbInformation, "Aviso")
-
-                End If
-
-                objLista2.Vazia()
-
-
-
-            Else
-
-                MsgBox("Seleccione p.f. o ficheiro Excel a reconciliar.", vbInformation, "Aviso")
-                Exit Sub
-            End If
-
-        Else
-
-            MsgBox("Seleccione p.f. a conta bancária a reconciliar.", vbInformation, "Aviso")
-            Exit Sub
-        End If
-
-        'objMotorErp.FechaEmpresaTrabalho
-        objMotorErp = Nothing
-        Exit Sub
-
-Erro:
-        MsgBox("Erro: " & Err.Number & " - " & Err.Description)
-
     End Sub
 
     Public Function insert_Query(str_query As String) As String
@@ -528,10 +430,53 @@ Erro:
         Return numRows.ToString()
     End Function
 
+    Public Function search_Query(str_query As String) As DataTable
+
+        Dim dt = New DataTable()
+        myConnection = New SqlConnection(connectionString)
+
+        'str_query = "select * from artigo"
+        myCommand = New SqlCommand(str_query, myConnection)
+        myConnection.Open()
+
+        myAdapter = New SqlDataAdapter(myCommand)
+        myAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey
+
+        myAdapter.Fill(dt)
+
+        Return dt
+    End Function
+
     Private Function daValorExcell(linhas As Integer, coluna As Integer) As Object
 
         Return xlSheet.cells(linhas, coluna).Value
     End Function
+
+    Private Function daData(data As Object, formatoEspecial As String) As String
+
+        Return CDate(data).ToString("MM/dd/yyyy")
+        ' DateTime.ParseExact(data.ToString(), formatoEspecial, CultureInfo.InvariantCulture).ToString("MM/dd/yyyy")
+        'DateTime.ParseExact(data, formatoEspecial, CultureInfo.InvariantCulture).ToString("MM/dd/yyyy")
+    End Function
+
+    Private Function daDouble(valorExcell As Object, separadorMilhares As String, sepraradorDecimal As String) As Double
+
+        Dim temp As String
+
+        
+        Try
+            temp = Replace(valorExcell.ToString(), separadorMilhares, "")
+            temp = Replace(temp, sepraradorDecimal, ",")
+            temp = Replace(temp, "-", "")
+            temp = Replace(temp, "+", "")
+            Return IIf(Convert.ToDouble(temp) < 0, Convert.ToDouble(temp) * -1, Convert.ToDouble(temp))
+
+        Catch ex As Exception
+            Return 0
+        End Try
+
+    End Function
+
 End Class
 
 Public Class Bancos
@@ -554,6 +499,8 @@ Public Class ContasBancarias
     Public Property NumConta As String
     Public Property Banco As String
     Public Property Descricao As String
+    Public Property Moeda As String
+
 
     Public Sub New()
 
@@ -562,12 +509,14 @@ Public Class ContasBancarias
     Public Sub New(ByVal conta As String,
                    ByVal numconta As String,
                    ByVal banco As String,
-                   ByVal descricao As String)
+                   ByVal descricao As String, ByVal moeda As String)
         Me.Conta = conta
         Me.NumConta = numconta
         Me.Banco = banco
         Me.Descricao = descricao
+        Me.Moeda = moeda
     End Sub
+
 End Class
 
 Public Class LinhasFormatoBancario
@@ -622,4 +571,33 @@ Public Class FormatoBancario
         Me.SeparadorDatas = separadorDatas
 
     End Sub
+End Class
+
+Public Class CabecExtractoBancario
+
+    Sub New()
+        ' TODO: Complete member initialization 
+    End Sub
+
+    Public Property Conta As String
+    Public Property NumeroConta As String
+    Public Property NumeroExtracto As String
+    Public Property Origem As String
+    Public Property DataInicial As Date
+    Public Property DataFinal As Date
+    Public Property id As Guid
+
+    Public Sub New(ByRef conta As String, ByRef NumeroConta As String, ByRef NumeroExtracto As String, ByRef Origem As String,
+                   ByRef DataInicial As Date, ByRef DataFinal As Date, ByRef id As Guid)
+        Me.Conta = conta
+        Me.NumeroConta = NumeroConta
+        Me.NumeroExtracto = NumeroExtracto
+        Me.Origem = Origem
+        Me.DataFinal = DataFinal
+        Me.DataInicial = DataInicial
+        Me.id = id
+    End Sub
+
+
+
 End Class

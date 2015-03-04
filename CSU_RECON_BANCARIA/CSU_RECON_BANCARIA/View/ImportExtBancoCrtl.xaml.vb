@@ -26,7 +26,8 @@ Public Class ImportExtBancoCrtl
         dtInicio.SelectedDate = Today
         dtFim.SelectedDate = Today
         ' Add any initialization after the InitializeComponent() call.
-        clienteshelper.incializarMotorPrimavera(tipoPlataforma, codEmpresa, codUsuario, password, con)
+        clienteshelper.connectionString = con
+        'clienteshelper.incializarMotorPrimavera(tipoPlataforma, codEmpresa, codUsuario, password, con)
 
         cbBanco.Items.Clear()
 
@@ -36,10 +37,12 @@ Public Class ImportExtBancoCrtl
             cbBanco.DisplayMemberPath = "Banco"
         Next
 
+        cbFormatoBanco.Items.Clear()
+
         Exit Sub
 trataerro:
 
-
+        MsgBox(Err.Description)
     End Sub
 
     'Public Sub Inicializar(obj As ErpBS, con As String)
@@ -92,14 +95,13 @@ trataerro:
             'Me.CmbFolha.ListIndex = 0
         End If
 
-        'Close workbook (optional)
-        'xlBook.Close()
+        xlBook.Close()
         'Quit excel (automatically closes all workbooks)
-        'xlApp.Quit()
+        xlApp.Quit()
 
-        'xlApp = Nothing
-        'xlBook = Nothing
-        'xlSheet = Nothing
+        xlApp = Nothing
+        xlBook = Nothing
+        xlSheet = Nothing
 
         Exit Sub
 

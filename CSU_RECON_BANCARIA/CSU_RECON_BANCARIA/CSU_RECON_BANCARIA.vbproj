@@ -166,6 +166,8 @@
     <Compile Include="ImportadorExtratoBancario.xaml.vb">
       <DependentUpon>ImportadorExtratoBancario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Helper\XmlHelper.vb" />
+    <Compile Include="Model\Instancia.vb" />
     <Compile Include="View\ImportExtBancoCrtl.xaml.vb">
       <DependentUpon>ImportExtBancoCrtl.xaml</DependentUpon>
     </Compile>
@@ -307,6 +309,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Entypo-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\versao1.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

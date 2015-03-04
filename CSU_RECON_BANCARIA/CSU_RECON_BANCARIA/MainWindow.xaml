@@ -11,7 +11,7 @@
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
         <Button Content="Pri Recon" HorizontalAlignment="Left" Margin="10,427,0,0" VerticalAlignment="Top" Width="111" Click="Button_Click2" Height="41"/>
-        <Image HorizontalAlignment="Left" Height="309" Margin="132,78,0,0" VerticalAlignment="Top" Width="354" Source="Images/Logo AccSys Out14.png" Stretch="None">
+        <Image MouseDown="Image_MouseDown" HorizontalAlignment="Left" Height="309" Margin="132,78,0,0" VerticalAlignment="Top" Width="354" Source="Images/Logo AccSys Out14.png" Stretch="None">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="Images/Logo AccSys Out14.png"/>
             </Image.OpacityMask>
