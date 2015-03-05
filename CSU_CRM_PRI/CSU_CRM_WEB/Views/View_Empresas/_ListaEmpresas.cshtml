@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CSU_CRM_WEB.Models.View_Empresas>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDNome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink( item.Codigo, "Details", new {  id=item.Codigo }) 
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDNome)
+        </td>
+        
+    </tr>
+}
+
+</table>

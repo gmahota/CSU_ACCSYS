@@ -1,0 +1,39 @@
+﻿@model CSU_CRM_WEB.Models.View_Empresas
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Clientes </h2>
+
+<div>
+    <h4>Com Pendentes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Empresas
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDNome)
+        </dd>
+
+        <dt>
+            Moradas
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDMorada)
+        </dd>
+
+    </dl>
+</div>
+
+
+<p>
+    @{
+        Html.RenderAction("Lista_Empresas_Pendentes", "View_Lista_Contactos_Pendentes", new { empresa = Model.Codigo, conexaoPriempre = ViewBag.ConexaoPri });
+    }
+</p>
+    

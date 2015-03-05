@@ -398,11 +398,8 @@ Public Class ClientesHelper
                         Try
                             Dim Smtp_Server As New SmtpClient
                             Dim e_mail As New MailMessage()
-                            Smtp_Server.UseDefaultCredentials = False 'True '
-                            'Smtp_Server.Credentials = New Net.NetworkCredential("gmahota@accsys.co.mz", "Meridian321")
-                            'Smtp_Server.Port = 587
-                            'Smtp_Server.EnableSsl = True
-                            'Smtp_Server.Host = "smtp.gmail.com"
+                            Smtp_Server.UseDefaultCredentials = False
+
                             Smtp_Server.Credentials = New Net.NetworkCredential("avisos@meridian32.com", "")
                             Smtp_Server.Port = 25
                             Smtp_Server.EnableSsl = False
@@ -414,9 +411,7 @@ Public Class ClientesHelper
                             e_mail.From = New MailAddress("avisos@meridian32.com")
                             e_mail.To.Add(objContacto.Email)
                             e_mail.CC.Add("cmelo@accsys.co.mz")
-                            'e_mail.CC.Add("gmahota@accsys.co.mz")
-                            'e_mail.CC.Add("mmawelele@accsys.co.mz")
-                            'e_mail.CC.Add("cfo@meridian.com")
+                            
                             e_mail.Subject = "Facturas Pendentes " + objmotor.Contexto.IDNome
 
                             e_mail.IsBodyHtml = True 'false
@@ -428,7 +423,7 @@ Public Class ClientesHelper
                             If anexo2 <> "" Then e_mail.Attachments.Add(New Net.Mail.Attachment(anexo2))
 
                             Smtp_Server.Send(e_mail)
-                            'MsgBox("Mail Sent")
+
                             enviado = True
                         Catch error_t As Exception
                             MsgBox(error_t.ToString)

@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PRIEMPREModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PRIEMPRE.dbo.View_Empresas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Empresas">
+          <Key>
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Categoria" />
+          </Key>
+          <Property Name="Codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IDNome" Type="varchar" MaxLength="50" />
+          <Property Name="IDMorada" Type="varchar" MaxLength="50" />
+          <Property Name="Categoria" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="IDTelefone" Type="varchar" MaxLength="15" />
+          <Property Name="IDIndicativoTelefone" Type="varchar" MaxLength="5" />
+          <Property Name="IDEmail" Type="varchar" MaxLength="50" />
+          <Property Name="IDLocalidade" Type="varchar" MaxLength="50" />
+          <Property Name="IFNIF" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityContainer Name="PRIEMPREModelStoreContainer">
+          <EntitySet Name="View_Empresas" EntityType="Self.View_Empresas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Empresas].[Codigo] AS [Codigo], 
+    [View_Empresas].[IDNome] AS [IDNome], 
+    [View_Empresas].[IDMorada] AS [IDMorada], 
+    [View_Empresas].[Categoria] AS [Categoria], 
+    [View_Empresas].[IDTelefone] AS [IDTelefone], 
+    [View_Empresas].[IDIndicativoTelefone] AS [IDIndicativoTelefone], 
+    [View_Empresas].[IDEmail] AS [IDEmail], 
+    [View_Empresas].[IDLocalidade] AS [IDLocalidade], 
+    [View_Empresas].[IFNIF] AS [IFNIF]
+    FROM [dbo].[View_Empresas] AS [View_Empresas]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PRIEMPREModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PRIEMPREEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="View_Empresas" EntityType="PRIEMPREModel.View_Empresas" />
+        </EntityContainer>
+        <EntityType Name="View_Empresas">
+          <Key>
+            <PropertyRef Name="Codigo" />
+            <PropertyRef Name="Categoria" />
+          </Key>
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDNome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDMorada" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Categoria" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="IDTelefone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IDIndicativoTelefone" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IDEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDLocalidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IFNIF" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PRIEMPREModelStoreContainer" CdmEntityContainer="PRIEMPREEntities">
+          <EntitySetMapping Name="View_Empresas">
+            <EntityTypeMapping TypeName="PRIEMPREModel.View_Empresas">
+              <MappingFragment StoreEntitySet="View_Empresas">
+                <ScalarProperty Name="IFNIF" ColumnName="IFNIF" />
+                <ScalarProperty Name="IDLocalidade" ColumnName="IDLocalidade" />
+                <ScalarProperty Name="IDEmail" ColumnName="IDEmail" />
+                <ScalarProperty Name="IDIndicativoTelefone" ColumnName="IDIndicativoTelefone" />
+                <ScalarProperty Name="IDTelefone" ColumnName="IDTelefone" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="IDMorada" ColumnName="IDMorada" />
+                <ScalarProperty Name="IDNome" ColumnName="IDNome" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

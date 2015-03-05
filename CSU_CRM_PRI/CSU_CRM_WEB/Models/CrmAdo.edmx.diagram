@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="738a75e704954324be6be09261c4bf7c" Name="Diagram1">
+        <EntityTypeShape EntityType="PRIACCModel.View_Lista_Contactos_Pendentes" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PRIACCModel.View_Bancos_Cobrancas" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PRIACCModel.View_Pendentes_Doc_Clientes" Width="1.5" PointX="5.625" PointY="1.5" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
