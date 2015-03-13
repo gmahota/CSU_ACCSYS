@@ -68,24 +68,26 @@ namespace CSU_CRM_WEB.Models.Helper
                     //mailboy = mailboy.Replace("##quantidade##", ds.Tables[0].Rows[0]["Quantidade"].ToString());
                     mailboy = mailboy.Replace("##divida##", objContacto.ValorPendente.ToString());
                     mailboy = mailboy.Replace("##empresa##", empresadb.IDNome);
-				    SmtpClient Smtp_Server = new SmtpClient();
-				    MailMessage e_mail = new MailMessage();
-				    
+
+                    SmtpClient Smtp_Server = new SmtpClient();
+                    MailMessage e_mail = new MailMessage();
 
                     //Smtp_Server.UseDefaultCredentials = true;
-                    //Smtp_Server.Credentials = new System.Net.NetworkCredential("guimaraesmahota@gmail.com", "Accsys2011!");
+                    //Smtp_Server.Credentials = new System.Net.NetworkCredential("gmahota@accsys.co.mz", "Accsys2011!");
                     //Smtp_Server.Port = 587;
                     //Smtp_Server.EnableSsl = true;
                     //Smtp_Server.Host = "smtp.gmail.com";
 
+
+
                     Smtp_Server.UseDefaultCredentials = false;
-                    Smtp_Server.Credentials = new System.Net.NetworkCredential("avisos@meridian32.com", "");
+                    Smtp_Server.Credentials = new System.Net.NetworkCredential("avisos@accsys.co.mz", "");
                     Smtp_Server.Port = 25;
                     Smtp_Server.EnableSsl = false;
                     Smtp_Server.Host = "192.168.3.14";
                     
 				    e_mail = new MailMessage();
-				    e_mail.From = new MailAddress("avisos@meridian32.com");
+                    e_mail.From = new MailAddress("avisos@accsys.co.mz");
                     //e_mail.To.Add("gmahota@accsys.co.mz");
                     e_mail.To.Add(objContacto.Email);
 				    e_mail.CC.Add("cmelo@accsys.co.mz");
@@ -97,10 +99,14 @@ namespace CSU_CRM_WEB.Models.Helper
                     e_mail.Body = mailboy;
 				    e_mail.Attachments.Add(new System.Net.Mail.Attachment(  imprimirPdf(objContacto.Cliente),"Extrato Pendentes.pdf"));
 
-                    foreach (var file in files)
+                    if (files != null)
                     {
-                        e_mail.Attachments.Add(new System.Net.Mail.Attachment(file.InputStream, Path.GetFileName(file.FileName)));
-                    }                   
+                        foreach (var file in files)
+                        {
+                            e_mail.Attachments.Add(new System.Net.Mail.Attachment(file.InputStream, Path.GetFileName(file.FileName)));
+                        }  
+                    }   
+                                     
 
 
 
@@ -219,7 +225,7 @@ namespace CSU_CRM_WEB.Models.Helper
                 objReport.DataDefinition.FormulaFields["TelefoneEmpresa"].Text = "'+ " + empresadb.IDIndicativoTelefone + empresadb.IDTelefone + "'";
                 objReport.DataDefinition.FormulaFields["NuitEmpresa"].Text = "' Nuit : " + empresadb.IFNIF + "'";
                 objReport.DataDefinition.FormulaFields["EmailEmpresa"].Text = "'Email: cmelo@accsys.co.mz'";
-                objReport.DataDefinition.FormulaFields["Ao_Cuidado_de"].Text = "' " + objectoContacto.Titulo + " " + objectoContacto.Nome + "'";
+                objReport.DataDefinition.FormulaFields["Ao_Cuidado_de"].Text = "' " + objectoContacto.Titulo + " " + objectoContacto.PrimeiroNome+ " "+ objectoContacto.UltimoNome + "'";
                 //objReport.DataDefinition.FormulaFields("EmailEmpresa").Text = "' Email: " & objmotor.Contexto.IDEmail & "'"
 
                 string banco = null;

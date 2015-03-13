@@ -5,7 +5,6 @@
 {
     int i = 0;
     @Html.AntiForgeryToken()
-    @Html.EditorForModel()
 
 <p>
     <div class="row">
@@ -77,7 +76,7 @@
 
             <input name="CDU_EnviaCobranca" type="checkbox" value="@item.Cliente" />
 
-            @Html.CheckBoxFor(modelItem => item.CDU_EnviaCobranca.Value)
+            @*@Html.CheckBoxFor(modelItem => item.CDU_EnviaCobranca.Value)*@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Cliente)
