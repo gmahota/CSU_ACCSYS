@@ -4,90 +4,144 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="559.771" Width="647.368">
-    <StackPanel Height="560" VerticalAlignment="Top">
+             mc:Ignorable="d" Height="694.886" Width="720.368">
+    <StackPanel Height="595" VerticalAlignment="Top" >
+        <DockPanel >
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar>
+                    <Button Cursor="Arrow">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/Actualizar.png" Name="Image3" Height="27" Width="35"></Image>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Actualizar</TextBlock>
 
-        <TabControl HorizontalAlignment="Left" Height="565" Margin="10,0,-3,0" VerticalAlignment="Top" Width="640" Grid.ColumnSpan="2">
-            <TabItem Header="Opções de Importação">
-                <Grid Background="#FFE5E5E5" Margin="0,0,5,11">
-                    <GroupBox Header="Ficheiro" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="229" Width="587">
-                        <Grid Margin="0,-10,0,-12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="481*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Content="Ficheiro Excel:" HorizontalAlignment="Left" Margin="19.226,35,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                            <TextBox x:Name="txtFicheiroExcell"  HorizontalAlignment="Left" Height="23" Margin="111.226,38,-40,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="410" Grid.Column="1"/>
-                            <Button Content="..." HorizontalAlignment="Left" Margin="526.226,38,-77,0" VerticalAlignment="Top" Width="32" Click="Button_Click" RenderTransformOrigin="2.143,0.589" Grid.Column="1"/>
-                            <Label Content="Folha Excel:" HorizontalAlignment="Left" Margin="19.226,72,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                            <ComboBox x:Name="cbFolhaExcel"  HorizontalAlignment="Left" Height="23" Margin="111.226,75,-40,0" Text="" VerticalAlignment="Top" Width="410" Grid.Column="1"/>
-                            <Label Content="Linha Inicial:" HorizontalAlignment="Left" Margin="21,167,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                            <TextBox x:Name="txtLinhaInical" HorizontalAlignment="Left" Height="23" Margin="113,167,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="99" Grid.Column="1"/>
-                            <Label Content="Linha Final:" HorizontalAlignment="Left" Margin="332,170,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                            <TextBox x:Name="txtLinhaFinal"  HorizontalAlignment="Left" Height="23" Margin="424,170,0,0" TextWrapping="Wrap" Text="30" VerticalAlignment="Top" Width="99" Grid.Column="1"/>
-                            <Label Content="Banco:" HorizontalAlignment="Left" Margin="22,106,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                            <ComboBox x:Name="cbBanco" HorizontalAlignment="Left" Height="23" Margin="111.226,106,0,0" Text="" VerticalAlignment="Top" Width="146" Grid.Column="1">
-                                <ListBoxItem Content="BIM"/>
-                                <ListBoxItem Content="BCI"/>
-                            </ComboBox>
-                            <TextBox x:Name="txtBanco"  HorizontalAlignment="Left" Height="23" Margin="262.226,106,-40,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" IsEnabled="False" Grid.Column="1"/>
+                        </StackPanel>
 
-                            <ComboBox x:Name="cbFormatoBanco" HorizontalAlignment="Left" Height="23" Margin="165,136,0,0" Text="" VerticalAlignment="Top" Width="162" Grid.Column="1">
-                                <ListBoxItem Content="BIM"/>
-                                <ListBoxItem Content="BCI"/>
-                            </ComboBox>
-                            <TextBox x:Name="txtFormatoBanco"  HorizontalAlignment="Left" Height="23" Margin="332,136,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsEnabled="False" Grid.Column="1"/>
-                            <Label Content="Formato de Importação:" HorizontalAlignment="Left" Margin="22,136,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    </Button>
+                    <Button  VerticalAlignment="Bottom" Click="Button_Click_1" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/processar.png" Name="Image2" Height="27" Width="35"></Image>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Importar</TextBlock>
 
-                        </Grid>
-                    </GroupBox>
-                    <GroupBox Header="Extrato Bancario" HorizontalAlignment="Left" Margin="10,244,0,0" VerticalAlignment="Top" Height="197" Width="587">
-                        <Grid Margin="2,0,-2,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*"/>
-                                <ColumnDefinition Width="18*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Content="C. Bancária:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                            <ComboBox x:Name="cbContaBancaria"  HorizontalAlignment="Left" Height="23" Margin="86,10,0,0" Text="" VerticalAlignment="Top" Width="171" Grid.ColumnSpan="2"/>
-                            <TextBox x:Name="txtContaBancaria"  HorizontalAlignment="Left" Height="23" Margin="137.105,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="254" IsEnabled="False" Grid.Column="1"/>
-                            <Label Content="Num Conta:" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038"/>
-                            <TextBox x:Name="txtNumConta"  HorizontalAlignment="Left" Height="23" Margin="86,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="254" IsEnabled="False" Grid.ColumnSpan="2"/>
-                            <Label Content="Num Extrato:" HorizontalAlignment="Left" Margin="220.105,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038" Grid.Column="1"/>
-                            <TextBox x:Name="txtNumExtrato"  HorizontalAlignment="Left" Height="23" Margin="304.105,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="87" IsEnabled="true" Grid.Column="1"/>
-                            <DatePicker x:Name="dtInicio" Margin="86,79,318,53" Grid.ColumnSpan="2" />
-                            <Label Content="Data Inicial:" HorizontalAlignment="Left" Margin="12,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038"/>
-                            <DatePicker x:Name="dtFim" Margin="0,80,59,49" Grid.Column="1" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="171" >
-                                <DatePicker.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform AngleX="-2.045"/>
-                                        <RotateTransform/>
-                                        <TranslateTransform X="-0.464"/>
-                                    </TransformGroup>
-                                </DatePicker.RenderTransform>
-                            </DatePicker>
-                            <Label Content="Data Final:" HorizontalAlignment="Left" Margin="144.105,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038" Grid.Column="1"/>
-                            <Label Content="Saldo Inicial:" HorizontalAlignment="Left" Margin="12,125,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038"/>
-                            <Label Content="Saldo Final:" HorizontalAlignment="Left" Margin="144.105,125,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038" Grid.Column="1"/>
-                            <TextBox Text="0,0" x:Name="txtSaldoInicial"  HorizontalAlignment="Left" Height="23" Margin="86,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" IsEnabled="true" Grid.ColumnSpan="2"/>
-                            <TextBox Text="0,0" x:Name="txtSaldoFinal"  HorizontalAlignment="Left" Height="23" Margin="220.105,125,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="171" IsEnabled="true" Grid.Column="1"/>
+                        </StackPanel>
 
-                        </Grid>
+                    </Button>
+                    <Button  VerticalAlignment="Bottom" Click="Button_Click_2" >
+                        <StackPanel Orientation="Horizontal" Width="82">
+                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/cancel.png" Name="Image5" Height="27" Width="35"></Image>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Anular</TextBlock>
 
-                    </GroupBox>
-                    <Button Content="Importar" HorizontalAlignment="Left" Margin="430,449,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" RenderTransformOrigin="0.539,1.843"/>
-                    <Button Content="Cancelar" HorizontalAlignment="Left" Margin="522,449,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2" RenderTransformOrigin="0.539,1.843"/>
+                        </StackPanel>
+
+                    </Button>
+                    <Button VerticalAlignment="Bottom" >
+                        <StackPanel Orientation="Horizontal" Width="82">
+                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/print.png" Name="Image4" Height="27" Width="35"></Image>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Imprimir</TextBlock>
+
+                        </StackPanel>
+
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+
+            <TabControl >
+                <TabItem Header="Opções de Importação">
+                    <Grid Background="#FFE5E5E5" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+
+                        </Grid.RowDefinitions>
+
+                        <GroupBox Header="Ficheiro" Grid.Row="0">
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="481*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="Ficheiro Excel:" HorizontalAlignment="Left" Margin="19.226,35,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <TextBox x:Name="txtFicheiroExcell"  HorizontalAlignment="Left" Height="23" Margin="111.226,38,-40,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="410" Grid.Column="1"/>
+                                <Button  HorizontalAlignment="Left" Margin="528,35,0,0" VerticalAlignment="Top" Width="38" Click="Button_Click" RenderTransformOrigin="2.143,0.589" Grid.Column="1" Height="29">
+                                    <StackPanel >
+                                        <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/search.png" Name="Image1" Height="19" ></Image>
 
 
-                </Grid>
+                                    </StackPanel>
+                                </Button>
+                                <Label Content="Folha Excel:" HorizontalAlignment="Left" Margin="19.226,72,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <ComboBox x:Name="cbFolhaExcel"  HorizontalAlignment="Left" Height="23" Margin="111.226,75,-40,0" Text="" VerticalAlignment="Top" Width="410" Grid.Column="1"/>
+                                <Label Content="Linha Inicial:" HorizontalAlignment="Left" Margin="21,167,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <TextBox x:Name="txtLinhaInical" HorizontalAlignment="Left" Height="23" Margin="113,167,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="99" Grid.Column="1"/>
+                                <Label Content="Linha Final:" HorizontalAlignment="Left" Margin="332,170,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <TextBox x:Name="txtLinhaFinal"  HorizontalAlignment="Left" Height="23" Margin="424,170,0,0" TextWrapping="Wrap" Text="30" VerticalAlignment="Top" Width="99" Grid.Column="1"/>
+                                <Label Content="Banco:" HorizontalAlignment="Left" Margin="22,106,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <ComboBox x:Name="cbBanco" HorizontalAlignment="Left" Height="23" Margin="111.226,106,0,0" Text="" VerticalAlignment="Top" Width="146" Grid.Column="1">
+                                    <ListBoxItem Content="BIM"/>
+                                    <ListBoxItem Content="BCI"/>
+                                </ComboBox>
+                                <TextBox x:Name="txtBanco"  HorizontalAlignment="Left" Height="23" Margin="262.226,106,-40,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="259" IsEnabled="False" Grid.Column="1"/>
 
-            </TabItem>
+                                <ComboBox x:Name="cbFormatoBanco" HorizontalAlignment="Left" Height="23" Margin="165,136,0,0" Text="" VerticalAlignment="Top" Width="162" Grid.Column="1">
+                                    <ListBoxItem Content="BIM"/>
+                                    <ListBoxItem Content="BCI"/>
+                                </ComboBox>
+                                <TextBox x:Name="txtFormatoBanco"  HorizontalAlignment="Left" Height="23" Margin="332,136,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsEnabled="False" Grid.Column="1"/>
+                                <Label Content="Formato de Importação:" HorizontalAlignment="Left" Margin="22,136,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                <Button x:Name="btValidado" Grid.Column="1" HorizontalAlignment="Left" Margin="528,170,0,0" VerticalAlignment="Top" Width="80" Height="26" Click="btValidado_Click" >
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Validado</TextBlock>
+                                        <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/validar_erro.jpg" Name="ImageValidado" ></Image>
 
-        </TabControl>
-        <Grid Margin="177,-12,-120,60" Grid.ColumnSpan="2">
-            <ProgressBar Minimum="0" Maximum="100" Value="0" Margin="-152,489,141,-12" Visibility="Hidden"  />
-            <TextBlock Text="{Binding ElementName=pbStatus, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        </Grid>
 
+
+                                    </StackPanel>
+                                </Button>
+
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Extrato Bancario" Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="C. Bancária:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="cbContaBancaria"  HorizontalAlignment="Left" Height="23" Margin="86,10,0,0" Text="" VerticalAlignment="Top" Width="171" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="txtContaBancaria"  HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="254" IsEnabled="False" Grid.Column="1"/>
+                                <Label Content="Num Conta:" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038"/>
+                                <TextBox x:Name="txtNumConta"  HorizontalAlignment="Left" Height="23" Margin="86,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="171" IsEnabled="False"/>
+                                <Label Content="Num Extrato:" HorizontalAlignment="Left" Margin="0,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038" Grid.Column="1"/>
+                                <TextBox x:Name="txtNumExtrato"  HorizontalAlignment="Left" Height="23" Margin="84,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" IsEnabled="true" Grid.Column="1"/>
+                                <DatePicker x:Name="dtInicio" Margin="86,79,87,53" />
+                                <Label Content="Data Inicial:" HorizontalAlignment="Left" Margin="12,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038"/>
+                                <DatePicker x:Name="dtFim" Margin="0,76,108,53" Grid.Column="1" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="151" >
+                                    <DatePicker.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform AngleX="-2.045"/>
+                                            <RotateTransform Angle="0.066"/>
+                                            <TranslateTransform X="-0.464"/>
+                                        </TransformGroup>
+                                    </DatePicker.RenderTransform>
+                                </DatePicker>
+                                <Label Content="Data Final:" HorizontalAlignment="Left" Margin="0,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038" Grid.Column="1"/>
+                                <Label Content="Saldo Inicial:" HorizontalAlignment="Left" Margin="12,125,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038"/>
+                                <Label Content="Saldo Final:" HorizontalAlignment="Left" Margin="0,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.535,2.038" Grid.Column="1"/>
+                                <TextBox Text="0,0" x:Name="txtSaldoInicial"  HorizontalAlignment="Left" Height="23" Margin="86,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" IsEnabled="true" Grid.ColumnSpan="2"/>
+                                <TextBox Text="0,0" x:Name="txtSaldoFinal"  HorizontalAlignment="Left" Height="23" Margin="84,125,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146" IsEnabled="true" Grid.Column="1"/>
+
+                            </Grid>
+
+                        </GroupBox>
+
+
+                    </Grid>
+
+                </TabItem>
+
+            </TabControl>
+        </DockPanel >
     </StackPanel>
 </UserControl>

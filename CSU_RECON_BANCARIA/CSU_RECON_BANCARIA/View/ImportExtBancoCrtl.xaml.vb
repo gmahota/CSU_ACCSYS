@@ -45,27 +45,9 @@ trataerro:
         MsgBox(Err.Description)
     End Sub
 
-    'Public Sub Inicializar(obj As ErpBS, con As String)
-
-    '    ' This call is required by the designer.
-    '    InitializeComponent()
-    '    dtInicio.SelectedDate = Today
-    '    dtFim.SelectedDate = Today
-    '    ' Add any initialization after the InitializeComponent() call.
-    '    'motor = obj
-    '    'connection = con
-
-    '    'clienteshelper.objmotor = motor
-    '    'clienteshelper.connectionString = connection
-
-    '    'clienteshelper.objmotor = motor
-    '    'clienteshelper.connectionString = connection
-
-    'End Sub
-
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
         Dim ficheiro As New Microsoft.Win32.OpenFileDialog()
-        ficheiro.Filter = "Excel files (*.xls)|*.xls|CVS Files (*.csv)|*.csv;"
+        ficheiro.Filter = "Excel files (*.xls;*.xlsx)|*.xls;*.xlsx|CVS Files (*.csv)|*.csv Files ();"
         Dim result As Boolean
         result = ficheiro.ShowDialog()
         If (result = False) Then
@@ -125,9 +107,12 @@ Sair:
 
             cbContaBancaria.Items.Add(contabancaria)
             cbContaBancaria.DisplayMemberPath = "Conta"
+
         Next
 
         inicializarValoresComponentes()
+        
+
 
     End Sub
 
@@ -167,13 +152,16 @@ trataerro:
     End Sub
 
     Private Sub inicializarValoresComponentes()
-        
+        Dim banco As Bancos
+
+
+        banco = cbBanco.SelectedItem
 
         For Each formatoBanco As FormatoBancario In clienteshelper.daFormatoBancario()
 
             cbFormatoBanco.Items.Add(formatoBanco)
             cbFormatoBanco.DisplayMemberPath = "Formato"
-            If formatoBanco.Formato = "STD" Then
+            If formatoBanco.Formato = banco.Formato Then '"STD"
                 cbFormatoBanco.SelectedItem = formatoBanco
             End If
 
@@ -238,5 +226,10 @@ trataerro:
     Private Sub Button_Click_2(sender As Object, e As RoutedEventArgs)
         'xlApp.Quit()
         Application.Current.Shutdown()
+    End Sub
+
+    Private Sub btValidado_Click(sender As Object, e As RoutedEventArgs)
+
+        ImageValidado.Source = New BitmapImage(New Uri("/CSU_RECON_BANCARIA;component/Resources/Images/validar_certo.jpg", UriKind.Relative))
     End Sub
 End Class

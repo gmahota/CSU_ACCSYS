@@ -1,10 +1,12 @@
-﻿ INSERT INTO [dbo].[FormatosImportacao]([Formato],[Descricao],[TipoComprimento],[SeparadorDecimal],[SeparadorMilhares]) VALUES ('BCI','BCI',2,'.',',') 
+﻿
+ 
+ INSERT INTO [dbo].[FormatosImportacao]([Formato],[Descricao],[TipoComprimento],[SeparadorDecimal],[SeparadorMilhares]) VALUES ('BCI','BCI',2,'.',',') 
  INSERT INTO [dbo].[FormatosImportacao]([Formato],[Descricao],[TipoComprimento],[SeparadorDecimal],[SeparadorMilhares]) VALUES ('BI2','BIM 2',2,'.',',') 
  INSERT INTO [dbo].[FormatosImportacao]([Formato],[Descricao],[TipoComprimento],[SeparadorDecimal],[SeparadorMilhares]) VALUES ('BIM','BIM',2,'.',',') 
  INSERT INTO [dbo].[FormatosImportacao]([Formato],[Descricao],[TipoComprimento],[SeparadorDecimal],[SeparadorMilhares]) VALUES ('SB','Standard Bank',1,',','.') 
  INSERT INTO [dbo].[FormatosImportacao]([Formato],[Descricao],[TipoComprimento],[SeparadorDecimal],[SeparadorMilhares]) VALUES ('STD','standard',1,',','.') 
 
-
+ 
 
  INSERT INTO [dbo].[LinhasFormatosImportacao]([IdLinha],[Formato],[TipoItem],[Campo],[Ordem],[Posicao],[Comprimento],[FormatoEspecial]) VALUES (NEWID(), 'STD', 1,'NumeroConta',1, 2,2,'') 
  INSERT INTO [dbo].[LinhasFormatosImportacao]([IdLinha],[Formato],[TipoItem],[Campo],[Ordem],[Posicao],[Comprimento],[FormatoEspecial]) VALUES (NEWID(), 'STD', 5,'DataMovimento',7, 1,0,'') 
@@ -61,3 +63,6 @@
  INSERT INTO [dbo].[LinhasFormatosImportacao]([IdLinha],[Formato],[TipoItem],[Campo],[Ordem],[Posicao],[Comprimento],[FormatoEspecial]) VALUES (NEWID(), 'SB', 5,'DataValor',8, 2,0,'') 
  INSERT INTO [dbo].[LinhasFormatosImportacao]([IdLinha],[Formato],[TipoItem],[Campo],[Ordem],[Posicao],[Comprimento],[FormatoEspecial]) VALUES (NEWID(), 'SB', 5,'Obs',9, 3,0,'') 
  INSERT INTO [dbo].[LinhasFormatosImportacao]([IdLinha],[Formato],[TipoItem],[Campo],[Ordem],[Posicao],[Comprimento],[FormatoEspecial]) VALUES (NEWID(), 'SB', 5,'ValorMov',10, 4,0,'D') 
+ 
+ update bancos set Formato = 'STD'
+ update bancos set Formato = 'SB' where Banco= 'SBM'

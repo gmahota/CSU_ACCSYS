@@ -68,7 +68,7 @@ Sair:
         Dim dt = search_Query("select * from Bancos")
 
         For Each row As DataRow In dt.Rows
-            lista.Add(New Bancos(row("Banco"), row("Descricao")))
+            lista.Add(New Bancos(row("Banco"), row("Descricao"), row("Formato").ToString()))
 
         Next
 
@@ -297,6 +297,7 @@ Sair:
                         Dim formatoBancario As FormatoBancario
                         formatoBancario = daFormatoBancario().Where(Function(x) x.Formato = linhasFormatoBancario(i).Formato).First
 
+                        Dim colunaDC As Boolean = True
                         For i = Ini To Fim
 
                             For Each linhas As LinhasFormatoBancario In linhasFormatoBancario
@@ -342,13 +343,13 @@ Sair:
 
                                 End Select
                             Next
-
+                            If valorDebito <> valorCredito Then
+                                Valor = IIf(valorCredito - valorDebito > 0, valorCredito, valorDebito)
+                                MovBnc = IIf(valorCredito - valorDebito > 0, "DVC", "DVD")
+                                Natureza = IIf(valorCredito - valorDebito > 0, "C", "D")
+                            End If
 
                             'If Left(Obs, 10) = "Pag. Serv." Then Numero = Right(Obs, 11)
-
-                            Valor = IIf(valorCredito - valorDebito > 0, valorCredito, valorDebito)
-                            MovBnc = IIf(valorCredito - valorDebito > 0, "DVD", "DVC")
-                            Natureza = IIf(valorCredito - valorDebito > 0, "D", "C")
 
                             valorCredito = 0
                             valorDebito = 0
@@ -447,6 +448,24 @@ Sair:
         Return dt
     End Function
 
+    Public Function search_Query_For_View(str_query As String) As DataTable
+
+        Dim ds = New DataSet()
+        myConnection = New SqlConnection(connectionString)
+
+        'str_query = "select * from artigo"
+        myCommand = New SqlCommand(str_query, myConnection)
+        myConnection.Open()
+
+        myAdapter = New SqlDataAdapter(myCommand)
+        myAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey
+
+        ds.EnforceConstraints = False
+        myAdapter.Fill(ds, "View")
+
+        Return ds.Tables("View")
+    End Function
+
     Private Function daValorExcell(linhas As Integer, coluna As Integer) As Object
 
         Return xlSheet.cells(linhas, coluna).Value
@@ -477,20 +496,83 @@ Sair:
 
     End Function
 
+    Public Function daListaHistoricoExpPS2() As IEnumerable(Of HistoricoExpPS2)
+        Dim lista As New List(Of HistoricoExpPS2)
+        Dim historicoExp As HistoricoExpPS2
+
+        Dim query As String = "select * from HistoricoExpPS2 order by IdExportacao asc "
+        Dim dt = search_Query(query)
+
+        For Each row As DataRow In dt.Rows
+
+            historicoExp = New HistoricoExpPS2(row("Opcoes").ToString(), row("Sequencia").ToString(),
+                                                             row("IdTEServicosBancarios").ToString(), row("ValorTotal"), row("TotalRegistosExportados"),
+                                                             row("UltimoLogin").ToString(), Convert.ToDateTime(row("DataExportacao")).Date, Convert.ToInt32(row("IdExportacao")))
+
+            lista.Add(historicoExp)
+        Next
+
+        Return lista
+
+    End Function
+
+    Public Function daListaMovimentosPorEntidadesExpPS2(IdExportacao As String, tipoEntidade As String, entidade As String) As IEnumerable(Of MovimentosBancos)
+        Dim lista As New List(Of MovimentosBancos)
+        Dim movimentosBancos As MovimentosBancos
+
+        Dim query As String = "select h.numdoc as Referencia ,mb.* from movimentosbancos mb "
+        query = query + "left join Historico h on h.tipodoc = mb.tipodocOriginal and h.numdocint = mb.numdocOriginal and h.serie = mb.serieOriginal "
+        query = query + "where mb.entidade ='" + entidade + "' and mb.TipoEntidade= '" + tipoEntidade + "' and mb.idExportacaoPS2= '" + IdExportacao + "'"
+        Dim dt = search_Query_For_View(query)
+
+        For Each row As DataRow In dt.Rows
+
+            movimentosBancos = New MovimentosBancos(row("Conta").ToString(), row("Movim").ToString(), row("Valor"), row("Entidade").ToString(), row("TipoEntidade"),
+                                                             row("DtMov"), row("Obsv").ToString(), row("IdExportacaoPS2").ToString(), row("id").ToString(),
+                                                             row("NIBExportaPS2").ToString(),
+                                                             row("SerieOriginal").ToString(), row("TipoDocOriginal").ToString(), row("NumDocOriginal"), row("Referencia").ToString())
+            lista.Add(movimentosBancos)
+        Next
+
+        Return lista
+    End Function
+
+    Public Function daListaEntidadesExpPS2(IdExportacao As String) As IEnumerable(Of EntidadeExportacao)
+        Dim lista As New List(Of EntidadeExportacao)
+        Dim entidades As EntidadeExportacao
+
+        Dim query As String = "select * from View_ImportadorFormatoMagnetico where IDExportacaoPS2 = '" + IdExportacao + "'"
+        Dim dt = search_Query_For_View(query)
+
+        For Each row As DataRow In dt.Rows
+
+            entidades = New EntidadeExportacao(row("TipoEntidade").ToString(), row("Entidade").ToString(),
+                                                             row("NUMContaTerceiro").ToString(), row("NIBTerceiro").ToString(), row("Valor"),
+                                                             row("BancoTerceiro").ToString())
+
+            entidades.listaMovimentos = daListaMovimentosPorEntidadesExpPS2(IdExportacao, entidades.TipoEntidade, entidades.Entidade)
+
+            lista.Add(entidades)
+        Next
+
+        Return lista
+    End Function
 End Class
 
 Public Class Bancos
     Public Property Banco As String
     Public Property Descricao As String
+    Public Property Formato As String
 
     Public Sub New()
 
     End Sub
 
     Public Sub New(ByVal banco As String,
-                   ByVal descricao As String)
+                   ByVal descricao As String, ByVal formato As String)
         Me.Banco = banco
         Me.Descricao = descricao
+        Me.Formato = formato
     End Sub
 End Class
 
@@ -600,4 +682,92 @@ Public Class CabecExtractoBancario
 
 
 
+End Class
+
+Public Class HistoricoExpPS2
+
+    Public Property Opcoes As String
+    Public Property Sequencia As Integer
+    Public Property IdTEServicosBancarios As String
+    Public Property ValorTotal As Double
+    Public Property TotalRegistosExportados As Integer
+    Public Property UltimoLogin As String
+    Public Property DataExportacao As Date
+    Public Property IdExportacao As Integer
+
+    Public Sub New(ByRef Opcoes As String, ByRef Sequencia As Integer, ByRef IdTEServicosBancarios As String, ByRef ValorTotal As Double,
+                   ByRef TotalRegistosExportados As Integer, ByRef UltimoLogin As String, ByRef DataExportacao As Date, ByRef IdExportacao As Integer)
+        Me.Opcoes = Opcoes
+        Me.Sequencia = Sequencia
+        Me.IdTEServicosBancarios = IdTEServicosBancarios
+        Me.ValorTotal = ValorTotal
+        Me.TotalRegistosExportados = TotalRegistosExportados
+        Me.DataExportacao = DataExportacao
+        Me.UltimoLogin = UltimoLogin
+        Me.IdExportacao = IdExportacao
+    End Sub
+End Class
+
+Public Class EntidadeExportacao
+
+    Public Property TipoEntidade As String
+    Public Property Entidade As String
+    Public Property NrConta As String
+    Public Property NIB As String
+    Public Property Valor As Double
+    Public Property Banco As String
+
+    Public Property listaMovimentos As IEnumerable(Of MovimentosBancos)
+
+    Public Sub New(ByRef TipoEntidade As String, ByRef Entidade As String, ByRef NrConta As String, ByRef NIB As String,
+                   ByRef Valor As Double, ByRef Banco As String)
+        Me.TipoEntidade = TipoEntidade
+        Me.Entidade = Entidade
+        Me.NrConta = NrConta
+        Me.NIB = NIB
+        Me.Valor = Valor
+        Me.Banco = Banco
+    End Sub
+
+
+
+End Class
+
+Public Class MovimentosBancos
+
+    Public Property Conta As String
+    Public Property Movim As String
+    Public Property Valor As Double
+    Public Property Entidade As String
+    Public Property TipoEntidade As String
+    Public Property DtMov As Date
+    Public Property Obsv As String
+    Public Property IdExportacaoPS2 As String
+    Public Property id As String
+    Public Property NibExportarPS2 As String
+    Public Property Referencia As String
+
+    Public SerieOriginal As String
+    Public TipoDocOriginal As String
+    Public NumDocOriginal As Integer
+
+    Public Sub New(ByRef Conta As String, ByRef Movim As String, Valor As Double, ByRef Entidade As String, TipoEntidade As String, ByRef DtMov As Date,
+                   ByRef Obsv As String, ByRef IdExportacaoPS2 As String, id As String, NibExportarPS2 As String, SerieOriginal As String, TipoDocOriginal As String,
+                   NumDocOriginal As Integer, ByRef Referencia As String)
+        Me.Conta = Conta
+        Me.Movim = Movim
+        Me.Valor = Valor
+        Me.Entidade = Entidade
+        Me.DtMov = DtMov
+        Me.Obsv = Obsv
+        Me.TipoEntidade = TipoEntidade
+        Me.IdExportacaoPS2 = IdExportacaoPS2
+        Me.id = id
+        Me.NibExportarPS2 = NibExportarPS2
+        Me.SerieOriginal = SerieOriginal
+        Me.TipoDocOriginal = TipoDocOriginal
+        Me.NumDocOriginal = NumDocOriginal
+        Me.Referencia = Referencia
+
+    End Sub
 End Class

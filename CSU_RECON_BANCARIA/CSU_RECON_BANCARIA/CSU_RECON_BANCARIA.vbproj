@@ -166,10 +166,17 @@
     <Compile Include="ImportadorExtratoBancario.xaml.vb">
       <DependentUpon>ImportadorExtratoBancario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImportadorFormatoMagneticoView.xaml.vb">
+      <DependentUpon>ImportadorFormatoMagneticoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Helper\XmlHelper.vb" />
     <Compile Include="Model\Instancia.vb" />
+    <Content Include="Resources\Scripts\update Importador Magnetico.sql" />
     <Compile Include="View\ImportExtBancoCrtl.xaml.vb">
       <DependentUpon>ImportExtBancoCrtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ImportFormatoMagneticoCtrl.xaml.vb">
+      <DependentUpon>ImportFormatoMagneticoCtrl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InicializarPlaformaCrtl.xaml.vb">
       <DependentUpon>InicializarPlaformaCrtl.xaml</DependentUpon>
@@ -178,6 +185,10 @@
       <DependentUpon>InicializarView.xaml</DependentUpon>
     </Compile>
     <Page Include="ImportadorExtratoBancario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImportadorFormatoMagneticoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,6 +209,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ImportExtBancoCrtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ImportFormatoMagneticoCtrl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -311,8 +326,25 @@
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\ver1.1.sql" />
-    <Content Include="Resources\versao1.sql" />
+    <Resource Include="Resources\Images\search.png" />
+    <Resource Include="Resources\Images\Accsys_Old_logo.png" />
+    <Resource Include="Resources\Images\Actualizar.png" />
+    <Resource Include="Resources\Images\cancel.png" />
+    <Resource Include="Resources\Images\favicon.ico" />
+    <Resource Include="Resources\Images\Grupo Meridian32 Out14.png" />
+    <Resource Include="Resources\Images\Logo AccSys.png" />
+    <Resource Include="Resources\Images\logo-primavera-PNG.png" />
+    <Resource Include="Resources\Images\LogosMeridian.png" />
+    <Resource Include="Resources\Images\print.png" />
+    <Resource Include="Resources\Images\processar.png" />
+    <Resource Include="Resources\Images\validar_certo.jpg" />
+    <Resource Include="Resources\Images\validar_erro.jpg" />
+    <Resource Include="Resources\Images\Save-icon.png" />
+    <Content Include="Resources\Scripts\ver1.2.sql" />
+    <Content Include="Resources\Scripts\ver1.1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controller\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -4,13 +4,47 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:CSU_RECON_BANCARIA" x:Class="MainWindow"
     Title="MainWindow" Height="525.922" Width="663.159" Icon="Images/favicon.ico">
-    
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Click="Button_Click2" >
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"  Visual="{StaticResource appbar_social_microsoft}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="Reconsiliação Bancaria" />
+                </StackPanel>
+            </Button>
+
+            <Button Click="Button_Click_1">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"  Visual="{StaticResource appbar_page_excel}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="Importação CSV - Banco" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+
     <Grid Margin="0,0,2,-3">
         <Grid.RowDefinitions>
             <RowDefinition Height="598*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <Button Content="Pri Recon" HorizontalAlignment="Left" Margin="10,427,0,0" VerticalAlignment="Top" Width="111" Click="Button_Click2" Height="41"/>
+        <!--<Button Content="Pri Recon" HorizontalAlignment="Left" Margin="10,427,0,0" VerticalAlignment="Top" Width="111" Click="Button_Click2" Height="41"/>
+        <Button Content="Pri Magnetico CSV" HorizontalAlignment="Left" Margin="145,427,0,0" VerticalAlignment="Top" Width="111" Click="Button_Click_1" Height="41"/>-->
         <Image MouseDown="Image_MouseDown" HorizontalAlignment="Left" Height="309" Margin="132,78,0,0" VerticalAlignment="Top" Width="354" Source="Images/Logo AccSys Out14.png" Stretch="None">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="Images/Logo AccSys Out14.png"/>
