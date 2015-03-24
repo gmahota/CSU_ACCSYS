@@ -97,15 +97,15 @@ trataerro:
                 For Each linhaMovimentoBanco As MovimentosBancos In entidade.listaMovimentos
                     palavra = linhasHistoricoSelecionado.DataExportacao.ToString("dd-MM-yyyy") '- VALUE_DATE
                     palavra = palavra & "," & linhaMovimentoBanco.Referencia 'referencia tipodoc, documento externo - REFERENCE
-                    palavra = palavra & "," & linhaMovimentoBanco.Entidade 'Nome da Entidade - DESTINATION_NAME
+                    palavra = palavra & "," & entidade.Nome 'Nome da Entidade - DESTINATION_NAME
 
                     palavra = palavra & "," & "00000221" 'linhaMovimentoBanco.Referencia ' Alterar por Referencia externa do Documento - DESTINATION_SORT_CODE
                     palavra = palavra & "," & entidade.NIB 'Nome da Entidade - DESTINATION_ACCOUNT_NUMBER
                     palavra = palavra & "," & linhaMovimentoBanco.Valor 'Nome da Entidade - AMOUNT
 
-                    palavra = palavra & "," & "MZN" ' Alterar por Referencia externa do Documento - CURRENCY
+                    palavra = palavra & "," & linhaMovimentoBanco.MoedaIso ' Alterar por Referencia externa do Documento - CURRENCY
                     palavra = palavra & "," & linhaMovimentoBanco.Referencia 'Nome da Entidade - NARRATIVE
-                    palavra = palavra & "," & "vendas.tete@norco.co.mz" 'Nome da Entidade - DESTINATION_EMAIL
+                    palavra = palavra & "," & entidade.Email 'Nome da Entidade - DESTINATION_EMAIL
 
                     sw.Write(palavra)
                     sw.Write(sw.NewLine)

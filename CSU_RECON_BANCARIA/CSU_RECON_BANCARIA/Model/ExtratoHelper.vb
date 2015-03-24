@@ -520,8 +520,10 @@ Sair:
         Dim lista As New List(Of MovimentosBancos)
         Dim movimentosBancos As MovimentosBancos
 
-        Dim query As String = "select h.numdoc as Referencia ,mb.* from movimentosbancos mb "
+        Dim query As String = "select m.ISO4217 as Iso,l.credito + l.Debito as ValorPagamento , h.numdoc as Referencia ,mb.* from movimentosbancos mb "
         query = query + "left join Historico h on h.tipodoc = mb.tipodocOriginal and h.numdocint = mb.numdocOriginal and h.serie = mb.serieOriginal "
+        query = query + "left join LinhasTesouraria l on l.IdMovimentosBancos =mb.id "
+        query = query + "left join Moedas m on m.Moeda = l.Moeda "
         query = query + "where mb.entidade ='" + entidade + "' and mb.TipoEntidade= '" + tipoEntidade + "' and mb.idExportacaoPS2= '" + IdExportacao + "'"
         Dim dt = search_Query_For_View(query)
 
@@ -530,7 +532,8 @@ Sair:
             movimentosBancos = New MovimentosBancos(row("Conta").ToString(), row("Movim").ToString(), row("Valor"), row("Entidade").ToString(), row("TipoEntidade"),
                                                              row("DtMov"), row("Obsv").ToString(), row("IdExportacaoPS2").ToString(), row("id").ToString(),
                                                              row("NIBExportaPS2").ToString(),
-                                                             row("SerieOriginal").ToString(), row("TipoDocOriginal").ToString(), row("NumDocOriginal"), row("Referencia").ToString())
+                                                             row("SerieOriginal").ToString(), row("TipoDocOriginal").ToString(), row("NumDocOriginal"),
+                                                             row("Referencia").ToString(), row("Iso").ToString())
             lista.Add(movimentosBancos)
         Next
 
@@ -548,7 +551,8 @@ Sair:
 
             entidades = New EntidadeExportacao(row("TipoEntidade").ToString(), row("Entidade").ToString(),
                                                              row("NUMContaTerceiro").ToString(), row("NIBTerceiro").ToString(), row("Valor"),
-                                                             row("BancoTerceiro").ToString())
+                                                             row("BancoTerceiro").ToString(), row("Email").ToString(),
+                                                             row("NomeTerceiro").ToString())
 
             entidades.listaMovimentos = daListaMovimentosPorEntidadesExpPS2(IdExportacao, entidades.TipoEntidade, entidades.Entidade)
 
@@ -712,21 +716,25 @@ Public Class EntidadeExportacao
 
     Public Property TipoEntidade As String
     Public Property Entidade As String
+    Public Property Nome As String
     Public Property NrConta As String
     Public Property NIB As String
     Public Property Valor As Double
     Public Property Banco As String
+    Public Property Email As String
 
     Public Property listaMovimentos As IEnumerable(Of MovimentosBancos)
 
     Public Sub New(ByRef TipoEntidade As String, ByRef Entidade As String, ByRef NrConta As String, ByRef NIB As String,
-                   ByRef Valor As Double, ByRef Banco As String)
+                   ByRef Valor As Double, ByRef Banco As String, ByRef Email As String, ByRef Nome As String)
         Me.TipoEntidade = TipoEntidade
         Me.Entidade = Entidade
         Me.NrConta = NrConta
         Me.NIB = NIB
         Me.Valor = Valor
         Me.Banco = Banco
+        Me.Email = Email
+        Me.Nome = Nome
     End Sub
 
 
@@ -740,6 +748,8 @@ Public Class MovimentosBancos
     Public Property Valor As Double
     Public Property Entidade As String
     Public Property TipoEntidade As String
+    Public Property NomeEntidade As String
+
     Public Property DtMov As Date
     Public Property Obsv As String
     Public Property IdExportacaoPS2 As String
@@ -751,9 +761,11 @@ Public Class MovimentosBancos
     Public TipoDocOriginal As String
     Public NumDocOriginal As Integer
 
+    Public MoedaIso As String
+
     Public Sub New(ByRef Conta As String, ByRef Movim As String, Valor As Double, ByRef Entidade As String, TipoEntidade As String, ByRef DtMov As Date,
                    ByRef Obsv As String, ByRef IdExportacaoPS2 As String, id As String, NibExportarPS2 As String, SerieOriginal As String, TipoDocOriginal As String,
-                   NumDocOriginal As Integer, ByRef Referencia As String)
+                   NumDocOriginal As Integer, ByRef Referencia As String, ByRef MoedaIso As String)
         Me.Conta = Conta
         Me.Movim = Movim
         Me.Valor = Valor
@@ -768,6 +780,7 @@ Public Class MovimentosBancos
         Me.TipoDocOriginal = TipoDocOriginal
         Me.NumDocOriginal = NumDocOriginal
         Me.Referencia = Referencia
+        Me.MoedaIso = MoedaIso
 
     End Sub
 End Class

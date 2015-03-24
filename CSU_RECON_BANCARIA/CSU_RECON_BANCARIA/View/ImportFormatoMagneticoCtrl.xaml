@@ -287,10 +287,13 @@
 
                 <DataGrid x:Name="dgEntidades" AutoGenerateColumns="False"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" SelectionMode="Single" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Entidade}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Entidade"/>
+                        <DataGridTextColumn Binding="{Binding Entidade}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Codigo"/>
+                        <DataGridTextColumn Binding="{Binding Nome}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Nome"/>
+
                         <DataGridTextColumn Binding="{Binding NIB}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="NIB (Destino)"/>
                         <DataGridTextColumn Binding="{Binding Valor}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Valor"/>
                         <DataGridCheckBoxColumn Binding="{Binding Exp}"  ClipboardContentBinding="{x:Null}"  Header="Exp."/>
+                        
                     </DataGrid.Columns>
                 </DataGrid>
 

@@ -171,7 +171,23 @@
     </Compile>
     <Compile Include="Model\Helper\XmlHelper.vb" />
     <Compile Include="Model\Instancia.vb" />
-    <Content Include="Resources\Scripts\update Importador Magnetico.sql" />
+    <Resource Include="Resources\Images\logo\AB.png" />
+    <Resource Include="Resources\Images\logo\AccSys.png" />
+    <Resource Include="Resources\Images\logo\Altel.png" />
+    <Resource Include="Resources\Images\logo\frontimageB.jpg" />
+    <Resource Include="Resources\Images\logo\greydod.png" />
+    <Resource Include="Resources\Images\logo\InvestImovel.png" />
+    <Resource Include="Resources\Images\logo\JA.png" />
+    <Resource Include="Resources\Images\logo\KeyPlan.png" />
+    <Resource Include="Resources\Images\logo\logo.png" />
+    <Resource Include="Resources\Images\logo\M32.png" />
+    <Resource Include="Resources\Images\logo\M32G2.png" />
+    <Resource Include="Resources\Images\logo\MIT.png" />
+    <Resource Include="Resources\Images\logo\REC.png" />
+    <Resource Include="Resources\Images\logo\SenIt.png" />
+    <Content Include="Resources\Scripts\Importador Magnetico\update Importador Magnetico.sql" />
+    <Content Include="Resources\Scripts\Importador Magnetico\Ver0.1.sql" />
+    <Content Include="Resources\Scripts\Importador Magnetico\Campos Utilizador.sql" />
     <Compile Include="View\ImportExtBancoCrtl.xaml.vb">
       <DependentUpon>ImportExtBancoCrtl.xaml</DependentUpon>
     </Compile>
@@ -340,8 +356,8 @@
     <Resource Include="Resources\Images\validar_certo.jpg" />
     <Resource Include="Resources\Images\validar_erro.jpg" />
     <Resource Include="Resources\Images\Save-icon.png" />
-    <Content Include="Resources\Scripts\ver1.2.sql" />
-    <Content Include="Resources\Scripts\ver1.1.sql" />
+    <Content Include="Resources\Scripts\Reconsiliação Bancaria\ver1.2.sql" />
+    <Content Include="Resources\Scripts\Reconsiliação Bancaria\ver1.1.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controller\" />
