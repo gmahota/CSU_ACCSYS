@@ -259,8 +259,17 @@
 
                 </TabItem>
                 <TabItem Header="Opções">
+                    <Grid Margin="0,2,0,-2">
+                        <Label Content="Ficheiro:" Margin="0,10,0,480" />
+                        <TextBox x:Name="txtFile" Margin="10,55,60,445"/>
+                        <Button Content="..." HorizontalAlignment="Left" Margin="275,55,0,0" VerticalAlignment="Top" Width="45" Height="30" Click="Button_Click"/>
+                        <RadioButton x:Name="rbCsv"  Content="CSV" Margin="10,90,220,410" Width="100" IsChecked="True" />
+                        <RadioButton x:Name="rbExcell" Content="Excell"  Margin="115,90,115,410" Width="100" />
+
+                    </Grid>
 
                 </TabItem>
+                
             </TabControl>
 
             <Grid Grid.Column="1" Grid.ColumnSpan="2">
@@ -293,7 +302,7 @@
                         <DataGridTextColumn Binding="{Binding NIB}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="NIB (Destino)"/>
                         <DataGridTextColumn Binding="{Binding Valor}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Valor"/>
                         <DataGridCheckBoxColumn Binding="{Binding Exp}"  ClipboardContentBinding="{x:Null}"  Header="Exp."/>
-                        
+
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -301,8 +310,9 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding DtMov}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Data"/>
                         <DataGridTextColumn Binding="{Binding Movim}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Doc"/>
-                        <DataGridTextColumn Binding="{Binding TipoDocOriginal}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Tipo Doc"/>
-                        <DataGridTextColumn Binding="{Binding NumDocOriginal}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Num. Doc"/>
+                        <DataGridTextColumn Binding="{Binding Obsv}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Obs."/>
+                        <!--<DataGridTextColumn Binding="{Binding TipoDocOriginal}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Tipo Doc"/>
+                        <DataGridTextColumn Binding="{Binding NumDocOriginal}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Num. Doc"/>-->
                         <DataGridTextColumn Binding="{Binding Valor}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Valor"/>
                     </DataGrid.Columns>
                 </DataGrid>

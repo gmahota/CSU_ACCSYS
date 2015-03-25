@@ -16,4 +16,10 @@ Public Class ConectorDll
     Public Sub New()
 
     End Sub
+
+    Public Sub inicializarImportadorFormatoMagnetico(tipoPlataforma As Integer, codEmpresa As String, codUsuario As String, password As String, connection As String)
+        Dim janela As CSU_RECON_BANCARIA.ImportadorFormatoMagneticoView
+        janela = New CSU_RECON_BANCARIA.ImportadorFormatoMagneticoView
+        janela.Inicializar(tipoPlataforma, codEmpresa, codUsuario, password, connection)
+    End Sub
 End Class

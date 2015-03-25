@@ -520,11 +520,28 @@ Sair:
         Dim lista As New List(Of MovimentosBancos)
         Dim movimentosBancos As MovimentosBancos
 
-        Dim query As String = "select m.ISO4217 as Iso,l.credito + l.Debito as ValorPagamento , h.numdoc as Referencia ,mb.* from movimentosbancos mb "
-        query = query + "left join Historico h on h.tipodoc = mb.tipodocOriginal and h.numdocint = mb.numdocOriginal and h.serie = mb.serieOriginal "
+        'Dim query As String = "select m.ISO4217 as Iso,l.credito + l.Debito as ValorPagamento , " ' h.numdoc as Referencia ,mb.* from movimentosbancos mb "
+        'query = query + "case when ll.NumDocOrig is not null then ll.NumDocOrig else h.numdoc end as Referencia , mb.* from movimentosbancos mb "
+        'query = query + "left join  Historico h on h.tipodoc = mb.tipodocOriginal and 	h.numdocint = mb.numdocOriginal and h.serie = mb.serieOriginal "
+        'query = query + "left join LinhasTesouraria l on l.IdMovimentosBancos =mb.id "
+        'query = query + "left join Moedas m on m.Moeda = l.Moeda "
+        'query = query + "left join LinhasLiq ll on ll.numdoc = h.NumDocint and ll.TipoDoc = h.TipoDoc and ll.Serie= h.Serie and ll.TipoDocOrig in ('ADF','VFA','VVD')  "
+        'query = query + "where mb.entidade ='" + entidade + "' and mb.TipoEntidade= '" + tipoEntidade + "' and mb.idExportacaoPS2= '" + IdExportacao + "' "
+        ''query = query + "Group by  m.ISO4217, l.credito , l.Debito,ll.NumDocOrig, h.numdoc "
+
+
+        Dim query As String = "select m.ISO4217 as Iso,l.credito + l.Debito as ValorPagamento , " ' h.numdoc as Referencia ,mb.* from movimentosbancos mb "
+        query = query + "case when ll.NumDocOrig is not null then ll.NumDocOrig else h.numdoc end as Referencia , "
+        query = query + "mb.Valor,mb.Entidade,mb.TipoEntidade,mb.DtMov,mb.Obsv,mb.IdExportacaoPS2, mb.Id,mb.NIBExportaPS2,mb.SerieOriginal,mb.TipoDocOriginal,mb.NumDocOriginal,mb.Conta ,mb.Movim "
+
+        query = query + "from movimentosbancos mb left join  Historico h on h.tipodoc = mb.tipodocOriginal and 	h.numdocint = mb.numdocOriginal and h.serie = mb.serieOriginal  "
         query = query + "left join LinhasTesouraria l on l.IdMovimentosBancos =mb.id "
         query = query + "left join Moedas m on m.Moeda = l.Moeda "
-        query = query + "where mb.entidade ='" + entidade + "' and mb.TipoEntidade= '" + tipoEntidade + "' and mb.idExportacaoPS2= '" + IdExportacao + "'"
+        query = query + "left join LinhasLiq ll on ll.numdoc = h.NumDocint and ll.TipoDoc = h.TipoDoc and ll.Serie= h.Serie and ll.TipoDocOrig in ('ADF','VFA','VVD') and (mb.Valor in ( (-1*ll.ValorRec), ll.ValorRec ))   "
+        query = query + "where mb.entidade ='" + entidade + "' and mb.TipoEntidade= '" + tipoEntidade + "' and mb.idExportacaoPS2= '" + IdExportacao + "' "
+        query = query + "Group by  m.ISO4217, l.credito , l.Debito,ll.NumDocOrig, h.numdoc,mb.Conta,mb.Movim,mb.Valor,mb.Entidade,mb.TipoEntidade,mb.DtMov,mb.Obsv,mb.IdExportacaoPS2,"
+        query = query + "mb.Id,mb.NIBExportaPS2,mb.SerieOriginal,mb.TipoDocOriginal,mb.NumDocOriginal,mb.Conta,mb.Movim"
+
         Dim dt = search_Query_For_View(query)
 
         For Each row As DataRow In dt.Rows
@@ -734,7 +751,7 @@ Public Class EntidadeExportacao
         Me.Valor = Valor
         Me.Banco = Banco
         Me.Email = Email
-        Me.Nome = Nome
+        Me.Nome = Left(Nome, 35)
     End Sub
 
 
@@ -779,7 +796,7 @@ Public Class MovimentosBancos
         Me.SerieOriginal = SerieOriginal
         Me.TipoDocOriginal = TipoDocOriginal
         Me.NumDocOriginal = NumDocOriginal
-        Me.Referencia = Referencia
+        Me.Referencia = Left(Referencia, 15)
         Me.MoedaIso = MoedaIso
 
     End Sub

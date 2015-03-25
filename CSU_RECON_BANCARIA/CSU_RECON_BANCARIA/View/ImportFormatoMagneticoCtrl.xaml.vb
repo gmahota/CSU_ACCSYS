@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.IO
+Imports System.Globalization
 
 Public Class ImportFormatoMagneticoCtrl
     Dim clienteshelper As New ExtratoHelper
@@ -68,7 +69,18 @@ trataerro:
     End Sub
 
     Private Sub btGravar_Click(sender As Object, e As RoutedEventArgs) Handles btGravar.Click
-        CreateCSVFile("c:\Teste.csv")
+
+        'get the file attributes for file or directory
+        'Dim attr As FileAttributes = File.GetAttributes(txtFile.Text)
+
+        'detect whether its a directory or file
+        If (Directory.Exists(txtFile.Text)) Then
+            CreateCSVFile(txtFile.Text + "\" + Now.ToString("dd_MM_yyyy_h_mm_ss.CSV"))
+        Else
+            CreateCSVFile(txtFile.Text)
+        End If
+
+
 
     End Sub
 
@@ -96,22 +108,24 @@ trataerro:
 
                 For Each linhaMovimentoBanco As MovimentosBancos In entidade.listaMovimentos
                     palavra = linhasHistoricoSelecionado.DataExportacao.ToString("dd-MM-yyyy") '- VALUE_DATE
-                    palavra = palavra & "," & linhaMovimentoBanco.Referencia 'referencia tipodoc, documento externo - REFERENCE
-                    palavra = palavra & "," & entidade.Nome 'Nome da Entidade - DESTINATION_NAME
+                    palavra = palavra & "," & Replace(linhaMovimentoBanco.Referencia, ",", " ") 'referencia tipodoc, documento externo - REFERENCE
+                    palavra = palavra & "," & Replace(entidade.Nome, ",", " ") 'Nome da Entidade- DESTINATION_NAME
 
-                    palavra = palavra & "," & "00000221" 'linhaMovimentoBanco.Referencia ' Alterar por Referencia externa do Documento - DESTINATION_SORT_CODE
-                    palavra = palavra & "," & entidade.NIB 'Nome da Entidade - DESTINATION_ACCOUNT_NUMBER
-                    palavra = palavra & "," & linhaMovimentoBanco.Valor 'Nome da Entidade - AMOUNT
+                    'palavra = palavra & "," & "00000221" 'linhaMovimentoBanco.Referencia ' Alterar por Referencia externa do Documento - DESTINATION_SORT_CODE
+                    palavra = palavra & "," & Left(entidade.NIB, 8) 'Nome da Entidade  - DESTINATION_SORT_CODE
+                    palavra = palavra & "," & Right(entidade.NIB, 13) 'Nome da Entidade - DESTINATION_ACCOUNT_NUMBER
+
+                    palavra = palavra & "," & Replace(linhaMovimentoBanco.Valor.ToString("0.00"), ",", ".")  'Nome da Entidade - AMOUNT
 
                     palavra = palavra & "," & linhaMovimentoBanco.MoedaIso ' Alterar por Referencia externa do Documento - CURRENCY
-                    palavra = palavra & "," & linhaMovimentoBanco.Referencia 'Nome da Entidade - NARRATIVE
+                    palavra = palavra & "," & Replace(linhaMovimentoBanco.Referencia, ",", " ")  'Nome da Entidade - NARRATIVE
                     palavra = palavra & "," & entidade.Email 'Nome da Entidade - DESTINATION_EMAIL
 
                     sw.Write(palavra)
                     sw.Write(sw.NewLine)
                     palavra = ""
                 Next
-                
+
 
             Next
 
@@ -140,7 +154,7 @@ trataerro:
         linhasSelecionada = dgHistorico.SelectedItem
 
         dgEntidades.ItemsSource = clienteshelper.daListaEntidadesExpPS2(linhasSelecionada.IdExportacao)
-        
+
 
 
         Exit Sub
@@ -168,5 +182,41 @@ trataerro:
         Exit Sub
 trataerro:
         MsgBox("Erro: " & Err.Number & " - " & Err.Description)
+    End Sub
+
+    Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+        Dim ficheiro As New Microsoft.Win32.OpenFileDialog()
+        'ficheiro.Filter = "CVS Files (*.csv)|*.csv Files ();"
+
+        ficheiro.ValidateNames = False
+        ficheiro.CheckFileExists = False
+        ficheiro.CheckPathExists = True
+
+        Dim result As Boolean
+        result = ficheiro.ShowDialog()
+        If (result = False) Then
+            Return
+        End If
+        txtFile.Text = ficheiro.FileName
+
+    End Sub
+
+    Private Sub rbCsv_Checked(sender As Object, e As RoutedEventArgs) Handles rbCsv.Checked
+        Try
+            rbExcell.IsChecked = False
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
+
+    Private Sub rbExcell_Checked(sender As Object, e As RoutedEventArgs) Handles rbExcell.Checked
+        Try
+            rbCsv.IsChecked = False
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 End Class
