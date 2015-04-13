@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using BundleTransformer.Core.Transformers;
+using BundleTransformer.Yui.Minifiers;
+using System.Web;
 using System.Web.Optimization;
 
 namespace CSU_CRM_WEB
@@ -10,6 +12,23 @@ namespace CSU_CRM_WEB
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
+
+            //bundles.Add(new ScriptBundle("~/js/required").Include(
+            //            "~/Scripts/jquery-1.10.2.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Morris_Charts").Include(
+                        "~/Content/boostrap_sb/js/plugins/morris/raphael.min.js",
+                        "~/Content/boostrap_sb/js/plugins/morris/morris.min.js",
+                        "~/Content/boostrap_sb/js/plugins/morris/morris-data.js",
+                        "~/Content/boostrap_sb/js/plugins/flot/jquery.flot.js",
+                        "~/Content/boostrap_sb/js/plugins/flot/jquery.flot.tooltip.min.js",
+                        "~/Content/boostrap_sb/js/plugins/flot/jquery.flot.resize.js",
+                        "~/Content/boostrap_sb/js/plugins/flot/jquery.flot.pie.js",
+                        "~/Content/boostrap_sb/js/plugins/flot/flot-data.js"
+             ));
+
+           
+
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -25,7 +44,26 @@ namespace CSU_CRM_WEB
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      //"~/Content/site.css",
+                      "~/Content/boostrap_sb/css/sb-admin.css",
+                      "~/Content/boostrap_sb/css/plugins/morris.css"
+
+                      )//.Include("~/Content/fontawesome/font-awesome.css", new CssRewriteUrlTransform())
+                      .Include("~/Content/fontawesome/font-awesome.min.css", new CssRewriteUrlTransform())
+            );
+
+            //var cssBundle = (new StyleBundle("~/bundles/css").Include(
+            //    "~/Content/fontawesome/font-awesome.css",
+            //    "~/Content/fontawesome/font-awesome.min.css"
+            //    )
+            //);
+            //cssBundle.Transforms.Add(new CssTransformer(new YuiCssMinifier()));
+
+            //bundles.Add(cssBundle);
+
+            //// Code removed for clarity.
+            //BundleTable.EnableOptimizations = true;
+
         }
     }
 }

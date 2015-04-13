@@ -1,27 +1,23 @@
 ﻿@model IEnumerable<CSU_CRM_WEB.Models.View_Empresas>
 
+<div >
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Empresas</h3>
+        </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Codigo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IDNome)
-        </th>
-        <th></th>
-    </tr>
+        <div class="panel-body">
+            <div class="list-group">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink( item.Codigo, "Details", new {  id=item.Codigo }) 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDNome)
-        </td>
-        
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <a href="@Url.Action("Details", "View_Empresas", new { id = item.Codigo })" class="list-group-item">
+                    <span class="badge">just now</span>
+                    <i class="fa fa-fw fa-calendar"></i> @Html.DisplayFor(modelItem => item.IDNome)
+                </a>
+            }
 
-</table>
+            </div>
+        </div>
+    </div>
+</div>

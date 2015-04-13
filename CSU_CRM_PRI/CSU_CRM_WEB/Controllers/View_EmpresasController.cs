@@ -133,5 +133,44 @@ namespace CSU_CRM_WEB.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Pendentes(string empresa)
+        {
+            // most probably the values will come from a database
+            // this is just a sample to show you 
+            // that you can return an IEnumerable object
+            // and it will be serialized properly
+            var pendentes = new List<Pendentes>();
+
+
+
+                dbEmpresa.Database.Connection.Open();
+                dbEmpresa.Database.Connection.ChangeDatabase("pri" + empresa);
+                try
+                {
+                    foreach (var docPendente in dbEmpresa.View_Pendentes_Doc_Clientes.ToList())
+                    {
+                        pendentes.Add(new Pendentes()
+                        {
+                            data = docPendente.DataVenc.Value.ToString("yyyy/MM/dd"),
+                            empresa = empresa,
+                            valor = docPendente.ValorPendente.Value,
+                            cliente = docPendente.Entidade
+                        });
+                    }
+                }
+                catch
+                {
+
+                }
+
+
+                dbEmpresa.Database.Connection.Close();
+        
+
+            return Json(pendentes, JsonRequestBehavior.AllowGet);
+        }
+
+        private PRIACCEntities dbEmpresa = new PRIACCEntities();
     }
 }

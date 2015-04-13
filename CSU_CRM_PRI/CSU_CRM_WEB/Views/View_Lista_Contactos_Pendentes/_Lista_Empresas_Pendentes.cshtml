@@ -24,101 +24,100 @@
     
 </p>
 
-<table class="table">
-    <tr>
-        <th>
-            Sel.
-        </th>
-        <th>@Html.DisplayNameFor(model => model.Cliente)</th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            Morada
-        </th>       
-        
-        
-        <th>
-            Telefone
-        </th>
-       
-        
-        
-        <th>
-            Contacto da Empresa
-        </th>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Sel.
+                </th>
+                <th>@Html.DisplayNameFor(model => model.Cliente)</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    Morada
+                </th>
 
-        <th>
-            Valor Pendente
-        </th>
-        <th>
-             Valor Total
-        </th>
-        
-    </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        
-        <td>
-            @Html.HiddenFor(x => item.Cliente)
-            @Html.HiddenFor(x => item.Nome)
-            @*@Html.CheckBoxFor(c => c.IsMarried, new { id = "CheckBoxFor", @class = "checkbox" })*@
-            
-            @*@Html.CheckBox(item.Cliente,item.CDU_EnviaCobranca.Value)*@
-            @*@Html.CheckBox("CDU_EnviaCobranca", new { value = item.Cliente })*@
+                <th>
+                    Telefone
+                </th>
 
-            <input name="CDU_EnviaCobranca" type="checkbox" value="@item.Cliente" />
 
-            @*@Html.CheckBoxFor(modelItem => item.CDU_EnviaCobranca.Value)*@
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cliente)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fac_Mor)
-        </td>
-        
-        
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Fac_Tel)
-        </td>
-        
-        
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.PrimeiroNome) @Html.DisplayFor(modelItem => item.UltimoNome)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        
 
-        <td>
-            @item.ValorPendente.Value.ToString("N", System.Globalization.CultureInfo.CreateSpecificCulture("pt-PT"))
-        </td>
-        <td>
-            @item.ValorTotal.Value.ToString("N", System.Globalization.CultureInfo.CreateSpecificCulture("pt-PT"))
-        </td>
-        
-    </tr>
-}
+                <th>
+                    Contacto da Empresa
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+
+
+                <th>
+                    Valor Pendente
+                </th>
+                <th>
+                    Valor Total
+                </th>
+
+            </tr>
+        </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.HiddenFor(x => item.Cliente)
+                        @Html.HiddenFor(x => item.Nome)
+                        @*@Html.CheckBoxFor(c => c.IsMarried, new { id = "CheckBoxFor", @class = "checkbox" })*@
+
+                        @*@Html.CheckBox(item.Cliente,item.CDU_EnviaCobranca.Value)*@
+                        @*@Html.CheckBox("CDU_EnviaCobranca", new { value = item.Cliente })*@
+
+                        <input name="CDU_EnviaCobranca" type="checkbox" value="@item.Cliente" />
+
+                        @*@Html.CheckBoxFor(modelItem => item.CDU_EnviaCobranca.Value)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fac_Mor)
+                    </td>
+
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fac_Tel)
+                    </td>
+
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrimeiroNome) @Html.DisplayFor(modelItem => item.UltimoNome)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+
+
+                    <td>
+                        @item.ValorPendente.Value.ToString("N", System.Globalization.CultureInfo.CreateSpecificCulture("pt-PT"))
+                    </td>
+                    <td>
+                        @item.ValorTotal.Value.ToString("N", System.Globalization.CultureInfo.CreateSpecificCulture("pt-PT"))
+                    </td>
+
+                </tr>
+            }
 
 </table>
 }
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
