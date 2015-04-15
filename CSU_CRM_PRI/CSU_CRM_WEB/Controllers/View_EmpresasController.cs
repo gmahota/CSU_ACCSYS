@@ -10,6 +10,7 @@ using CSU_CRM_WEB.Models;
 
 namespace CSU_CRM_WEB.Controllers
 {
+    [Authorize]
     public class View_EmpresasController : Controller
     {
         private PRIEMPREEntities db = new PRIEMPREEntities();

@@ -48,7 +48,7 @@ namespace CSU_CRM_WEB
                       "~/Content/boostrap_sb/css/sb-admin.css",
                       "~/Content/boostrap_sb/css/plugins/morris.css"
 
-                      )//.Include("~/Content/fontawesome/font-awesome.css", new CssRewriteUrlTransform())
+                      ).Include("~/Content/fontawesome/font-awesome.css", new CssRewriteUrlTransform())
                       .Include("~/Content/fontawesome/font-awesome.min.css", new CssRewriteUrlTransform())
             );
 
