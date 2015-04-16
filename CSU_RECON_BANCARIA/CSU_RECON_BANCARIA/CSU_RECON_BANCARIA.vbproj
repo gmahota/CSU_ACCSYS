@@ -185,9 +185,14 @@
     <Resource Include="Resources\Images\logo\MIT.png" />
     <Resource Include="Resources\Images\logo\REC.png" />
     <Resource Include="Resources\Images\logo\SenIt.png" />
+    <Resource Include="Resources\Images\logo\frontimageAccSys.jpg" />
     <Content Include="Resources\Scripts\Importador Magnetico\update Importador Magnetico.sql" />
     <Content Include="Resources\Scripts\Importador Magnetico\Ver0.1.sql" />
     <Content Include="Resources\Scripts\Importador Magnetico\Campos Utilizador.sql" />
+    <None Include="Resources\Mod_CSU_Bancos.bas" />
+    <Compile Include="View\Home\HomeCrtl.xaml.vb">
+      <DependentUpon>HomeCrtl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ImportExtBancoCrtl.xaml.vb">
       <DependentUpon>ImportExtBancoCrtl.xaml</DependentUpon>
     </Compile>
@@ -223,6 +228,10 @@
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Home\HomeCrtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ImportExtBancoCrtl.xaml">
       <SubType>Designer</SubType>

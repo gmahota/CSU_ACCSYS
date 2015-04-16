@@ -3,7 +3,7 @@
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:CSU_RECON_BANCARIA" x:Class="MainWindow"
-    Title="MainWindow" Height="525.922" Width="663.159" Icon="Images/favicon.ico">
+    Title="MainWindow" Height="670.99" Width="889" Icon="Images/favicon.ico">
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
@@ -43,14 +43,27 @@
             <RowDefinition Height="598*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
+
+
+
+
+        <TabControl>
+            <TabItem Header="Home">
+                <Grid >
+                    <local:HomeCrtl />
+                </Grid>
+            </TabItem>
+
+        </TabControl>
         <!--<Button Content="Pri Recon" HorizontalAlignment="Left" Margin="10,427,0,0" VerticalAlignment="Top" Width="111" Click="Button_Click2" Height="41"/>
         <Button Content="Pri Magnetico CSV" HorizontalAlignment="Left" Margin="145,427,0,0" VerticalAlignment="Top" Width="111" Click="Button_Click_1" Height="41"/>-->
-        <Image MouseDown="Image_MouseDown" HorizontalAlignment="Left" Height="309" Margin="132,78,0,0" VerticalAlignment="Top" Width="354" Source="Images/Logo AccSys Out14.png" Stretch="None">
+        <!--<Image MouseDown="Image_MouseDown" HorizontalAlignment="Left" Height="309" Margin="132,78,0,0" VerticalAlignment="Top" Width="354" Source="Images/Logo AccSys Out14.png" Stretch="None">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="Images/Logo AccSys Out14.png"/>
             </Image.OpacityMask>
-        </Image>
+        </Image>-->
+
 
     </Grid>
-    
+
 </Controls:MetroWindow>
