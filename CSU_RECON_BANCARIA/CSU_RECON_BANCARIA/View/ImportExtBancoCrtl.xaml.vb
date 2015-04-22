@@ -1,6 +1,10 @@
 ﻿Imports Interop.ErpBS800
+Imports MahApps.Metro.Controls
+Imports MahApps.Metro.Controls.Dialogs
+Imports System.Threading
 
 Public Class ImportExtBancoCrtl
+
     Dim clienteshelper As New ExtratoHelper
     Dim xlApp As Object
     Dim xlBook As Object
@@ -111,7 +115,7 @@ Sair:
         Next
 
         inicializarValoresComponentes()
-        
+
 
 
     End Sub
@@ -133,11 +137,23 @@ trataerro:
     End Sub
 
     Private Sub Button_Click_1(sender As Object, e As RoutedEventArgs)
-        'clienteshelper.incializarMotorPrimavera(1, "clone", "accsys", "accsys2011")
+        Try
+            'Mouse.OverrideCursor = Cursors.Wait
+            progressRing.IsActive = True
+            'progressRing.Visibility = Windows.Visibility.Visible
+            clienteshelper.importarExtrato2(txtFicheiroExcell.Text, cbFolhaExcel.SelectedIndex + 1, Conversion.Int(txtLinhaInical.Text), Conversion.Int(txtLinhaFinal.Text), cbBanco.Text, cbContaBancaria.Text, cbFormatoBanco.Text, txtNumConta.Text, txtNumExtrato.Text, dtInicio.SelectedDate, dtFim.SelectedDate, txtSaldoInicial.Text, txtSaldoFinal.Text)
+            progressRing.IsActive = False
 
-        clienteshelper.importarExtrato2(txtFicheiroExcell.Text, cbFolhaExcel.SelectedIndex + 1, Conversion.Int(txtLinhaInical.Text), Conversion.Int(txtLinhaFinal.Text), cbBanco.Text, cbContaBancaria.Text, cbFormatoBanco.Text, txtNumConta.Text, txtNumExtrato.Text, dtInicio.SelectedDate, dtFim.SelectedDate, txtSaldoInicial.Text, txtSaldoFinal.Text)
+            'progressRing.Visibility = Windows.Visibility.Hidden
+        Catch ex As Exception
+            progressRing.IsActive = False
+
+            'progressRing.Visibility = Windows.Visibility.Hidden
+
+        End Try
 
 
+        
         'clienteshelper.importarExtrato(txtFicheiroExcell.Text, cbFolhaExcel.SelectedIndex + 1, Conversion.Int(txtLinhaInical.Text), Conversion.Int(txtLinhaFinal.Text), cbBanco.Text, cbContaBancaria.Text, txtNumConta.Text, txtNumExtrato.Text, Today, Today, 0, 0)
     End Sub
 
@@ -180,40 +196,40 @@ trataerro:
 
 
 
-            linhasFormatoBancario = clienteshelper.daLinhasFormatoBancario(cbFormatoBanco.SelectedItem)
+        linhasFormatoBancario = clienteshelper.daLinhasFormatoBancario(cbFormatoBanco.SelectedItem)
 
-            For Each formatoBanco As LinhasFormatoBancario In clienteshelper.daLinhasFormatoBancario(cbFormatoBanco.SelectedItem)
+        For Each formatoBanco As LinhasFormatoBancario In clienteshelper.daLinhasFormatoBancario(cbFormatoBanco.SelectedItem)
 
-                Select Case formatoBanco.Campo
-                    Case "NumeroExtracto"
-                        If formatoBanco.Coluna > 0 Then
-                            txtNumExtrato.Text = daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna)
-                        End If
+            Select Case formatoBanco.Campo
+                Case "NumeroExtracto"
+                    If formatoBanco.Coluna > 0 Then
+                        txtNumExtrato.Text = daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna)
+                    End If
 
-                    Case "SaldoInicial"
-                        If formatoBanco.Coluna > 0 Then
-                            txtSaldoInicial.Text = daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna)
-                        End If
-                    Case "SaldoFinal"
-                        If formatoBanco.Coluna > 0 Then
-                            txtSaldoFinal.Text = daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna)
-                        End If
-                    Case "DataInicial"
-                        If formatoBanco.Coluna > 0 Then
-                            dtInicio.SelectedDate = Convert.ToDateTime(daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna))
-                        End If
-                    Case "DataFinal"
-                        If formatoBanco.Coluna > 0 Then
-                            dtFim.SelectedDate = Convert.ToDateTime(daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna))
-                        End If
-                    Case "NumeroConta"
-                        If formatoBanco.Coluna > 0 Then
-                            txtNumConta.Text = daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna)
-                        End If
+                Case "SaldoInicial"
+                    If formatoBanco.Coluna > 0 Then
+                        txtSaldoInicial.Text = daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna)
+                    End If
+                Case "SaldoFinal"
+                    If formatoBanco.Coluna > 0 Then
+                        txtSaldoFinal.Text = daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna)
+                    End If
+                Case "DataInicial"
+                    If formatoBanco.Coluna > 0 Then
+                        dtInicio.SelectedDate = Convert.ToDateTime(daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna))
+                    End If
+                Case "DataFinal"
+                    If formatoBanco.Coluna > 0 Then
+                        dtFim.SelectedDate = Convert.ToDateTime(daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna))
+                    End If
+                Case "NumeroConta"
+                    If formatoBanco.Coluna > 0 Then
+                        txtNumConta.Text = daValorExcell(formatoBanco.Linhas, formatoBanco.Coluna)
+                    End If
 
-                End Select
+            End Select
 
-            Next
+        Next
 
     End Sub
 
@@ -231,5 +247,9 @@ trataerro:
     Private Sub btValidado_Click(sender As Object, e As RoutedEventArgs)
 
         ImageValidado.Source = New BitmapImage(New Uri("/CSU_RECON_BANCARIA;component/Resources/Images/validar_certo.jpg", UriKind.Relative))
+    End Sub
+
+    Private Sub btupdate_Click(sender As Object, e As RoutedEventArgs)
+
     End Sub
 End Class

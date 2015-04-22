@@ -25,7 +25,7 @@ Public Class XmlHelper
             Next
 
         Catch ex As Exception
-            MessageBox.Show("Erro ao carregar os dados da Instancia")
+            MessageBox.Show(ex.Message, "Erro ao carregar os dados da Instancia ")
         End Try
 
 
@@ -52,9 +52,15 @@ Public Class XmlHelper
     End Function
 
     Public Sub New()
-        filename = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase) + "\Resources\Config.xml"
+        filename = DefaultData.Pasta_Config_Filename
         instancia = New Instancia
         loadFolder()
         ' My.Application.Info.DirectoryPath + "\Resources\Config.xml"
     End Sub
+End Class
+
+Friend Class DefaultData
+    Public Shared Pasta_Config As String = "resources/Config.xml"
+    Public Shared Pasta_Config_Filename As String = System.IO.
+        Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase) + "\Resources\Config.xml"
 End Class

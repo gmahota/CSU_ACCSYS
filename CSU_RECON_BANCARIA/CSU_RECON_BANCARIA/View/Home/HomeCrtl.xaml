@@ -5,31 +5,96 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="525.922" d:DesignWidth="663.159">
+    
     <Grid>
-        <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/MIT.png" VerticalAlignment="Top" Height="175"  />
-        <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/frontimageAccSys.jpg" VerticalAlignment="Center" />
-        <Grid VerticalAlignment="Bottom">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/MIT.png" VerticalAlignment="Top" Height="175" Grid.Row="0" />
+        <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/frontimageAccSys.jpg" VerticalAlignment="Center" Grid.Row="1" />
+
+        <GroupBox Header="Aplicações Disponiveis" Grid.Row="3">
+            <Grid>
+                <Grid.Resources>
+                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                </Grid.Resources>
+                <TabControl TabStripPlacement="Left">
+                    <TabItem Header="Extrato Bancario">
+                        <RichTextBox IsDocumentEnabled="True">
+                            <FlowDocument >
+                                <Paragraph>
+                                    <Hyperlink  Click="Hyperlink_Click" >
+                                        <Run Text="Extrato Bancario" />
+                                    </Hyperlink>
+                                    <LineBreak />
+                                    <Run>Importação do Extrato no formato de excel para o Erp Primavera.</Run>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </TabItem>
+                    <TabItem Header="Importador Pagamentos">
+                        <RichTextBox IsDocumentEnabled="True">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Hyperlink NavigateUri="https://github.com/MahApps/MahApps.Metro">
+                                        <Run Text="Importador de Pagamentos Para CSV" />
+                                    </Hyperlink>
+                                    <LineBreak />
+                                    <Run>Importador de Pagamentos do Erp Primavera para o Formato CSV do Standart Bank.</Run>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </TabItem>
+                    
+                </TabControl>
+            </Grid>
+
+        </GroupBox>
+        <!--<Grid VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                
                                
             </Grid.ColumnDefinitions>
-            <!--<Image HorizontalAlignment="Center" Height="75" VerticalAlignment="Center" Width="100" Grid.Column="0" Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/AccSys.png"/>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                
+            </Grid.RowDefinitions>
+
+            <Grid>
+                
+            </Grid>
+            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/App/services-bank-reconciliations.png" VerticalAlignment="Bottom" Height="150" Grid.Column="0" Grid.Row="1" />
+            <Label HorizontalAlignment="Center" Content="Reconsiliação Bancaria"  Grid.Row="0" Grid.Column="0" FontWeight="Bold"></Label>
+
+            <Ellipse VerticalAlignment="Bottom" Height="150" Grid.Column="1" Grid.Row="1">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/CSU_RECON_BANCARIA;component/Resources/Images/App/csv2.png" Stretch='None'   />
+                </Ellipse.Fill>
+
+            </Ellipse>
+           
+            <Label HorizontalAlignment="Center" Content="Reconsiliação Bancaria"  Grid.Row="0" Grid.Column="1" FontWeight="Bold"></Label>
+
+
+            --><!--<Image HorizontalAlignment="Center" Height="75" VerticalAlignment="Center" Width="100" Grid.Column="0" Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/AccSys.png"/>
             <Image HorizontalAlignment="Center" Height="75" VerticalAlignment="Center" Width="100" Grid.Column="1" Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/Altel.png"/>
             <Image HorizontalAlignment="Center" Height="75" VerticalAlignment="Center" Width="100" Grid.Column="2" Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/AB.png"/>
             <Image HorizontalAlignment="Center" Height="75" VerticalAlignment="Center" Width="100" Grid.Column="3" Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/JA.png"/>
             <Image HorizontalAlignment="Center" Height="75" VerticalAlignment="Center" Width="100" Grid.Column="4" Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/KeyPlan.png"/>
             <Image HorizontalAlignment="Center" Height="75" VerticalAlignment="Center" Width="100" Grid.Column="5" Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/MIT.png"/>
             <Image HorizontalAlignment="Center" Height="75" VerticalAlignment="Center" Width="100" Grid.Column="6" Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/REC.png"/>
-            <Image HorizontalAlignment="Center" Height="75" VerticalAlignment="Center" Width="100" Grid.Column="7" Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/SenIt.png"/>-->
+            <Image HorizontalAlignment="Center" Height="75" VerticalAlignment="Center" Width="100" Grid.Column="7" Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/SenIt.png"/>--><!--
 
-        </Grid>
+        </Grid>-->
             
     </Grid>
 </UserControl>

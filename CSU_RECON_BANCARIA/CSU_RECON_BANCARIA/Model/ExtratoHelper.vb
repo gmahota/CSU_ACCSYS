@@ -6,6 +6,8 @@ Imports System.Data
 Imports System.Net.Mail
 Imports System.Threading
 Imports System.Globalization
+Imports MahApps.Metro.Controls
+Imports MahApps.Metro.Controls.Dialogs
 
 
 Public Class ExtratoHelper
@@ -31,14 +33,14 @@ Public Class ExtratoHelper
     Dim myAdapter As SqlDataAdapter
 
 
-    Public Sub openExcell(caminhoficheiro As String)
+    Public Sub openExcell(caminhoficheiro As String, folhaexcel As Integer)
         ' Excell file
 
         On Error GoTo Sair
 
         xlApp = CreateObject("Excel.Application")
         xlBook = xlApp.Workbooks.Open(caminhoficheiro)
-        xlSheet = xlBook.Worksheets(1)
+        xlSheet = xlBook.Worksheets(folhaexcel)
 
         Exit Sub
 
@@ -64,7 +66,7 @@ Sair:
 
     Public Function daListaBancos() As IEnumerable(Of Bancos)
         Dim lista As New List(Of Bancos)
-       
+
         Dim dt = search_Query("select * from Bancos")
 
         For Each row As DataRow In dt.Rows
@@ -91,13 +93,13 @@ Sair:
     Public Function daListaContasBancarias(banco As String) As IEnumerable(Of ContasBancarias)
         Dim lista As New List(Of ContasBancarias)
         Dim dt = search_Query("select * from ContasBancarias where banco = '" & banco & "'")
-        
+
         For Each row As DataRow In dt.Rows
             lista.Add(New ContasBancarias(row("Conta").ToString(), row("NumConta").ToString(), row("Banco").ToString(),
                                           row("DescBanco").ToString(), row("Moeda").ToString()))
 
         Next
-    
+
         Return lista
     End Function
 
@@ -122,7 +124,7 @@ Sair:
         Dim dt = search_Query("select * from LinhasFormatosImportacao where formato = '" & formatoBancario.Formato & "'")
 
         For Each row As DataRow In dt.Rows
-            
+
             linhasFormatoBancario = New LinhasFormatoBancario(row("Formato").ToString(), row("TipoItem").ToString(),
                                                               row("Campo").ToString(),
                                           row("Posicao").ToString(), row("Comprimento").ToString(), row("FormatoEspecial").ToString())
@@ -137,7 +139,7 @@ Sair:
     Public Function daFormatoBancario() As IEnumerable(Of FormatoBancario)
         Dim lista As New List(Of FormatoBancario)
         Dim formatoBancario As FormatoBancario
-        
+
         Dim dt = search_Query("select * from FormatosImportacao")
 
         For Each row As DataRow In dt.Rows
@@ -178,7 +180,7 @@ Sair:
         Dim dt = search_Query(query)
 
         For Each row As DataRow In dt.Rows
-            
+
             cabecExtratoBancario = New CabecExtractoBancario(row("Conta").ToString(), row("NumeroConta").ToString(),
                                                              row("NumeroExtracto").ToString(), row("Origem").ToString(),
                                                              Convert.ToDateTime(row("DataInicial")).Date,
@@ -192,42 +194,40 @@ Sair:
 
     End Function
 
+
+    
     Public Sub importarExtrato2(caminhoexcel As String, folhaexcel As Integer, linhaInicial As Integer, linhaFinal As Integer, banco As String, Conta As String, formatobanco As String, NumConta As String, NumExtrato As String, ByVal DataIniEx As Date, ByVal DataFimEx As Date, ByVal SaldoIni As String, ByVal SaldoFim As String)
-        Try
+        
+        Dim i As Long
+        Dim sqlstr As String
+        Dim sqlstr2 As String
+        Dim sqlstr3 As String
+        Dim sqlstr4 As String
 
-            Dim i As Long
-            Dim sqlstr As String
-            Dim sqlstr1 As String
-            Dim sqlstr2 As String
-            Dim sqlstr3 As String
-            Dim sqlstr4 As String
+        
+        Dim IdCabec As String
+        Dim DataMovimEx As New String("")
+        Dim DataValorEx As New String("")
+        Dim Movimento As New String("")
+        Dim Natureza As New String("")
+        Dim MovBnc As New String("")
+        Dim Numero As New String("")
+        Dim Obs As New String("")
 
-            Dim xlApp As Object
-            Dim xlBook As Object
-            Dim xlSheet As Object
-
-            Dim IdCabec As String
-
-            Dim IdLinhas As String
-            Dim DataMovimEx As New String("")
-            Dim DataValorEx As New String("")
-            Dim Movimento As New String("")
-            Dim Natureza As New String("")
-            Dim MovBnc As New String("")
-            Dim Numero As New String("")
-            Dim Obs As New String("")
-
-            Dim ValorMov As Double
-            Dim ValorConta As Double
-            Dim MoedaMov As String
-            Dim MoedaConta As String
-            Dim Ini As Integer
-            Dim Fim As Integer
-            Dim Valor As Double
+        Dim ValorMov As Double
+        Dim ValorConta As Double
+        Dim MoedaMov As String
+        Dim MoedaConta As String
+        Dim Ini As Integer
+        Dim Fim As Integer
+        Dim Valor As Double
+        Dim cbextrato As CabecExtractoBancario
 
             Dim linhasFormatoBancario As List(Of LinhasFormatoBancario)
 
-            openExcell(caminhoexcel)
+        Try
+
+            openExcell(caminhoexcel, folhaexcel)
 
             'variavel temporaria
             Dim temp As LinhasFormatoBancario
@@ -254,7 +254,7 @@ Sair:
 
                     Dim dt2 = search_Query(sqlstr2)
 
-                    Dim cbextrato = daCabecExtractoBancario(sqlstr2)
+                    cbextrato = daCabecExtractoBancario(sqlstr2)
                     'objLista2 = objMotorErp.Consulta(sqlstr2)
 
                     'For Each row As DataRow In dt.Rows
@@ -286,9 +286,9 @@ Sair:
 
                         'Carrega Dados da folha de Excel
 
-                        xlApp = CreateObject("Excel.Application")
-                        xlBook = xlApp.Workbooks.Open(caminhoexcel)
-                        xlSheet = xlBook.Worksheets(folhaexcel)
+                        'xlApp = CreateObject("Excel.Application")
+                        'xlBook = xlApp.Workbooks.Open(caminhoexcel)
+                        'xlSheet = xlBook.Worksheets(folhaexcel)
 
                         Ini = linhaInicial
                         Fim = linhaFinal
@@ -326,6 +326,7 @@ Sair:
                                                     MovBnc = "DVC"
                                                     Natureza = "C"
                                                 Case Else
+
                                                     Valor = daDouble(daValorExcell(i, linhas.Coluna), formatoBancario.SeparadorMilhares, formatoBancario.SeparadorDecimal)
                                                     MovBnc = IIf(daValorExcell(i, linhas.Coluna) > 0, "DVC", "DVD")
                                                     Natureza = IIf(daValorExcell(i, linhas.Coluna) > 0, "C", "D")
@@ -351,8 +352,7 @@ Sair:
 
                             'If Left(Obs, 10) = "Pag. Serv." Then Numero = Right(Obs, 11)
 
-                            valorCredito = 0
-                            valorDebito = 0
+
 
                             ValorMov = IIf(Valor > 0, Valor, Valor * -1)
                             ValorConta = IIf(Valor > 0, Valor, Valor * -1)
@@ -374,7 +374,9 @@ Sair:
 
 
                             insert_Query(sqlstr4) ''adLockReadOnly
-
+                            valorCredito = 0
+                            valorDebito = 0
+                            Valor = 0
                         Next i
 
 
@@ -408,6 +410,27 @@ Sair:
             End If
 
         Catch ex As Exception
+            If Not xlBook Is Nothing Then
+                xlBook.Close()
+                'Quit excel (automatically closes all workbooks)
+                xlApp.Quit()
+
+                xlApp = Nothing
+                xlBook = Nothing
+                xlSheet = Nothing
+            End If
+
+            
+
+            If Not cbextrato Is Nothing Then
+                delete_Query("delete LINHASEXTRACTOBANCARIO where IdCabecExtractoBancario = '" & cbextrato.id.ToString() & "'")
+
+
+                delete_Query("delete CabecExtractoBancario where Conta ='" & Conta & "' and NumeroConta ='" &
+                              NumConta & "' and NumeroExtracto ='" & NumExtrato & "' and Origem='F' and DataInicial='" & DataIniEx.ToString("MM/dd/yyyy") &
+                              "' and DataFinal='" & DataFimEx.ToString("MM/dd/yyyy") & "'")
+            End If
+
             MsgBox("Erro: " & Err.Number & " - " & Err.Description)
         End Try
 
@@ -427,6 +450,23 @@ Sair:
         myAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey
         myAdapter.InsertCommand = New SqlCommand(str_query, myConnection)
         numRows = myAdapter.InsertCommand.ExecuteNonQuery()
+
+        Return numRows.ToString()
+    End Function
+
+    Public Function delete_Query(str_query As String) As String
+        Dim numRows As Integer
+
+        myConnection = New SqlConnection(connectionString)
+
+        'str_query = "select * from artigo"
+        myCommand = New SqlCommand(str_query, myConnection)
+        myConnection.Open()
+
+        myAdapter = New SqlDataAdapter(myCommand)
+        myAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey
+        myAdapter.DeleteCommand = New SqlCommand(str_query, myConnection)
+        numRows = myAdapter.DeleteCommand.ExecuteNonQuery()
 
         Return numRows.ToString()
     End Function
@@ -482,7 +522,7 @@ Sair:
 
         Dim temp As String
 
-        
+
         Try
             temp = Replace(valorExcell.ToString(), separadorMilhares, "")
             temp = Replace(temp, sepraradorDecimal, ",")

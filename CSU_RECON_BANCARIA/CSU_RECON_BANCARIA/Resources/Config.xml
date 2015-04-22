@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <instancias>
-  <!--<Instancia instancia ="1" empresa ="Clone" usuario="accsys" password ="accsys2011" instanciaSql ="ACCPRI08\PRIMAVERAV810" empresaSql ="PRIClone" usuarioSql="sa" passwordSql ="accsys2011"/>-->
-  <!--<Instancia instancia ="1" empresa ="MINASREB" usuario="accsys" password ="accsys2011" instanciaSql ="MNR-P-DB02\PRIMAVERAV810" empresaSql ="PRIMINASREB" usuarioSql="sa" passwordSql ="Accsys2011"/>-->
   <Instancia instancia ="1" empresa ="MINASREB" usuario="accsys" password ="accsys2011" instanciaSql ="ACCPRI12\PRIMAVERAV810" empresaSql ="PRIMINAS2015C" usuarioSql="sa" passwordSql ="accsys2011!"/>
 </instancias>

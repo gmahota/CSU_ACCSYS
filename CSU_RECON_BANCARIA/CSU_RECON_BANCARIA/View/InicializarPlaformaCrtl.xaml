@@ -1,51 +1,108 @@
-﻿<UserControl x:Class="InicializarPlaformaCrtl"
+﻿<controls:Flyout
+             x:Class="InicializarPlaformaCrtl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="410" Width="405">
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d">
+    <controls:Flyout.Resources>
 
-    <UserControl.Resources>
-        <XmlDataProvider x:Key="instPri" XPath="instancias/Instancia" Source="/resources/Config.xml"/>
-    </UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.ListView.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+            
+        </ResourceDictionary>
+    </controls:Flyout.Resources>
+    
+    <GroupBox Header="Parametros">
+        
+        <Grid >
+            <!--<Grid DataContext="{Binding Source={StaticResource instPri}}">-->
+            <Grid.DataContext>
+                <XmlDataProvider x:Name="XMLData" XPath="instancias/Instancia" Source="/resources/Config.xml"/>
+            </Grid.DataContext>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TabControl HorizontalAlignment="Left"   VerticalAlignment="Top" >
+                <TabItem Header="Primavera">
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Instancia:" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" />
+                        <ComboBox  SelectedIndex="{Binding XPath=@instancia , Mode=TwoWay}" x:Name="cbInstancia" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Grid.Column="1" Grid.Row="0">
+                            <ListBoxItem Content="Executivo"/>
+                            <ListBoxItem Content="Profissional"/>
+                        </ComboBox>
+                        <Label Content="Empresa Primavera:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" />
+                        <TextBox  Text="{Binding XPath=@empresa , Mode=TwoWay}"  x:Name="txtCodEmp" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Width="200" VerticalAlignment="Top" />
+                        <Label Content="Usuario:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="2" />
+                        <TextBox Text="{Binding XPath=@usuario , Mode=TwoWay}"  x:Name="txtUser" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"  Grid.Column="1" Grid.Row="2" />
+                        <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3"/>
+                        <TextBox Text="{Binding XPath=@password , Mode=TwoWay}" x:Name="txtPassword"  Grid.Column="1" Grid.Row="3" Width="200"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Conf. SQL">
+                    <Grid  >
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Instancia Sql:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0"/>
+                        <TextBox Text="{Binding XPath=@instanciaSql , Mode=TwoWay}" x:Name="txtInstancia" HorizontalAlignment="Left" 
+                             TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.Column="1" Grid.Row="0"/>
+
+                        <Label Content="Base de Dados:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1"/>
+                        <TextBox Text="{Binding XPath=@empresaSql , Mode=TwoWay}" x:Name="txtDasedeDados" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.Column="1" Grid.Row="1"/>
+                        <Label Content="Usuario:" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="0" Grid.Row="2" />
+                        <TextBox  Text="{Binding XPath=@usuarioSql , Mode=TwoWay}" x:Name="txtUserSql" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.Column="1" Grid.Row="2"/>
+                        <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" />
+                        <TextBox Text="{Binding XPath=@passwordSql , Mode=TwoWay}"  x:Name="txtPasswordSql" Grid.Column="1" Grid.Row="3" Width="200" />
+
+                        <!--<PasswordBox  Grid.Column="1" Grid.Row="3" Width="200"
+                             Controls:TextBoxHelper.Watermark="Password"
+                             Controls:TextBoxHelper.UseFloatingWatermark="True"
+                             Controls:TextBoxHelper.ClearTextButton="True"
+                             Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}"
+                             Password="Password"/>-->
+                    </Grid>
+                </TabItem>
+            </TabControl>
+
+            <Button Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Style="{DynamicResource AccentedSquareButtonStyle}" Content="OK" Click="Button_Click"/>
 
 
-    <Grid Margin="0,0,10,10" DataContext="{Binding Source={StaticResource instPri}}">
 
-        <TabControl HorizontalAlignment="Left" Height="565" Margin="10,0,-3,0" VerticalAlignment="Top" Width="640" Grid.ColumnSpan="2" DataContext="{Binding Source={StaticResource instPri}}">
-            <TabItem Header="Primavera">
-                <Grid Background="#FFE5E5E5" Margin="0,0,5,11" >
-                    <Label Content="Instancia:" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.558,-0.071"/>
-                    <ComboBox  SelectedIndex="0" x:Name="cbInstancia" HorizontalAlignment="Left" Margin="141,72,0,0" VerticalAlignment="Top" Width="175">
-                        <ListBoxItem Content="Executivo"/>
-                        <ListBoxItem Content="Profissional"/>
-                    </ComboBox>
-                    <Label Content="Empresa Primavera:" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.558,-0.071"/>
-                    <TextBox  Text="{Binding XPath=@empresa , Mode=TwoWay}"  x:Name="txtCodEmp" HorizontalAlignment="Left" Height="23" Margin="139,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
-                    <Label Content="Usuario:" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.558,-0.071"/>
-                    <TextBox Text="{Binding XPath=@usuario , Mode=TwoWay}"  x:Name="txtUser" HorizontalAlignment="Left" Height="23" Margin="141,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
-                    <Label Content="Password:" HorizontalAlignment="Left" Margin="10,208,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.558,-0.071"/>
-                    <TextBox Text="{Binding XPath=@password , Mode=TwoWay}" x:Name="txtPassword"  Margin="139,208,309,271" RenderTransformOrigin="0.524,0.553" />
-                </Grid>
-            </TabItem>
-            <TabItem Header="Conf. SQL">
-                <Grid Background="#FFE5E5E5" Margin="0,0,5,11">
-                    <Label Content="Instancia Sql:" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.558,-0.071"/>
-                    <TextBox Text="{Binding XPath=@instanciaSql , Mode=TwoWay}" x:Name="txtInstancia" HorizontalAlignment="Left" Height="23" Margin="139,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
-
-                    <Label Content="Base de Dados:" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.558,-0.071"/>
-                    <TextBox Text="{Binding XPath=@empresaSql , Mode=TwoWay}" x:Name="txtDasedeDados" HorizontalAlignment="Left" Height="23" Margin="139,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
-                    <Label Content="Usuario:" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.558,-0.071"/>
-                    <TextBox  Text="{Binding XPath=@usuarioSql , Mode=TwoWay}" x:Name="txtUserSql" HorizontalAlignment="Left" Height="23" Margin="141,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
-                    <Label Content="Password:" HorizontalAlignment="Left" Margin="10,208,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.558,-0.071"/>
-                    <TextBox Text="{Binding XPath=@passwordSql , Mode=TwoWay}"  x:Name="txtPasswordSql"  Margin="139,208,309,271" RenderTransformOrigin="0.524,0.553" />
-                </Grid>
-            </TabItem>
-        </TabControl>
-
-        <Button Content="OK" HorizontalAlignment="Left" Margin="310,370,0,5" Width="75" RenderTransformOrigin="0.493,-0.8" Click="Button_Click"/>
-
-
-
-    </Grid>
-</UserControl>
+        </Grid>
+    </GroupBox>
+    
+    
+</controls:Flyout>
