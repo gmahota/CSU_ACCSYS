@@ -12,8 +12,9 @@
             @foreach (var item in Model)
             {
                 <a href="@Url.Action("Details", "View_Empresas", new { id = item.Codigo })" class="list-group-item">
-                    <span class="badge">just now</span>
-                    <i class="fa fa-fw fa-calendar"></i> @Html.DisplayFor(modelItem => item.IDNome)
+                    @*<span class="badge">just now</span>*@
+                    
+                    <i><img height="20" width="20"  src="@Url.Content("~/Content/Images/LogoEmpresas/" + item.Codigo +".png")" alt="IMAGES"></i> @Html.DisplayFor(modelItem => item.IDNome)
                 </a>
             }
 

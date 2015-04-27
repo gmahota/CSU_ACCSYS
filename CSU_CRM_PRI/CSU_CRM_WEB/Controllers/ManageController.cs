@@ -10,7 +10,7 @@ using CSU_CRM_WEB.Models;
 
 namespace CSU_CRM_WEB.Controllers
 {
-    [Authorize]
+    
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

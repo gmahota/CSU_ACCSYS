@@ -35,6 +35,6 @@ namespace CSU_CRM_WEB.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<CSU_CRM_WEB.Models.ApplicationUser> ApplicationUsers { get; set; }
+        //public System.Data.Entity.DbSet<CSU_CRM_WEB.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

@@ -129,23 +129,26 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Dragablz">
       <HintPath>..\packages\Dragablz.0.0.1.109\lib\net40\Dragablz.dll</HintPath>
     </Reference>
-    <Reference Include="Interop.ErpBS800">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG800\Interop.ErpBS800.dll</HintPath>
+    <Reference Include="Interop.EapBE900">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG900\Interop.EapBE900.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Interop.GcpBE800">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG800\Interop.GcpBE800.dll</HintPath>
+    <Reference Include="Interop.ErpBS900">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG900\Interop.ErpBS900.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Interop.IGcpBS800">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG800\Interop.IGcpBS800.dll</HintPath>
+    <Reference Include="Interop.IEapBS900">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG900\Interop.IEapBS900.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Interop.StdBE800">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG800\Interop.StdBE800.dll</HintPath>
+    <Reference Include="Interop.StdBE900">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG900\Interop.StdBE900.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
@@ -156,12 +159,7 @@
       <HintPath>..\packages\Portable.Licensing.1.1.0\lib\portable-net40+sl4+wp7+win8\Portable.Licensing.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Controls.Input.Toolkit">
-      <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\System.Windows.Controls.Input.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Controls.Layout.Toolkit">
-      <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -176,9 +174,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFToolkit">
-      <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\WPFToolkit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="Application.xaml">
@@ -193,9 +188,10 @@
     </Compile>
     <Compile Include="Model\Helper\Actions\ClosableTab.vb" />
     <Compile Include="Model\Helper\Actions\CloseTabItemAction.vb" />
+    <Compile Include="Model\Helper\ImobilizadoHelper.vb" />
     <Compile Include="Model\Helper\XmlHelper.vb" />
+    <Compile Include="Model\Imobilizado.vb" />
     <Compile Include="Model\Instancia.vb" />
-    <Resource Include="Themes\MetroDark\HowToApplyTheme.txt" />
     <Resource Include="Resources\Images\logo\AB.png" />
     <Resource Include="Resources\Images\logo\AccSys.png" />
     <Resource Include="Resources\Images\logo\Altel.png" />
@@ -223,8 +219,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DefaultDataResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Reports\Reconsiliacao Bancaria\Reconcil.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reconcil.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="View\Home\HomeCrtl.xaml.vb">
       <DependentUpon>HomeCrtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Imobilizado\ImobilizadoCrtl.xaml.vb">
+      <DependentUpon>ImobilizadoCrtl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ImportExtBancoCrtl.xaml.vb">
       <DependentUpon>ImportExtBancoCrtl.xaml</DependentUpon>
@@ -263,27 +268,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\MetroDark\MetroDark.MSControls.Core.Implicit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MetroDark\MetroDark.MSControls.Toolkit.Implicit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MetroDark\Styles.Shared.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MetroDark\Styles.WPF.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MetroDark\Theme.Colors.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\Home\HomeCrtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Imobilizado\ImobilizadoCrtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -348,13 +337,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DefaultDataResources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Reports\Reconsiliacao Bancaria\Reconcil.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reconcil.vb</LastGenOutput>
+    </EmbeddedResource>
     <None Include="CSU_RECON_BANCARIA_TemporaryKey.pfx" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <AppDesigner Include="My Project\" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -425,6 +420,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controller\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
