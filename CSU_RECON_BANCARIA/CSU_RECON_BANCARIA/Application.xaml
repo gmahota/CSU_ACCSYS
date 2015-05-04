@@ -1,5 +1,6 @@
 ﻿<Application x:Class="Application"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -23,15 +24,12 @@
                 
             </ResourceDictionary.MergedDictionaries>
             
-            
 
-            <!--<Style x:Key="DescriptionHeaderStyle"
-                   TargetType="Label">
-                <Setter Property="FontSize"
-                        Value="10" />
-                <Setter Property="HorizontalAlignment"
-                        Value="Center" />
-            </Style>-->
+            <Style x:Key="MenuLevel2" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+                    <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="18"></Setter>
+                    <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="18"></Setter>
+            </Style>
+
 
 
         </ResourceDictionary>

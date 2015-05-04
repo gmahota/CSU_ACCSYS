@@ -70,15 +70,7 @@ trataerro:
 
     Private Sub btGravar_Click(sender As Object, e As RoutedEventArgs) Handles btGravar.Click
 
-        'get the file attributes for file or directory
-        'Dim attr As FileAttributes = File.GetAttributes(txtFile.Text)
-
-        'detect whether its a directory or file
-        If (Directory.Exists(txtFile.Text)) Then
-            CreateCSVFile(txtFile.Text + "\" + Now.ToString("dd_MM_yyyy_h_mm_ss.CSV"))
-        Else
-            CreateCSVFile(txtFile.Text)
-        End If
+        save()
 
 
 
@@ -218,5 +210,17 @@ trataerro:
 
         End Try
 
+    End Sub
+
+    Public Sub save()
+        'get the file attributes for file or directory
+        'Dim attr As FileAttributes = File.GetAttributes(txtFile.Text)
+
+        'detect whether its a directory or file
+        If (Directory.Exists(txtFile.Text)) Then
+            CreateCSVFile(txtFile.Text + "\" + Now.ToString("dd_MM_yyyy_h_mm_ss.CSV"))
+        Else
+            CreateCSVFile(txtFile.Text)
+        End If
     End Sub
 End Class

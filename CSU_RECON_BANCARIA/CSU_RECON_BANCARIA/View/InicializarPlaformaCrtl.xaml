@@ -5,7 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             mc:Ignorable="d">
+             xmlns:myXamlHelpers="clr-namespace:CSU_RECON_BANCARIA.CMS.Models.UserLogin.XamlHelpers"
+             
+             mc:Ignorable="d" >
     <controls:Flyout.Resources>
 
         <ResourceDictionary>
@@ -57,7 +59,9 @@
                         <Label Content="Usuario:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="2" />
                         <TextBox Text="{Binding XPath=@usuario , Mode=TwoWay}"  x:Name="txtUser" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"  Grid.Column="1" Grid.Row="2" />
                         <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3"/>
-                        <TextBox Text="{Binding XPath=@password , Mode=TwoWay}" x:Name="txtPassword"  Grid.Column="1" Grid.Row="3" Width="200"/>
+                        <!--<TextBox Text="{Binding XPath=@password , Mode=TwoWay}" x:Name="txtPassword"  Grid.Column="1" Grid.Row="3" Width="200"/>-->
+                        <PasswordBox x:Name="txtPassword" Grid.Column="1" Grid.Row="3" Width="200" myXamlHelpers:PasswordBoxHelper.BindPassword="True" 
+                            myXamlHelpers:PasswordBoxHelper.BoundPassword="{Binding XPath=@password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </TabItem>
                 <TabItem Header="Conf. SQL">
@@ -85,14 +89,11 @@
                         <Label Content="Usuario:" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.Column="0" Grid.Row="2" />
                         <TextBox  Text="{Binding XPath=@usuarioSql , Mode=TwoWay}" x:Name="txtUserSql" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.Column="1" Grid.Row="2"/>
                         <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" />
-                        <TextBox Text="{Binding XPath=@passwordSql , Mode=TwoWay}"  x:Name="txtPasswordSql" Grid.Column="1" Grid.Row="3" Width="200" />
+                        <!--<TextBox Text="{Binding XPath=@passwordSql , Mode=TwoWay}"  x:Name="txtPasswordSql" Grid.Column="1" Grid.Row="3" Width="200" />-->
 
-                        <!--<PasswordBox  Grid.Column="1" Grid.Row="3" Width="200"
-                             Controls:TextBoxHelper.Watermark="Password"
-                             Controls:TextBoxHelper.UseFloatingWatermark="True"
-                             Controls:TextBoxHelper.ClearTextButton="True"
-                             Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}"
-                             Password="Password"/>-->
+                        <PasswordBox x:Name="txtPasswordSql"  Grid.Column="1" Grid.Row="3" Width="200" myXamlHelpers:PasswordBoxHelper.BindPassword="True" 
+                            myXamlHelpers:PasswordBoxHelper.BoundPassword="{Binding XPath=@passwordSql, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        
                     </Grid>
                 </TabItem>
             </TabControl>

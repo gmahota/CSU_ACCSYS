@@ -1,7 +1,4 @@
-﻿Imports Interop.StdBE800
-Imports Interop.ErpBS800
-Imports Interop.GcpBE800
-Imports System.Data.SqlClient
+﻿Imports System.Data.SqlClient
 Imports System.Data
 Imports System.Net.Mail
 Imports System.Threading
@@ -47,22 +44,6 @@ Public Class ExtratoHelper
 Sair:
         MsgBox(Err.Description, vbInformation, "erro: " & Err.Number)
     End Sub
-
-    '    Public Sub incializarMotorPrimavera(tipoPlataforma As Integer, codEmpresa As String, codUsuario As String, password As String, con As String)
-    '        On Error GoTo trataerro
-    '        Me.tipoPlataforma = tipoPlataforma
-    '        Me.codUsuario = codUsuario
-    '        Me.codEmpresa = codEmpresa
-    '        Me.password = password
-    '        Me.connectionString = con
-
-    '        'objmotor = CreateObject("ErpBS800.ErpBs")
-    '        objmotor = New ErpBS
-    '        objmotor.AbreEmpresaTrabalho(tipoPlataforma, codEmpresa, codUsuario, password)
-    '        Exit Sub
-    'trataerro:
-    '        MsgBox(Err.Description)
-    '    End Sub
 
     Public Function daListaBancos() As IEnumerable(Of Bancos)
         Dim lista As New List(Of Bancos)
@@ -194,8 +175,6 @@ Sair:
 
     End Function
 
-
-    
     Public Sub importarExtrato2(caminhoexcel As String, folhaexcel As Integer, linhaInicial As Integer, linhaFinal As Integer, banco As String, Conta As String, formatobanco As String, NumConta As String, NumExtrato As String, ByVal DataIniEx As Date, ByVal DataFimEx As Date, ByVal SaldoIni As String, ByVal SaldoFim As String)
         
         Dim i As Long

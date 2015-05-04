@@ -15,6 +15,12 @@ Public Class XmlHelper
             Dim pastas As XmlNode = doc.SelectSingleNode("/instancias")
 
             For Each node As XmlNode In pastas
+                Try
+                    instancia.instancia = Conversion.Int(node.Attributes.GetNamedItem("instancia").InnerText)
+
+                Catch ex As Exception
+
+                End Try
                 instancia.empresa = node.Attributes.GetNamedItem("empresa").InnerText
                 instancia.empresaSql = node.Attributes.GetNamedItem("empresaSql").InnerText
                 instancia.instanciaSql = node.Attributes.GetNamedItem("instanciaSql").InnerText
@@ -22,6 +28,7 @@ Public Class XmlHelper
                 instancia.passwordSql = node.Attributes.GetNamedItem("passwordSql").InnerText
                 instancia.usuario = node.Attributes.GetNamedItem("usuario").InnerText
                 instancia.usuarioSql = node.Attributes.GetNamedItem("usuarioSql").InnerText
+                instancia.pastaConfig = node.Attributes.GetNamedItem("PastaConfig").InnerText
             Next
 
         Catch ex As Exception

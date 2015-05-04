@@ -14,6 +14,10 @@ Public Class ImobilizadoCrtl
         On Error GoTo trataerro
         ' This call is required by the designer.
         'InitializeComponent()
+        imobilizadoHelper.tipoPlataforma = tipoPlataforma
+        imobilizadoHelper.codEmpresa = codEmpresa
+        imobilizadoHelper.codUsuario = codUsuario
+        imobilizadoHelper.password = password
 
         imobilizadoHelper.connectionString = con
 
@@ -76,6 +80,15 @@ Sair:
     End Sub
 
     Private Sub Button_Click_1(sender As Object, e As RoutedEventArgs)
+        save()
+
+    End Sub
+
+    Private Sub btupdate_Click(sender As Object, e As RoutedEventArgs)
+
+    End Sub
+
+    Public Sub save()
         Try
             'Mouse.OverrideCursor = Cursors.Wait
             progressRing.IsActive = True
@@ -90,10 +103,5 @@ Sair:
             'progressRing.Visibility = Windows.Visibility.Hidden
 
         End Try
-
-    End Sub
-
-    Private Sub btupdate_Click(sender As Object, e As RoutedEventArgs)
-
     End Sub
 End Class

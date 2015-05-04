@@ -136,23 +136,8 @@ trataerro:
     End Sub
 
     Private Sub Button_Click_1(sender As Object, e As RoutedEventArgs)
-        Try
-            'Mouse.OverrideCursor = Cursors.Wait
-            progressRing.IsActive = True
-            'progressRing.Visibility = Windows.Visibility.Visible
-            clienteshelper.importarExtrato2(txtFicheiroExcell.Text, cbFolhaExcel.SelectedIndex + 1, Conversion.Int(txtLinhaInical.Text), Conversion.Int(txtLinhaFinal.Text), cbBanco.Text, cbContaBancaria.Text, cbFormatoBanco.Text, txtNumConta.Text, txtNumExtrato.Text, dtInicio.SelectedDate, dtFim.SelectedDate, txtSaldoInicial.Text, txtSaldoFinal.Text)
-            progressRing.IsActive = False
+        save()
 
-            'progressRing.Visibility = Windows.Visibility.Hidden
-        Catch ex As Exception
-            progressRing.IsActive = False
-
-            'progressRing.Visibility = Windows.Visibility.Hidden
-
-        End Try
-
-
-        
         'clienteshelper.importarExtrato(txtFicheiroExcell.Text, cbFolhaExcel.SelectedIndex + 1, Conversion.Int(txtLinhaInical.Text), Conversion.Int(txtLinhaFinal.Text), cbBanco.Text, cbContaBancaria.Text, txtNumConta.Text, txtNumExtrato.Text, Today, Today, 0, 0)
     End Sub
 
@@ -250,5 +235,22 @@ trataerro:
 
     Private Sub btupdate_Click(sender As Object, e As RoutedEventArgs)
 
+    End Sub
+
+    Public Sub save()
+        Try
+            'Mouse.OverrideCursor = Cursors.Wait
+            progressRing.IsActive = True
+            'progressRing.Visibility = Windows.Visibility.Visible
+            clienteshelper.importarExtrato2(txtFicheiroExcell.Text, cbFolhaExcel.SelectedIndex + 1, Conversion.Int(txtLinhaInical.Text), Conversion.Int(txtLinhaFinal.Text), cbBanco.Text, cbContaBancaria.Text, cbFormatoBanco.Text, txtNumConta.Text, txtNumExtrato.Text, dtInicio.SelectedDate, dtFim.SelectedDate, txtSaldoInicial.Text, txtSaldoFinal.Text)
+            progressRing.IsActive = False
+
+            'progressRing.Visibility = Windows.Visibility.Hidden
+        Catch ex As Exception
+            progressRing.IsActive = False
+
+            'progressRing.Visibility = Windows.Visibility.Hidden
+
+        End Try
     End Sub
 End Class

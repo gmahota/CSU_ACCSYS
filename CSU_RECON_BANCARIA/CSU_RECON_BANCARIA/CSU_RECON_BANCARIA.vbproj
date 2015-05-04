@@ -135,16 +135,48 @@
     <Reference Include="Dragablz">
       <HintPath>..\packages\Dragablz.0.0.1.109\lib\net40\Dragablz.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.EapBE800">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG800\Interop.EapBE800.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Interop.EapBE900">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG900\Interop.EapBE900.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.ErpBS800">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG800\Interop.ErpBS800.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Interop.ErpBS900">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG900\Interop.ErpBS900.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Interop.GcpBE800">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG800\Interop.GcpBE800.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.GcpBE900">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG900\Interop.GcpBE900.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.IEapBS800">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG800\Interop.IEapBS800.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Interop.IEapBS900">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG900\Interop.IEapBS900.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.IGcpBS800">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG800\Interop.IGcpBS800.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.IGcpBS900">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG900\Interop.IGcpBS900.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.StdBE800">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Common Files\PRIMAVERA\SG800\Interop.StdBE800.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Interop.StdBE900">
@@ -188,7 +220,9 @@
     </Compile>
     <Compile Include="Model\Helper\Actions\ClosableTab.vb" />
     <Compile Include="Model\Helper\Actions\CloseTabItemAction.vb" />
+    <Compile Include="Model\Helper\Actions\PasswordBoxHelper.vb" />
     <Compile Include="Model\Helper\ImobilizadoHelper.vb" />
+    <Compile Include="Model\Helper\PendentesHelper.vb" />
     <Compile Include="Model\Helper\XmlHelper.vb" />
     <Compile Include="Model\Imobilizado.vb" />
     <Compile Include="Model\Instancia.vb" />
@@ -224,6 +258,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reconcil.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\DiferencaCambioCtrl.xaml.vb">
+      <DependentUpon>DiferencaCambioCtrl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Home\HomeCrtl.xaml.vb">
       <DependentUpon>HomeCrtl.xaml</DependentUpon>
@@ -264,9 +301,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Dicionarios\MetroTabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DiferencaCambioCtrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Home\HomeCrtl.xaml">
       <SubType>Designer</SubType>
@@ -309,7 +354,7 @@
     <Import Include="System.Windows.Navigation" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\ExtratoHelper.vb" />
+    <Compile Include="Model\Helper\ExtratoHelper.vb" />
     <Compile Include="My Project\AssemblyInfo.vb">
       <SubType>Code</SubType>
     </Compile>

@@ -13,10 +13,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/MIT.png" VerticalAlignment="Top" Height="175" Grid.Row="0" />
+        <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/MIT.png" VerticalAlignment="Top" Height="120" Grid.Row="0" />
         <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/logo/frontimageAccSys.jpg" VerticalAlignment="Center" Grid.Row="1" />
 
-        <GroupBox Header="Aplicações Disponiveis" Grid.Row="3">
+        <GroupBox Header="Aplicações Disponiveis" VerticalAlignment="Center" Grid.Row="3">
             <Grid>
                 <Grid.Resources>
                     <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />

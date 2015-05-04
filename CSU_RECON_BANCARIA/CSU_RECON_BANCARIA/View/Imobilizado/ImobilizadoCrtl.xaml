@@ -7,7 +7,7 @@
              mc:Ignorable="d" Height="694.886" Width="720.368">
     <StackPanel Height="595" VerticalAlignment="Top" >
         <DockPanel >
-            <ToolBarTray DockPanel.Dock="Top">
+            <ToolBarTray x:Name="toolbar" DockPanel.Dock="Top">
                 <ToolBar>
                     <Button Cursor="Arrow" x:Name="btupdate" Click="btupdate_Click">
                         <StackPanel Orientation="Horizontal">
@@ -119,12 +119,7 @@
                         </Grid>
 
                     </TabItem>
-                    <TabItem Header="Opções de Importação">
-                        <Grid>
-                            <DataGrid />
-                        </Grid>
-                    </TabItem>
-
+                    
                 </TabControl>
 
                 

@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" Height="600" Width="850">
     <DockPanel >
-        <ToolBarTray DockPanel.Dock="Top">
+        <ToolBarTray x:Name="toolbar" DockPanel.Dock="Top">
             <ToolBar>
                 <Button x:Name="btActualizar" Cursor="Arrow">
                     <StackPanel Orientation="Horizontal">

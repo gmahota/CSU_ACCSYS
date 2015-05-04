@@ -83,8 +83,6 @@ Partial Public Class MainWindow : Inherits MetroWindow
 
     End Function
 
-
-
     Public Sub Inicializar()
         'Dim motor As ErpBS
         'motor = New ErpBS()
@@ -92,77 +90,6 @@ Partial Public Class MainWindow : Inherits MetroWindow
         'motor.AbreEmpresaTrabalho(1, "clone", "accsys", "accsys2011")
         ' Add any initialization after the InitializeComponent() call.
 
-    End Sub
-
-    Private Sub importadorFormatoMagnetico()
-        'Dim imp As New ImportadorFormatoMagneticoView
-        'imp.InicializarPorXml()
-        'imp.Show()
-
-        For Each janela As MetroTabItem In tbMain.Items
-            If janela.Header = "Importador para CSV" Then
-                janela.IsSelected = True
-                Exit Sub
-            End If
-        Next
-
-        Dim item As New MetroTabItem
-        item.Header = "Importador para CSV"
-        item.CloseButtonEnabled = True
-        item.IsSelected = True
-
-        Dim importadorCrlFormatoMagnetico As New ImportFormatoMagneticoCtrl
-
-        importadorCrlFormatoMagnetico.Inicializar(xmlHelper.instancia.instancia, xmlHelper.instancia.empresa, xmlHelper.instancia.usuario,
-                                     xmlHelper.instancia.password, xmlHelper.instancia.daConnectionString())
-        item.Content = importadorCrlFormatoMagnetico
-
-        tbMain.Items.Add(item)
-    End Sub
-
-    Private Sub importadoExtratoBancario()
-
-        For Each janela As MetroTabItem In tbMain.Items
-            If janela.Header = "Importador de Extrato Bancario" Then
-                janela.IsSelected = True
-                Exit Sub
-            End If
-        Next
-
-        Dim item As New MetroTabItem
-        item.Header = "Importador de Extrato Bancario"
-        item.CloseButtonEnabled = True
-        item.IsSelected = True
-
-        Dim importadorCrlExtratoBancario As New ImportExtBancoCrtl
-
-        importadorCrlExtratoBancario.Inicializar(xmlHelper.instancia.instancia, xmlHelper.instancia.empresa, xmlHelper.instancia.usuario,
-                                     xmlHelper.instancia.password, xmlHelper.instancia.daConnectionString())
-        item.Content = importadorCrlExtratoBancario
-
-        tbMain.Items.Add(item)
-    End Sub
-
-    Private Sub janelaHome()
-
-        For Each janela As MetroTabItem In tbMain.Items
-            If janela.Header = "Pagina Inicial" Then
-                janela.IsSelected = True
-                Exit Sub
-            End If
-        Next
-
-        Dim item As New MetroTabItem
-        item.Header = "Pagina Inicial"
-
-        item.CloseButtonEnabled = True
-        item.IsSelected = True
-
-        Dim paginaInicial As New HomeCrtl
-
-        item.Content = paginaInicial
-
-        tbMain.Items.Add(item)
     End Sub
 
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
@@ -221,7 +148,6 @@ Partial Public Class MainWindow : Inherits MetroWindow
         importadorFormatoMagnetico()
     End Sub
 
-
     Private Sub MenuItem_Click(sender As Object, e As RoutedEventArgs)
 
     End Sub
@@ -234,7 +160,35 @@ Partial Public Class MainWindow : Inherits MetroWindow
         importadorImobilizado()
     End Sub
 
+    Private Sub DiferencaCambioMenu_Click(sender As Object, e As RoutedEventArgs)
+        diferencaCambio()
+    End Sub
+
+    Private Sub janelaHome()
+
+        For Each janela As MetroTabItem In tbMain.Items
+            If janela.Header = "Pagina Inicial" Then
+                janela.IsSelected = True
+                Exit Sub
+            End If
+        Next
+
+        Dim item As New MetroTabItem
+        item.Header = "Pagina Inicial"
+
+        item.CloseButtonEnabled = True
+        item.IsSelected = True
+
+        Dim paginaInicial As New HomeCrtl
+
+        item.Content = paginaInicial
+        item.SetValue(ControlsHelper.HeaderFontSizeProperty, 18.0)
+        tbMain.Items.Add(item)
+    End Sub
+
     Private Sub importadorImobilizado()
+        btSave.IsEnabled = True
+
         For Each janela As MetroTabItem In tbMain.Items
             If janela.Header = "Importador de Imobilizado" Then
                 janela.IsSelected = True
@@ -248,12 +202,266 @@ Partial Public Class MainWindow : Inherits MetroWindow
         item.IsSelected = True
 
         Dim importadorCrlImobilizado As New ImobilizadoCrtl
-
+        importadorCrlImobilizado.toolbar.Visibility = Windows.Visibility.Hidden
         importadorCrlImobilizado.Inicializar(xmlHelper.instancia.instancia, xmlHelper.instancia.empresa, xmlHelper.instancia.usuario,
                                      xmlHelper.instancia.password, xmlHelper.instancia.daConnectionString())
         item.Content = importadorCrlImobilizado
+        item.SetValue(ControlsHelper.HeaderFontSizeProperty, 18.0)
+        tbMain.Items.Add(item)
+    End Sub
+
+    Private Sub importadorFormatoMagnetico()
+
+        For Each janela As MetroTabItem In tbMain.Items
+            If janela.Header = "Importador para CSV" Then
+                janela.IsSelected = True
+                Exit Sub
+            End If
+        Next
+
+        Dim item As New MetroTabItem
+        item.Header = "Importador para CSV"
+        item.CloseButtonEnabled = True
+        item.IsSelected = True
+
+        Dim importadorCrlFormatoMagnetico As New ImportFormatoMagneticoCtrl
+
+        importadorCrlFormatoMagnetico.toolbar.Visibility = Windows.Visibility.Hidden
+        importadorCrlFormatoMagnetico.Inicializar(xmlHelper.instancia.instancia, xmlHelper.instancia.empresa, xmlHelper.instancia.usuario,
+                                     xmlHelper.instancia.password, xmlHelper.instancia.daConnectionString())
+        item.Content = importadorCrlFormatoMagnetico
+        item.SetValue(ControlsHelper.HeaderFontSizeProperty, 18.0)
+        tbMain.Items.Add(item)
+    End Sub
+
+    Private Sub importadoExtratoBancario()
+
+        btSave.IsEnabled = True
+
+        For Each janela As MetroTabItem In tbMain.Items
+            If janela.Header = "Importador de Extrato Bancario" Then
+                janela.IsSelected = True
+                Exit Sub
+            End If
+        Next
+
+        Dim item As New MetroTabItem
+
+        item.Header = "Importador de Extrato Bancario"
+        item.CloseButtonEnabled = True
+        item.IsSelected = True
+
+        Dim importadorCrlExtratoBancario As New ImportExtBancoCrtl
+        importadorCrlExtratoBancario.toolbar.Visibility = Windows.Visibility.Hidden
+
+        importadorCrlExtratoBancario.Inicializar(xmlHelper.instancia.instancia, xmlHelper.instancia.empresa, xmlHelper.instancia.usuario,
+                                     xmlHelper.instancia.password, xmlHelper.instancia.daConnectionString())
+        item.Content = importadorCrlExtratoBancario
+
+        
+        item.SetValue(ControlsHelper.HeaderFontSizeProperty, 18.0)
 
         tbMain.Items.Add(item)
     End Sub
 
+    Private Sub diferencaCambio()
+
+        btSave.IsEnabled = True
+
+        For Each janela As MetroTabItem In tbMain.Items
+            If janela.Header = "Diferença de Cambios" Then
+                janela.IsSelected = True
+                Exit Sub
+            End If
+        Next
+
+        Dim item As New MetroTabItem
+
+        item.Header = "Diferença de Cambios"
+        item.CloseButtonEnabled = True
+        item.IsSelected = True
+
+        Dim diferencaCambioCtrl As New DiferencaCambioCtrl
+        'diferencaCambioCtrl.toolbar.Visibility = Windows.Visibility.Hidden
+
+        diferencaCambioCtrl.Inicializar(xmlHelper.instancia.instancia, xmlHelper.instancia.empresa, xmlHelper.instancia.usuario,
+                                     xmlHelper.instancia.password, xmlHelper.instancia.daConnectionString())
+
+        item.Content = diferencaCambioCtrl
+
+        item.SetValue(ControlsHelper.HeaderFontSizeProperty, 18.0)
+
+        tbMain.Items.Add(item)
+    End Sub
+
+    Private Sub tbMain_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles tbMain.SelectionChanged
+        Try
+            Dim header = tbMain.Items(tbMain.SelectedIndex).Header
+            Select Case header
+                Case "Pagina Inicial"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = False
+                    btupdate.IsEnabled = False
+                Case "Importador de Extrato Bancario"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = True
+                    btupdate.IsEnabled = False
+                Case "Importador para CSV"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = True
+                    btupdate.IsEnabled = False
+                Case "Importador de Imobilizado"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = True
+                    btupdate.IsEnabled = False
+                Case "Diferença de Cambios"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = True
+                    btupdate.IsEnabled = True
+            End Select
+        Catch ex As Exception
+
+        End Try
+
+
+        
+
+    End Sub
+
+    Private Sub btupdate_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            Dim header = tbMain.Items(tbMain.SelectedIndex).Header
+            Select Case header
+                Case "Pagina Inicial"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = False
+                    btupdate.IsEnabled = False
+                Case "Importador de Extrato Bancario"
+
+                Case "Importador para CSV"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = True
+                    btupdate.IsEnabled = False
+                Case "Importador de Imobilizado"
+                    'Dim diferencaCtrl As New DiferencaCambioCtrl
+                    'diferencaCtrl = tbMain.Items(tbMain.SelectedIndex).Content
+                    'diferencaCtrl.update()
+                Case "Diferença de Cambios"
+                    Dim diferencaCtrl As New DiferencaCambioCtrl
+                    diferencaCtrl = tbMain.Items(tbMain.SelectedIndex).Content
+                    diferencaCtrl.update()
+            End Select
+        Catch ex As Exception
+            MessageBox.Show(Err.Description)
+        End Try
+    End Sub
+
+    Private Sub btSave_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            Dim header = tbMain.Items(tbMain.SelectedIndex).Header
+            Select Case header
+                Case "Pagina Inicial"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = False
+                    btupdate.IsEnabled = False
+                Case "Importador de Extrato Bancario"
+                    Dim importadorCrlExtratoBancario As New ImportExtBancoCrtl
+                    importadorCrlExtratoBancario = tbMain.Items(tbMain.SelectedIndex).Content
+                    importadorCrlExtratoBancario.save()
+                Case "Importador para CSV"
+                    Dim importadorFormatoMagnetico As New ImportFormatoMagneticoCtrl
+                    importadorFormatoMagnetico = tbMain.Items(tbMain.SelectedIndex).Content
+                    importadorFormatoMagnetico.save()
+                Case "Importador de Imobilizado"
+                    Dim imobilizadoCtrl As New ImobilizadoCrtl
+                    imobilizadoCtrl = tbMain.Items(tbMain.SelectedIndex).Content
+                    imobilizadoCtrl.save()
+                Case "Diferença de Cambios"
+                    Dim diferencaCtrl As New DiferencaCambioCtrl
+                    diferencaCtrl = tbMain.Items(tbMain.SelectedIndex).Content
+                    diferencaCtrl.save()
+            End Select
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btRemove_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            Dim header = tbMain.Items(tbMain.SelectedIndex).Header
+            Select Case header
+                Case "Pagina Inicial"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = False
+                    btupdate.IsEnabled = False
+                Case "Importador de Extrato Bancario"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = True
+                    btupdate.IsEnabled = False
+                Case "Importador para CSV"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = True
+                    btupdate.IsEnabled = False
+                Case "Importador de Imobilizado"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = True
+                    btupdate.IsEnabled = False
+            End Select
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btPrint_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            Dim header = tbMain.Items(tbMain.SelectedIndex).Header
+            Select Case header
+                Case "Pagina Inicial"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = False
+                    btupdate.IsEnabled = False
+                Case "Importador de Extrato Bancario"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = True
+                    btupdate.IsEnabled = False
+                Case "Importador para CSV"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = True
+                    btupdate.IsEnabled = False
+                Case "Importador de Imobilizado"
+                    btPrint.IsEnabled = False
+                    btRemove.IsEnabled = False
+                    btSave.IsEnabled = True
+                    btupdate.IsEnabled = False
+            End Select
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    
+    Private Sub btProperties_Click(sender As Object, e As RoutedEventArgs)
+        parametrosCtrl.IsOpen = Not parametrosCtrl.IsOpen
+    End Sub
+
+    Private Sub TextBlock_MouseLeave(sender As Object, e As MouseEventArgs)
+        parametrosCtrl.IsOpen = Not parametrosCtrl.IsOpen
+    End Sub
+
+    
 End Class
