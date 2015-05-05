@@ -5,6 +5,7 @@ Imports System.Threading
 Imports System.Globalization
 Imports MahApps.Metro.Controls
 Imports MahApps.Metro.Controls.Dialogs
+Imports System.Text.RegularExpressions
 
 
 Public Class ExtratoHelper
@@ -176,14 +177,14 @@ Sair:
     End Function
 
     Public Sub importarExtrato2(caminhoexcel As String, folhaexcel As Integer, linhaInicial As Integer, linhaFinal As Integer, banco As String, Conta As String, formatobanco As String, NumConta As String, NumExtrato As String, ByVal DataIniEx As Date, ByVal DataFimEx As Date, ByVal SaldoIni As String, ByVal SaldoFim As String)
-        
+
         Dim i As Long
         Dim sqlstr As String
         Dim sqlstr2 As String
         Dim sqlstr3 As String
         Dim sqlstr4 As String
 
-        
+
         Dim IdCabec As String
         Dim DataMovimEx As New String("")
         Dim DataValorEx As New String("")
@@ -202,14 +203,11 @@ Sair:
         Dim Valor As Double
         Dim cbextrato As CabecExtractoBancario
 
-            Dim linhasFormatoBancario As List(Of LinhasFormatoBancario)
+        Dim linhasFormatoBancario As List(Of LinhasFormatoBancario)
 
         Try
 
             openExcell(caminhoexcel, folhaexcel)
-
-            'variavel temporaria
-            Dim temp As LinhasFormatoBancario
 
             linhasFormatoBancario = daLinhasFormatoBancario(formatobanco, "")
 
@@ -304,11 +302,13 @@ Sair:
                                                     valorCredito = daDouble(daValorExcell(i, linhas.Coluna), formatoBancario.SeparadorMilhares, formatoBancario.SeparadorDecimal)
                                                     MovBnc = "DVC"
                                                     Natureza = "C"
+                                                    
                                                 Case Else
 
                                                     Valor = daDouble(daValorExcell(i, linhas.Coluna), formatoBancario.SeparadorMilhares, formatoBancario.SeparadorDecimal)
-                                                    MovBnc = IIf(daValorExcell(i, linhas.Coluna) > 0, "DVC", "DVD")
-                                                    Natureza = IIf(daValorExcell(i, linhas.Coluna) > 0, "C", "D")
+                                                    MovBnc = IIf(Valor > 0, "DVC", "DVD")
+                                                    Natureza = IIf(Valor > 0, "D", "C")
+                                                    'IIf(Convert.ToDouble(temp) < 0, Convert.ToDouble(temp) * -1, Convert.ToDouble(temp))
 
                                             End Select
                                         End If
@@ -399,7 +399,7 @@ Sair:
                 xlSheet = Nothing
             End If
 
-            
+
 
             If Not cbextrato Is Nothing Then
                 delete_Query("delete LINHASEXTRACTOBANCARIO where IdCabecExtractoBancario = '" & cbextrato.id.ToString() & "'")
@@ -501,19 +501,25 @@ Sair:
 
         Dim temp As String
 
-
         Try
-            temp = Replace(valorExcell.ToString(), separadorMilhares, "")
+            temp = RemoveExtraText(valorExcell.ToString())
+            temp = Replace(temp, separadorMilhares, "")
             temp = Replace(temp, sepraradorDecimal, ",")
             temp = Replace(temp, "-", "")
             temp = Replace(temp, "+", "")
-            Return IIf(Convert.ToDouble(temp) < 0, Convert.ToDouble(temp) * -1, Convert.ToDouble(temp))
-
+            Return Convert.ToDouble(temp) 
         Catch ex As Exception
             Return 0
         End Try
 
     End Function
+
+    Private Function RemoveExtraText(value As String) As String
+
+        Dim allowedChars = "01234567890.,"
+        Return New String(value.Where(Function(c) allowedChars.Contains(c)).ToArray())
+    End Function
+
 
     Public Function daListaHistoricoExpPS2() As IEnumerable(Of HistoricoExpPS2)
         Dim lista As New List(Of HistoricoExpPS2)

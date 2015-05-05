@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<instancias>
+  <Instancia PastaConfig="PRIMAVERA\\SG800" instancia ="1" empresa ="MINAS2015C" usuario="accsys" password ="accsys2011" instanciaSql ="ACCPRI12\PRIMAVERACIAS" empresaSql ="PRIMINAS2015C" usuarioSql="sa" passwordSql ="Accsys2011!"/>
+</instancias>
