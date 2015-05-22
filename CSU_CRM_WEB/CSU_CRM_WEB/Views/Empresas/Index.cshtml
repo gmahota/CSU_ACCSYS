@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CSU_CRM_WEB.Models.Empresas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CodEmpresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodEmpresaPri)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeEmpresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LogoTipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Conexao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpresaPrimavera)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodEmpresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodEmpresaPri)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeEmpresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LogoTipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Conexao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpresaPrimavera)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

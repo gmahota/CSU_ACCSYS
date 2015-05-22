@@ -1,0 +1,130 @@
+﻿@model IEnumerable<CSU_CRM_WEB.Models.View_Lista_Contactos_Pendentes>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm(Html.BeginForm("ListaPendentesClientes", "Empresas",
+    new { empresa = ViewBag.empresabd }, FormMethod.Post, new { encType = "multipart/form-data" })))
+{
+    int i = 0;
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="row">
+        
+    </div>
+
+    <div class="row">
+        
+        <div class="col-md-4">
+            <input type="radio" id="rPendentes" name="tipoExtrato" checked="checked" value="ExtratoCompleto" /> Extrato Completo
+            <input type="radio" id="rExtrato" name="tipoExtrato" value="ExtratoPendentes"  /> Extrato de Pendentes
+        </div>
+
+        <div class="col-md-3">
+            <button class="btn btn-default"> <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Enviar</button>
+        </div>
+
+        <div class="col-md-3">
+            <input type="file" name="file1" />
+            <input type="file" name="file2" />
+        </div>
+
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Sel.
+                </th>
+                <th>@Html.DisplayNameFor(model => model.Cliente)</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    Morada
+                </th>
+
+
+                <th>
+                    Telefone
+                </th>
+
+
+
+                <th>
+                    Contacto da Empresa
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+
+
+                <th>
+                    Valor Pendente
+                </th>
+                <th>
+                    Valor Total
+                </th>
+
+            </tr>
+        </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.HiddenFor(x => item.Cliente)
+                        @Html.HiddenFor(x => item.Nome)
+                        
+                        <input name="CDU_EnviaCobranca" checked="@item.CDU_EnviaCobranca" type="checkbox" value="@item.Cliente" />
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fac_Mor)
+                    </td>
+
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fac_Tel)
+                    </td>
+
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrimeiroNome) @Html.DisplayFor(modelItem => item.UltimoNome)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+
+
+                    <td>
+                        @item.ValorPendente.Value.ToString("N", System.Globalization.CultureInfo.CreateSpecificCulture("pt-PT"))
+                    </td>
+                    <td>
+                        @item.ValorTotal.Value.ToString("N", System.Globalization.CultureInfo.CreateSpecificCulture("pt-PT"))
+                    </td>
+
+                </tr>
+            }
+
+</table>
+}
+
+
+

@@ -1,0 +1,124 @@
+﻿@model IEnumerable<CSU_CRM_WEB.Models.View_Lista_Contactos_Pendentes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fac_Mor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fac_Local)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumContrib)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fac_Tel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Moeda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CDU_ContaRec)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CDU_EnviaCobranca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrimeiroNome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UltimoNome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAssist)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorPendente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorTotal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fac_Mor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fac_Local)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumContrib)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pais)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fac_Tel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Moeda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CDU_ContaRec)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CDU_EnviaCobranca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrimeiroNome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UltimoNome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailAssist)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorPendente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorTotal)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

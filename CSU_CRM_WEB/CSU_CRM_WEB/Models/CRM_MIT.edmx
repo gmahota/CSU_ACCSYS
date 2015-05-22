@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CRM_MITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodEmpresa" Type="nvarchar(max)" />
+          <Property Name="CodEmpresaPri" Type="nvarchar(max)" />
+          <Property Name="NomeEmpresa" Type="nvarchar(max)" />
+          <Property Name="LogoTipo" Type="varbinary(max)" />
+          <Property Name="Conexao" Type="nvarchar(max)" />
+          <Property Name="EmpresaPrimavera" Type="bit" />
+          <Property Name="TipoEmpresa" Type="nvarchar(max)" />
+          <Property Name="UseDefaultCredentials" Type="bit" />
+          <Property Name="Credentials" Type="nvarchar(max)" />
+          <Property Name="Port" Type="int" />
+          <Property Name="EnableSsl" Type="bit" />
+          <Property Name="Host" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="CRM_MITModelStoreContainer">
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRM_MITModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodEmpresa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CodEmpresaPri" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NomeEmpresa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LogoTipo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Conexao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmpresaPrimavera" Type="Boolean" />
+          <Property Name="TipoEmpresa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UseDefaultCredentials" Type="Boolean" />
+          <Property Name="Credentials" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Port" Type="Int32" />
+          <Property Name="EnableSsl" Type="Boolean" />
+          <Property Name="Host" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="CRM_MITEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRM_MITModelStoreContainer" CdmEntityContainer="CRM_MITEntities">
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="CRM_MITModel.Empresas">
+              <MappingFragment StoreEntitySet="Empresas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CodEmpresa" ColumnName="CodEmpresa" />
+                <ScalarProperty Name="CodEmpresaPri" ColumnName="CodEmpresaPri" />
+                <ScalarProperty Name="NomeEmpresa" ColumnName="NomeEmpresa" />
+                <ScalarProperty Name="LogoTipo" ColumnName="LogoTipo" />
+                <ScalarProperty Name="Conexao" ColumnName="Conexao" />
+                <ScalarProperty Name="EmpresaPrimavera" ColumnName="EmpresaPrimavera" />
+                <ScalarProperty Name="TipoEmpresa" ColumnName="TipoEmpresa" />
+                <ScalarProperty Name="UseDefaultCredentials" ColumnName="UseDefaultCredentials" />
+                <ScalarProperty Name="Credentials" ColumnName="Credentials" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="EnableSsl" ColumnName="EnableSsl" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

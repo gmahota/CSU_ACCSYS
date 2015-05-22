@@ -1,0 +1,29 @@
+﻿@model IEnumerable<CSU_CRM_WEB.Models.Empresas>
+
+<div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Empresas</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class="list-group">
+
+                @foreach (var item in Model)
+            {
+                    <a href="@Url.Action("Dashboard", "Empresas", new { id = item.Id})" class="list-group-item">
+                        @*<span class="badge">just now</span>*@
+                        <i class="fa fa-database"></i>
+                         @Html.DisplayFor(modelItem => item.NomeEmpresa)
+                    </a>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("+ Add New", "Create")
+</p>
+
