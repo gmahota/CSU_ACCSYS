@@ -18,7 +18,7 @@ namespace CSU_CRM_WEB.Controllers
 {
     public class View_Lista_Contactos_PendentesController : Controller
     {
-        private PRIACCEntities db = new PRIACCEntities();
+        private PRIEmpresasEntities db = new PRIEmpresasEntities();
         private string empresadb;
 
         // GET: View_Lista_Contactos_Pendentes
@@ -30,7 +30,7 @@ namespace CSU_CRM_WEB.Controllers
         // GET: View_Lista_Contactos_Pendentes
         public ActionResult Lista_Empresas_Pendentes(string empresa,string conexaoPriempre)
         {
-            //db = new PRIACCEntities(empresa,conexaoPriempre)
+            //db = new PRIEmpresasEntities(empresa,conexaoPriempre)
             //db.Database.Connection.Close();
             db.Database.Connection.Open();
             db.Database.Connection.ChangeDatabase("pri" + empresa);

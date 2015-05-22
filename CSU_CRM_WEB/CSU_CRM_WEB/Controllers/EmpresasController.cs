@@ -13,8 +13,8 @@ namespace CSU_CRM_WEB.Controllers
 {
     public class EmpresasController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-        private PRIACCEntities dbEmpresaPrimavera = new PRIACCEntities();
+        private CRM_MITEntities db = new CRM_MITEntities();
+        private PRIEmpresasEntities dbEmpresaPrimavera = new PRIEmpresasEntities();
 
         private void abreEmpresaPrimavera()
         {
