@@ -196,6 +196,14 @@
     <Compile Include="Migrations\201505220921362_adicao da empresa.Designer.cs">
       <DependentUpon>201505220921362_adicao da empresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505221005332_adicao dos dados da empresa.cs" />
+    <Compile Include="Migrations\201505221005332_adicao dos dados da empresa.Designer.cs">
+      <DependentUpon>201505221005332_adicao dos dados da empresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505221019216_adicao do email nos dados da empresa.cs" />
+    <Compile Include="Migrations\201505221019216_adicao do email nos dados da empresa.Designer.cs">
+      <DependentUpon>201505221019216_adicao do email nos dados da empresa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ClientesDataSet.Designer.cs">
@@ -475,6 +483,7 @@
     <Content Include="Views\View_Lista_Contactos_Pendentes\Edit.cshtml" />
     <Content Include="Views\View_Lista_Contactos_Pendentes\Index.cshtml" />
     <Content Include="Views\View_Lista_Contactos_Pendentes\Lista_Empresas_Pendentes.cshtml" />
+    <Content Include="Views\Empresas\ListaExtratoClientes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -499,6 +508,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505220921362_adicao da empresa.resx">
       <DependentUpon>201505220921362_adicao da empresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505221005332_adicao dos dados da empresa.resx">
+      <DependentUpon>201505221005332_adicao dos dados da empresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505221019216_adicao do email nos dados da empresa.resx">
+      <DependentUpon>201505221019216_adicao do email nos dados da empresa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

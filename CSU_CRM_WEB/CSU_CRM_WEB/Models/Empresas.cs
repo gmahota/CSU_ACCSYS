@@ -27,5 +27,10 @@ namespace CSU_CRM_WEB.Models
         public Nullable<int> Port { get; set; }
         public Nullable<bool> EnableSsl { get; set; }
         public string Host { get; set; }
+        public string MoradaEmpresa { get; set; }
+        public string LocalidadeEmpresa { get; set; }
+        public string TelefoneEmpresa { get; set; }
+        public string NuitEmpresa { get; set; }
+        public string Email { get; set; }
     }
 }

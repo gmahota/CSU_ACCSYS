@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CRM_MITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CRM_MITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Empresas">
           <Key>
             <PropertyRef Name="Id" />
@@ -22,12 +22,16 @@
           <Property Name="Port" Type="int" />
           <Property Name="EnableSsl" Type="bit" />
           <Property Name="Host" Type="nvarchar(max)" />
+          <Property Name="MoradaEmpresa" Type="nvarchar(max)" />
+          <Property Name="LocalidadeEmpresa" Type="nvarchar(max)" />
+          <Property Name="TelefoneEmpresa" Type="nvarchar(max)" />
+          <Property Name="NuitEmpresa" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="CRM_MITModelStoreContainer">
           <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CRM_MITModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -48,6 +52,11 @@
           <Property Name="Port" Type="Int32" />
           <Property Name="EnableSsl" Type="Boolean" />
           <Property Name="Host" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoradaEmpresa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LocalidadeEmpresa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TelefoneEmpresa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NuitEmpresa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="CRM_MITEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Empresas" EntityType="Self.Empresas" />
@@ -61,6 +70,11 @@
           <EntitySetMapping Name="Empresas">
             <EntityTypeMapping TypeName="CRM_MITModel.Empresas">
               <MappingFragment StoreEntitySet="Empresas">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NuitEmpresa" ColumnName="NuitEmpresa" />
+                <ScalarProperty Name="TelefoneEmpresa" ColumnName="TelefoneEmpresa" />
+                <ScalarProperty Name="LocalidadeEmpresa" ColumnName="LocalidadeEmpresa" />
+                <ScalarProperty Name="MoradaEmpresa" ColumnName="MoradaEmpresa" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CodEmpresa" ColumnName="CodEmpresa" />
                 <ScalarProperty Name="CodEmpresaPri" ColumnName="CodEmpresaPri" />

@@ -192,14 +192,23 @@ namespace CSU_CRM_WEB.Controllers
                 dbEmpresaPrimavera.Database.Connection.Open();
                 dbEmpresaPrimavera.Database.Connection.ChangeDatabase(codEmpresaPrimavera);
 
-                return View();
+                var temp = dbEmpresaPrimavera.View_Lista_Contactos_Pendentes;
+                try
+                {
+                    return PartialView(temp.ToList().Where(p => p.CDU_EnviaCobranca == true));
+                }
+                catch
+                {
+                    return PartialView(new List<View_Lista_Contactos_Pendentes>());
+                }
+                
             }
             else
             {
 
                 return RedirectToAction("Index", "Home", null);
             }
-                
+
         }
 
         public ActionResult ListaPendentesClientes()
@@ -222,9 +231,7 @@ namespace CSU_CRM_WEB.Controllers
                 {
                     return PartialView( new List<View_Lista_Contactos_Pendentes>());
                 }
-
-
-                return View();
+                
             }
             else
             {
