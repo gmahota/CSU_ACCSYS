@@ -64,6 +64,7 @@ namespace CSU_CRM_WEB.Controllers
         private void Envia_Email(string codigoCliente,  IEnumerable<HttpPostedFileBase> files, string empresab)
         {
             EmailHelper envia_email = new EmailHelper(empresab);
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId());
             envia_email.enviaEmailComRelatorio(codigoCliente, files, "extratoPendentes");
         }
         

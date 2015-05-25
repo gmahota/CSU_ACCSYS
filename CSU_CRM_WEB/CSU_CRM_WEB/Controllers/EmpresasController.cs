@@ -8,16 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using CSU_CRM_WEB.Models;
 using CSU_CRM_WEB.Models.Helper;
+using Microsoft.AspNet.Identity;
 
 namespace CSU_CRM_WEB.Controllers
 {
+    [Authorize]
     public class EmpresasController : Controller
     {
         private CRM_MITEntities db = new CRM_MITEntities();
         private PRIEmpresasEntities dbEmpresaPrimavera = new PRIEmpresasEntities();
 
+        
+
         private void abreEmpresaPrimavera()
         {
+            
             string codEmpresaPrimavera;
 
             codEmpresaPrimavera = Session["EmpresaCodigoPrimavera"].ToString();
@@ -43,6 +48,7 @@ namespace CSU_CRM_WEB.Controllers
         // GET: Empresas/Details/5
         public ActionResult Details(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -68,10 +74,11 @@ namespace CSU_CRM_WEB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CodEmpresa,CodEmpresaPri,NomeEmpresa,LogoTipo,Conexao,EmpresaPrimavera")] Empresas empresas)
+        public ActionResult Create([Bind(Include = "Id,CodEmpresa,CodEmpresaPri,NomeEmpresa,LogoTipo,Conexao,EmpresaPrimavera,Credentials,Email,EnableSsl,Host,Port,UseDefaultCredentials")] Empresas empresas)
         {
             if (ModelState.IsValid)
             {
+                
                 db.Empresas.Add(empresas);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -100,7 +107,7 @@ namespace CSU_CRM_WEB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CodEmpresa,CodEmpresaPri,NomeEmpresa,LogoTipo,Conexao,EmpresaPrimavera")] Empresas empresas)
+        public ActionResult Edit([Bind(Include = "Id,CodEmpresa,CodEmpresaPri,NomeEmpresa,LogoTipo,Conexao,EmpresaPrimavera,Credentials,Email,EnableSsl,Host,Port,UseDefaultCredentials")] Empresas empresas)
         {
             if (ModelState.IsValid)
             {
