@@ -30,7 +30,10 @@
                                         <Run Text="Extrato Bancario" />
                                     </Hyperlink>
                                     <LineBreak />
-                                    <Run>Importação do Extrato no formato de excel para o Erp Primavera.</Run>
+                                    <Run>Os extractos bancários poderão ser confirmados no sentido de apurar se o saldo bancário da conta está correcto, sendo possivel na mesma opção, inserir novos movimentos que ainda não estão lançados, ficando estes assinalados</Run>
+                                    <Run>Importação do Extrato Bancario no formato de excel para o Erp Primavera.</Run>
+                                    <LineBreak />
+                                    <Run>Formatos Bancarios Testados: BIM, Standart Bank, Moza Banco e Banco Unico.</Run>
                                 </Paragraph>
                             </FlowDocument>
                         </RichTextBox>

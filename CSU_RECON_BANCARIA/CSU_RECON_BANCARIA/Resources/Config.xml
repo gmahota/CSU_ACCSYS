@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
+
 <instancias>
-  <Instancia PastaConfig="PRIMAVERA\\SG800" instancia ="1" empresa ="MINAS2015C" usuario="accsys" password ="accsys2011" instanciaSql ="ACCPRI12\PRIMAVERACIAS" empresaSql ="PRIMINAS" usuarioSql="sa" passwordSql ="Accsys2011!"/>
+  <Instancia PastaConfig="PRIMAVERA\\SG900" instancia ="1" empresa ="MINASREB" usuario="accsys" password ="accsys2011" instanciaSql ="MNR-P-DB02\PRIMAVERAV810" empresaSql ="PRIMINASREB" usuarioSql="sa" passwordSql ="Accsys2011"/>
+
 </instancias>
+
+<!--<instancias>
+  <Instancia PastaConfig="PRIMAVERA\\SG900" instancia ="1" empresa ="ACC" usuario="accsys" password ="accsys2011" instanciaSql ="ACCPRI12\PRIMAVERAV810" empresaSql ="PRIACC" usuarioSql="sa" passwordSql ="Accsys2011"/>
+</instancias>-->

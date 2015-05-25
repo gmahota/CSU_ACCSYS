@@ -5,6 +5,7 @@ Partial Public Class MainWindow : Inherits MetroWindow
     Public xmlHelper As XmlHelper
     Public Const pastaConfig As String = "PRIMAVERA\\SG900"
 
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -12,11 +13,8 @@ Partial Public Class MainWindow : Inherits MetroWindow
 
         Inicializar()
 
-        xmlHelper = New XmlHelper
         homeCrl.mainWindows = Me
 
-        ' This call is required by the designer.
-        InitializeComponent()
         AddHandler AppDomain.CurrentDomain.AssemblyResolve, AddressOf CurrentDomain_AssemblyResolve
         ' DoTest()
     End Sub
@@ -200,7 +198,7 @@ Partial Public Class MainWindow : Inherits MetroWindow
         item.Header = "Importador de Imobilizado"
         item.CloseButtonEnabled = True
         item.IsSelected = True
-
+        xmlHelper = New XmlHelper
         Dim importadorCrlImobilizado As New ImobilizadoCrtl
         importadorCrlImobilizado.toolbar.Visibility = Windows.Visibility.Hidden
         importadorCrlImobilizado.Inicializar(xmlHelper.instancia.instancia, xmlHelper.instancia.empresa, xmlHelper.instancia.usuario,
@@ -225,7 +223,7 @@ Partial Public Class MainWindow : Inherits MetroWindow
         item.IsSelected = True
 
         Dim importadorCrlFormatoMagnetico As New ImportFormatoMagneticoCtrl
-
+        xmlHelper = New XmlHelper
         importadorCrlFormatoMagnetico.toolbar.Visibility = Windows.Visibility.Hidden
         importadorCrlFormatoMagnetico.Inicializar(xmlHelper.instancia.instancia, xmlHelper.instancia.empresa, xmlHelper.instancia.usuario,
                                      xmlHelper.instancia.password, xmlHelper.instancia.daConnectionString())
@@ -250,7 +248,7 @@ Partial Public Class MainWindow : Inherits MetroWindow
         item.Header = "Importador de Extrato Bancario"
         item.CloseButtonEnabled = True
         item.IsSelected = True
-
+        xmlHelper = New XmlHelper
         Dim importadorCrlExtratoBancario As New ImportExtBancoCrtl
         importadorCrlExtratoBancario.toolbar.Visibility = Windows.Visibility.Hidden
 
@@ -283,7 +281,7 @@ Partial Public Class MainWindow : Inherits MetroWindow
 
         Dim diferencaCambioCtrl As New DiferencaCambioCtrl
         'diferencaCambioCtrl.toolbar.Visibility = Windows.Visibility.Hidden
-
+        xmlHelper = New XmlHelper
         diferencaCambioCtrl.Inicializar(xmlHelper.instancia.instancia, xmlHelper.instancia.empresa, xmlHelper.instancia.usuario,
                                      xmlHelper.instancia.password, xmlHelper.instancia.daConnectionString())
 
@@ -312,7 +310,7 @@ Partial Public Class MainWindow : Inherits MetroWindow
                     btPrint.IsEnabled = False
                     btRemove.IsEnabled = False
                     btSave.IsEnabled = True
-                    btupdate.IsEnabled = False
+                    btupdate.IsEnabled = True
                 Case "Importador de Imobilizado"
                     btPrint.IsEnabled = False
                     btRemove.IsEnabled = False
@@ -334,6 +332,10 @@ Partial Public Class MainWindow : Inherits MetroWindow
     End Sub
 
     Private Sub btupdate_Click(sender As Object, e As RoutedEventArgs)
+        update()
+    End Sub
+
+    Private Sub update()
         Try
             Dim header = tbMain.Items(tbMain.SelectedIndex).Header
             Select Case header
@@ -343,27 +345,21 @@ Partial Public Class MainWindow : Inherits MetroWindow
                     btSave.IsEnabled = False
                     btupdate.IsEnabled = False
                 Case "Importador de Extrato Bancario"
-
+                    
                 Case "Importador para CSV"
-                    btPrint.IsEnabled = False
-                    btRemove.IsEnabled = False
-                    btSave.IsEnabled = True
-                    btupdate.IsEnabled = False
+                    Dim importadorFormatoMagnetico As New ImportFormatoMagneticoCtrl
+                    importadorFormatoMagnetico = tbMain.Items(tbMain.SelectedIndex).Content
+                    importadorFormatoMagnetico.update()
                 Case "Importador de Imobilizado"
-                    'Dim diferencaCtrl As New DiferencaCambioCtrl
-                    'diferencaCtrl = tbMain.Items(tbMain.SelectedIndex).Content
-                    'diferencaCtrl.update()
+                    
                 Case "Diferença de Cambios"
-                    Dim diferencaCtrl As New DiferencaCambioCtrl
-                    diferencaCtrl = tbMain.Items(tbMain.SelectedIndex).Content
-                    diferencaCtrl.update()
+
             End Select
         Catch ex As Exception
-            MessageBox.Show(Err.Description)
+
         End Try
     End Sub
-
-    Private Sub btSave_Click(sender As Object, e As RoutedEventArgs)
+    Private Sub save()
         Try
             Dim header = tbMain.Items(tbMain.SelectedIndex).Header
             Select Case header
@@ -392,6 +388,9 @@ Partial Public Class MainWindow : Inherits MetroWindow
         Catch ex As Exception
 
         End Try
+    End Sub
+    Private Sub btSave_Click(sender As Object, e As RoutedEventArgs)
+        save()
     End Sub
 
     Private Sub btRemove_Click(sender As Object, e As RoutedEventArgs)

@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="694.886" Width="720.368">
+             mc:Ignorable="d" Height="694.886" Width="735">
     <StackPanel Height="595" VerticalAlignment="Top" >
         <DockPanel >
             <ToolBarTray x:Name="toolbar" DockPanel.Dock="Top">
@@ -47,7 +47,7 @@
             <Grid>
                 <TabControl >
                     <TabItem Header="Opções de Importação">
-                        <Grid Background="#FFE5E5E5" >
+                        <Grid Background="#FFE5E5E5"  >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
@@ -141,7 +141,28 @@
                         </Grid>
 
                     </TabItem>
+                    <TabItem Header="Extrato Bancario">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width ="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <DataGrid x:Name="dgExtratoBancario" AutoGenerateColumns="False"  Grid.Row="1" SelectionMode="Single">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding DataMovimento}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Data Movimento"/>
+                                    <DataGridTextColumn Binding="{Binding DataValor}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Data Valor"/>
+                                    <DataGridTextColumn Binding="{Binding Movimento}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Movimento"/>
+                                    <DataGridTextColumn Binding="{Binding Numero}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Numero"/>
+                                    <DataGridTextColumn Binding="{Binding Obs}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Descrição"/>
 
+                                    <DataGridTextColumn Binding="{Binding daValorDebito}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Débito"/>
+                                    <DataGridTextColumn Binding="{Binding daValorCredito}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Crédito"/>
+                                   
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </Grid>
+                    </TabItem>
                 </TabControl>
                 
                 <Controls:ProgressRing x:Name="progressRing" Grid.Column="1" IsActive="False" Width="50" Height="50"  Visibility="Visible"/>

@@ -11,11 +11,11 @@ Imports System.Windows
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("CSU_CRM_Dll")> 
+<Assembly: AssemblyTitle("RelatoriosCrystal")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("HP")> 
-<Assembly: AssemblyProduct("CSU_CRM_Dll")> 
-<Assembly: AssemblyCopyright("Copyright © HP 2014")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("RelatoriosCrystal")> 
+<Assembly: AssemblyCopyright("Copyright @  2015")> 
 <Assembly: AssemblyTrademark("")> 
 <Assembly: ComVisible(false)>
 
@@ -42,7 +42,7 @@ Imports System.Windows
 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("4e37fdb7-5a56-4bcd-8b6e-0356476753bc")> 
+<Assembly: Guid("2622a8f5-3f96-4693-bdb9-c2a467fc8991")> 
 
 ' Version information for an assembly consists of the following four values:
 '

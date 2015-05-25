@@ -133,6 +133,10 @@ trataerro:
     End Sub
 
     Private Sub btActualizar_Click(sender As Object, e As RoutedEventArgs) Handles btActualizar.Click
+        update()
+    End Sub
+
+    Public Sub update()
         dgHistorico.ItemsSource = clienteshelper.daListaHistoricoExpPS2()
     End Sub
 
@@ -218,9 +222,9 @@ trataerro:
 
         'detect whether its a directory or file
         If (Directory.Exists(txtFile.Text)) Then
-            CreateCSVFile(txtFile.Text + "\" + Now.ToString("dd_MM_yyyy_h_mm_ss.CSV"))
+            CreateCSVFile(txtFile.Text + "\STD_" + Now.ToString("dd_MM_yyyy_h_mm_ss.CSV"))
         Else
-            CreateCSVFile(txtFile.Text)
+            CreateCSVFile(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\" + "STD_" + Now.ToString("dd_MM_yyyy_h_mm_ss.CSV"))
         End If
     End Sub
 End Class

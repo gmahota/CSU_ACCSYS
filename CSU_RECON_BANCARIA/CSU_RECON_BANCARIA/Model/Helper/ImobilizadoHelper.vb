@@ -7,9 +7,9 @@ Imports erpBS900 = Interop.ErpBS900
 Imports eapBS900 = Interop.IEapBS900
 Imports eapBE900 = Interop.EapBE900
 
-Imports erpBS800 = Interop.ErpBS800
-Imports eapBS800 = Interop.IEapBS800
-Imports eapBE800 = Interop.EapBE800
+'Imports erpBS800 = Interop.ErpBS800
+'Imports eapBS800 = Interop.IEapBS800
+'Imports eapBE800 = Interop.EapBE800
 
 Public Class ImobilizadoHelper
     Public listaImobilizado As List(Of Imobilizado)
@@ -65,7 +65,7 @@ Public Class ImobilizadoHelper
             Next i
 
             Select Case pastaConfig
-                Case "PRIMAVERA\\SG800" : importarAoErpV800()
+                Case "PRIMAVERA\\SG800" : importarAoErpV900()
                 Case "PRIMAVERA\\SG900" : importarAoErpV900()
                 Case Else : MessageBox.Show("Preecha o tipo de Plataforma", "Erro ao Importar ao ERP")
             End Select
@@ -169,120 +169,120 @@ Sair:
 
     End Function
 
-    Private Sub importarAoErpV800()
+    '    Private Sub importarAoErpV800()
 
-        Dim motor As erpBS800.ErpBS
-        Dim ficha As eapBE800.ImoBEFicha
-        Dim valor As eapBE800.ImoBEFichaPlanoDepreciacao
-        Dim conta As eapBE800.ImoBEFichaConta
-        Dim centro As eapBE800.ImoBEFichaCentroCusto
-        Dim reav As eapBE800.ImoBEReavaliacao
-        Dim aquis As eapBE800.ImoBEAquisicao
-        Dim objLinha As eapBE800.ImoBELinhaAquisicao
-        Dim i As Long
-        Dim j As Long
+    '        Dim motor As erpBS800.ErpBS
+    '        Dim ficha As eapBE800.ImoBEFicha
+    '        Dim valor As eapBE800.ImoBEFichaPlanoDepreciacao
+    '        Dim conta As eapBE800.ImoBEFichaConta
+    '        Dim centro As eapBE800.ImoBEFichaCentroCusto
+    '        Dim reav As eapBE800.ImoBEReavaliacao
+    '        Dim aquis As eapBE800.ImoBEAquisicao
+    '        Dim objLinha As eapBE800.ImoBELinhaAquisicao
+    '        Dim i As Long
+    '        Dim j As Long
 
-        motor = New erpBS800.ErpBS
-        Dim linha As String
+    '        motor = New erpBS800.ErpBS
+    '        Dim linha As String
 
-        motor.AbreEmpresaTrabalho(tipoPlataforma, codEmpresa, codUsuario, password)
+    '        motor.AbreEmpresaTrabalho(tipoPlataforma, codEmpresa, codUsuario, password)
 
-        On Error GoTo erro
+    '        On Error GoTo erro
 
-        For Each iventario In listaImobilizado
-            ' Passos para criar a ficha do bem
-            ficha = New eapBE800.ImoBEFicha
+    '        For Each iventario In listaImobilizado
+    '            ' Passos para criar a ficha do bem
+    '            ficha = New eapBE800.ImoBEFicha
 
-            ficha.Ficha = iventario.Codigo
-            ficha.Activo = True
-            ficha.CodBarras = iventario.Codigo
-            ficha.DataAquisicao = iventario.dataAquisicao
-            ficha.DataUtilizacao = iventario.dataUtilizacao
-            ficha.Descricao = iventario.nome
-            ficha.NElementos = iventario.nrElementos
-            ficha.TipoImo = iventario.tipoImobilizado
-            ficha.NumeroInventario = iventario.Codigo
-            ficha.DataInventario = iventario.dataAquisicao
-            ficha.Diploma = iventario.diploma
-            ficha.CodFiscal = iventario.codigoFiscal
-
-
-
-            ' Passos para criar a conta do bem
-            j = Year(iventario.dataAquisicao)
-            Do While j <= 2015
-                conta = New eapBE800.ImoBEFichaConta
-                conta.Ficha = iventario.Codigo
-                conta.Exercicio = j
-                conta.Conta = iventario.contaPOS
-                ficha.ContasInvestimento.Insere(conta)
-                j = j + 1
-            Loop
+    '            ficha.Ficha = iventario.Codigo
+    '            ficha.Activo = True
+    '            ficha.CodBarras = iventario.Codigo
+    '            ficha.DataAquisicao = iventario.dataAquisicao
+    '            ficha.DataUtilizacao = iventario.dataUtilizacao
+    '            ficha.Descricao = iventario.nome
+    '            ficha.NElementos = iventario.nrElementos
+    '            ficha.TipoImo = iventario.tipoImobilizado
+    '            ficha.NumeroInventario = iventario.Codigo
+    '            ficha.DataInventario = iventario.dataAquisicao
+    '            ficha.Diploma = iventario.diploma
+    '            ficha.CodFiscal = iventario.codigoFiscal
 
 
-            'Passos para criar os planos de depreciação
-            'Plano Fiscal
-            valor = New eapBE800.ImoBEFichaPlanoDepreciacao
-            valor.Plano = "001"
-            valor.Ficha = iventario.Codigo
-            valor.ValorAquisicao = iventario.ValorAquisicao
-            valor.ValorContabilistico = iventario.valorActual
 
-            ficha.PlanosDepreciacao.Insere(valor)
-
-            motor.Equipamentos.Fichas.Actualiza(ficha)
-
-
-            ' Passos para criar o centro de custo
-            '     Set centro = New EapBE700.ImoBEFichaCentroCusto
-            '    centro.Bem = Cells(i, 2)
-            '    centro.CentroCusto = Cells(i, 13)
-            '    centro.Exercicio = Cells(i, 11)
-            '    centro.Percentagem = "100"
-            '    centro.Principal = True
-            '    centro.Fixa = True
-            '    motor.Equipamentos.FichaCentrosCusto.Actualiza centro
-
-            ficha = motor.Equipamentos.Fichas.Edita(iventario.Codigo)
-
-            aquis = New eapBE800.ImoBEAquisicao
-
-            aquis.Tipo = "AQ"
-            aquis.Alteracao = "001"
-            aquis.Exercicio = Year(iventario.dataUtilizacao)
-            aquis.Periodo = Month(iventario.dataUtilizacao)
-            aquis.Dia = Day(iventario.dataUtilizacao)
-            aquis.ExercicioDoc = Year(iventario.dataAquisicao)
-            aquis.PeriodoDoc = 1
-            aquis.Modulo = "E"
+    '            ' Passos para criar a conta do bem
+    '            j = Year(iventario.dataAquisicao)
+    '            Do While j <= 2015
+    '                conta = New eapBE800.ImoBEFichaConta
+    '                conta.Ficha = iventario.Codigo
+    '                conta.Exercicio = j
+    '                conta.Conta = iventario.contaPOS
+    '                ficha.ContasInvestimento.Insere(conta)
+    '                j = j + 1
+    '            Loop
 
 
-            objLinha = New eapBE800.ImoBELinhaAquisicao
+    '            'Passos para criar os planos de depreciação
+    '            'Plano Fiscal
+    '            valor = New eapBE800.ImoBEFichaPlanoDepreciacao
+    '            valor.Plano = "001"
+    '            valor.Ficha = iventario.Codigo
+    '            valor.ValorAquisicao = iventario.ValorAquisicao
+    '            valor.ValorContabilistico = iventario.valorActual
 
-            objLinha.Exercicio = aquis.Exercicio
-            objLinha.Dia = aquis.Dia
-            objLinha.Periodo = aquis.Periodo
-            objLinha.Cambio = 1
-            objLinha.Dedutivel = 100
-            objLinha.Ficha = ficha.Ficha
-            objLinha.Iva = "00"
-            objLinha.IvaDedutivel = 0
-            objLinha.Linha = 1
-            objLinha.Plano = "001"
-            objLinha.ValorAquisicao = iventario.ValorAquisicao
+    '            ficha.PlanosDepreciacao.Insere(valor)
 
-            aquis.Linhas.Insere(objLinha)
+    '            motor.Equipamentos.Fichas.Actualiza(ficha)
 
-            motor.Equipamentos.Aquisicoes.Actualiza(aquis)
 
-        Next
+    '            ' Passos para criar o centro de custo
+    '            '     Set centro = New EapBE700.ImoBEFichaCentroCusto
+    '            '    centro.Bem = Cells(i, 2)
+    '            '    centro.CentroCusto = Cells(i, 13)
+    '            '    centro.Exercicio = Cells(i, 11)
+    '            '    centro.Percentagem = "100"
+    '            '    centro.Principal = True
+    '            '    centro.Fixa = True
+    '            '    motor.Equipamentos.FichaCentrosCusto.Actualiza centro
 
-        MsgBox("Bens criados com sucesso!!!")
-        Exit Sub
-erro:
-        MsgBox(Err.Description, vbOKOnly)
+    '            ficha = motor.Equipamentos.Fichas.Edita(iventario.Codigo)
 
-    End Sub
+    '            aquis = New eapBE800.ImoBEAquisicao
+
+    '            aquis.Tipo = "AQ"
+    '            aquis.Alteracao = "001"
+    '            aquis.Exercicio = Year(iventario.dataUtilizacao)
+    '            aquis.Periodo = Month(iventario.dataUtilizacao)
+    '            aquis.Dia = Day(iventario.dataUtilizacao)
+    '            aquis.ExercicioDoc = Year(iventario.dataAquisicao)
+    '            aquis.PeriodoDoc = 1
+    '            aquis.Modulo = "E"
+
+
+    '            objLinha = New eapBE800.ImoBELinhaAquisicao
+
+    '            objLinha.Exercicio = aquis.Exercicio
+    '            objLinha.Dia = aquis.Dia
+    '            objLinha.Periodo = aquis.Periodo
+    '            objLinha.Cambio = 1
+    '            objLinha.Dedutivel = 100
+    '            objLinha.Ficha = ficha.Ficha
+    '            objLinha.Iva = "00"
+    '            objLinha.IvaDedutivel = 0
+    '            objLinha.Linha = 1
+    '            objLinha.Plano = "001"
+    '            objLinha.ValorAquisicao = iventario.ValorAquisicao
+
+    '            aquis.Linhas.Insere(objLinha)
+
+    '            motor.Equipamentos.Aquisicoes.Actualiza(aquis)
+
+    '        Next
+
+    '        MsgBox("Bens criados com sucesso!!!")
+    '        Exit Sub
+    'erro:
+    '        MsgBox(Err.Description, vbOKOnly)
+
+    '    End Sub
 
     Private Sub importarAoErpV900()
 
