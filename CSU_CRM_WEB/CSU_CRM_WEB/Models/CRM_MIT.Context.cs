@@ -26,5 +26,6 @@ namespace CSU_CRM_WEB.Models
         }
     
         public virtual DbSet<Empresas> Empresas { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     }
 }

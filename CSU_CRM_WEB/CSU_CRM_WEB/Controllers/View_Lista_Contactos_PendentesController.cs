@@ -14,11 +14,16 @@ using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using CSU_CRM_WEB.Models.Helper;
 
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+
 namespace CSU_CRM_WEB.Controllers
 {
     public class View_Lista_Contactos_PendentesController : Controller
     {
         private PRIEmpresasEntities db = new PRIEmpresasEntities();
+        private CRM_MITEntities dbEntites = new CRM_MITEntities();
         private string empresadb;
 
         // GET: View_Lista_Contactos_Pendentes
@@ -63,9 +68,10 @@ namespace CSU_CRM_WEB.Controllers
         
         private void Envia_Email(string codigoCliente,  IEnumerable<HttpPostedFileBase> files, string empresab)
         {
+            
             EmailHelper envia_email = new EmailHelper(empresab);
-            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId());
-            envia_email.enviaEmailComRelatorio(codigoCliente, files, "extratoPendentes");
+            AspNetUsers currentUser = dbEntites.AspNetUsers.FirstOrDefault(x => x.Id == User.Identity.GetUserId());
+            envia_email.enviaEmailComRelatorio(codigoCliente, files, "extratoPendentes",currentUser.Email);
         }
         
 

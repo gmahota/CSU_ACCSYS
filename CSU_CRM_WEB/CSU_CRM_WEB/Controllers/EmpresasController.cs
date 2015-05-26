@@ -262,13 +262,18 @@ namespace CSU_CRM_WEB.Controllers
                 var temp = dbEmpresaPrimavera.View_Lista_Contactos_Pendentes;
                 try
                 {
+                    EmailHelper envia_email = new EmailHelper(Session["Empresa"].ToString());
+                    envia_email.db = dbEmpresaPrimavera;
+                    
+                    
                     foreach (string cliente in CDU_EnviaCobranca)
                     {
-                        EmailHelper envia_email = new EmailHelper();
-                        envia_email.db = dbEmpresaPrimavera;
+                        
 
-                        envia_email.enviaEmailComRelatorio(cliente, files, tipoExtrato);
-                        //Envia_Email(cliente, files, empresa, tipoExtrato);
+
+                        AspNetUsers currentUser = db.AspNetUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
+                        envia_email.enviaEmailComRelatorio(cliente, files, tipoExtrato, currentUser.Email);
+                        
                     }
                     return RedirectToAction("Index", "Home");
                 }

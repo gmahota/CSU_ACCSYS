@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d8e0a189e3c84dd199b36a4bfc57646b" Name="Diagram1">
         <EntityTypeShape EntityType="CRM_MITModel.Empresas" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRM_MITModel.AspNetUsers" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
