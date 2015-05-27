@@ -183,6 +183,12 @@
       <DependentUpon>Clientes.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Content\Reports\Extrato.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Extrato.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -516,6 +522,10 @@
     <EmbeddedResource Include="Content\Reports\Clientes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Clientes.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Reports\Extrato.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Extrato.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505220917151_inicial_migration.resx">
       <DependentUpon>201505220917151_inicial_migration.cs</DependentUpon>
