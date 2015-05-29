@@ -205,17 +205,9 @@
     <Compile Include="Migrations\201505220918174_config_dados_empresa.Designer.cs">
       <DependentUpon>201505220918174_config_dados_empresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201505220921362_adicao da empresa.cs" />
-    <Compile Include="Migrations\201505220921362_adicao da empresa.Designer.cs">
-      <DependentUpon>201505220921362_adicao da empresa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505221005332_adicao dos dados da empresa.cs" />
-    <Compile Include="Migrations\201505221005332_adicao dos dados da empresa.Designer.cs">
-      <DependentUpon>201505221005332_adicao dos dados da empresa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505221019216_adicao do email nos dados da empresa.cs" />
-    <Compile Include="Migrations\201505221019216_adicao do email nos dados da empresa.Designer.cs">
-      <DependentUpon>201505221019216_adicao do email nos dados da empresa.cs</DependentUpon>
+    <Compile Include="Migrations\201505290827046_update dados.cs" />
+    <Compile Include="Migrations\201505290827046_update dados.Designer.cs">
+      <DependentUpon>201505290827046_update dados.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -533,14 +525,8 @@
     <EmbeddedResource Include="Migrations\201505220918174_config_dados_empresa.resx">
       <DependentUpon>201505220918174_config_dados_empresa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505220921362_adicao da empresa.resx">
-      <DependentUpon>201505220921362_adicao da empresa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505221005332_adicao dos dados da empresa.resx">
-      <DependentUpon>201505221005332_adicao dos dados da empresa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505221019216_adicao do email nos dados da empresa.resx">
-      <DependentUpon>201505221019216_adicao do email nos dados da empresa.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505290827046_update dados.resx">
+      <DependentUpon>201505290827046_update dados.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
