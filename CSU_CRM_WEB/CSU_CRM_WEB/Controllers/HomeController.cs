@@ -10,8 +10,8 @@ namespace CSU_CRM_WEB.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Empresas");
-            //return View();
+            //return RedirectToAction("Index", "Empresas");
+            return View();
         }
 
         public ActionResult About()

@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201505290827046_update dados.Designer.cs">
       <DependentUpon>201505290827046_update dados.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506021529063_remove the asp.net roles.cs" />
+    <Compile Include="Migrations\201506021529063_remove the asp.net roles.Designer.cs">
+      <DependentUpon>201506021529063_remove the asp.net roles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetUsers.cs">
@@ -422,8 +426,6 @@
     <Content Include="Models\ClientesDataSet.xss">
       <DependentUpon>ClientesDataSet.xsd</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -434,7 +436,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
@@ -527,6 +528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505290827046_update dados.resx">
       <DependentUpon>201505290827046_update dados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506021529063_remove the asp.net roles.resx">
+      <DependentUpon>201506021529063_remove the asp.net roles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
