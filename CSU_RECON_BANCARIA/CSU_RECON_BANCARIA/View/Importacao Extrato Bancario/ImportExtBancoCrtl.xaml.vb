@@ -1,6 +1,7 @@
 ﻿Imports MahApps.Metro.Controls
 Imports MahApps.Metro.Controls.Dialogs
 Imports System.Threading
+Imports System.Data
 
 Public Class ImportExtBancoCrtl
 
@@ -79,7 +80,7 @@ trataerro:
             Next i
             'Me.CmbFolha.ListIndex = 0
         End If
-
+        preencheExcellView(xlSheet)
         xlBook.Close()
         'Quit excel (automatically closes all workbooks)
         xlApp.Quit()
@@ -92,6 +93,56 @@ trataerro:
 
 Sair:
         MsgBox(Err.Description, vbInformation, "erro: " & Err.Number)
+
+    End Sub
+
+    Private Sub preencheExcellView(excelSheet As Object)
+        Dim excelRange As Object
+        excelRange = excelSheet.UsedRange
+
+        Dim strCellData As String = ""
+        Dim douCellData As Double
+        Dim rowCnt, colCnt As Integer
+
+        Dim dt As DataTable
+
+        dt = New DataTable()
+
+        For colCnt = 1 To excelRange.Columns.Count
+            Dim strColumn As String = ""
+            strColumn = CType((excelRange.Cells(1, colCnt)).Value2, String)
+
+            dt.Columns.Add(strColumn)
+        Next
+
+        For rowCnt = 1 To excelRange.Rows.Count
+
+            Dim strData As String = ""
+
+            For colCnt = 1 To excelRange.Columns.Count
+
+                Try
+                    strCellData = CType((excelRange.Cells(rowCnt, colCnt)).Value2, String)
+                    strData += strCellData + "|"
+
+                Catch ex As Exception
+                    douCellData = CType((excelRange.Cells(rowCnt, colCnt)).Value2, String)
+                    strData += douCellData.ToString() + "|"
+
+                End Try
+
+            Next
+
+            strData = strData.Remove(strData.Length - 1, 1)
+            dt.Rows.Add(strData.Split("|"))
+
+        Next
+
+
+        excelHelperView.dgExcell.ItemsSource = dt.DefaultView
+
+        'excelBook.Close(True, null, null)
+        'excelApp.Quit()
 
     End Sub
 

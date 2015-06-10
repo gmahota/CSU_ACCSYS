@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="ImportExtBancoCrtl"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSU_RECON_BANCARIA" x:Class="ImportExtBancoCrtl" 
              mc:Ignorable="d" Height="694.886" Width="735">
     <StackPanel Height="595" VerticalAlignment="Top" >
         <DockPanel >
@@ -11,39 +12,39 @@
                 <ToolBar>
                     <Button Cursor="Arrow" x:Name="btupdate" Click="btupdate_Click">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/Actualizar.png" Name="Image3" Height="27" Width="35"></Image>
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Actualizar</TextBlock>
+                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/Actualizar.png" x:Name="Image3" Height="27" Width="35"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Actualizar"/></TextBlock>
 
                         </StackPanel>
 
                     </Button>
                     <Button  VerticalAlignment="Bottom" Click="Button_Click_1" >
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/processar.png" Name="Image2" Height="27" Width="35"></Image>
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Importar</TextBlock>
+                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/processar.png" x:Name="Image2" Height="27" Width="35"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Importar"/></TextBlock>
 
                         </StackPanel>
 
                     </Button>
                     <Button  VerticalAlignment="Bottom" Click="Button_Click_2" >
                         <StackPanel Orientation="Horizontal" Width="82">
-                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/cancel.png" Name="Image5" Height="27" Width="35"></Image>
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Anular</TextBlock>
+                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/cancel.png" x:Name="Image5" Height="27" Width="35"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Anular"/></TextBlock>
 
                         </StackPanel>
 
                     </Button>
                     <Button VerticalAlignment="Bottom" >
                         <StackPanel Orientation="Horizontal" Width="82">
-                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/print.png" Name="Image4" Height="27" Width="35"></Image>
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Imprimir</TextBlock>
+                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/print.png" x:Name="Image4" Height="27" Width="35"/>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Imprimir"/></TextBlock>
 
                         </StackPanel>
 
                     </Button>
                 </ToolBar>
             </ToolBarTray>
-            
+
             <Grid>
                 <TabControl >
                     <TabItem Header="Opções de Importação">
@@ -66,7 +67,7 @@
                                     <TextBox x:Name="txtFicheiroExcell"  HorizontalAlignment="Left" Height="23" Margin="111.226,38,-40,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="410" Grid.Column="1"/>
                                     <Button  HorizontalAlignment="Left" Margin="528,35,0,0" VerticalAlignment="Top" Width="38" Click="Button_Click" RenderTransformOrigin="2.143,0.589" Grid.Column="1" Height="29">
                                         <StackPanel >
-                                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/search.png" Name="Image1" Height="19" ></Image>
+                                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/search.png" x:Name="Image1" Height="19" />
 
 
                                         </StackPanel>
@@ -92,8 +93,8 @@
                                     <Label Content="Formato de Importação:" HorizontalAlignment="Left" Margin="22,136,0,0" VerticalAlignment="Top" Grid.Column="1"/>
                                     <Button x:Name="btValidado" Grid.Column="1" HorizontalAlignment="Left" Margin="528,170,0,0" VerticalAlignment="Top" Width="80" Height="26" Click="btValidado_Click" >
                                         <StackPanel Orientation="Horizontal" >
-                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Validado</TextBlock>
-                                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/validar_erro.jpg" Name="ImageValidado" ></Image>
+                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Validado"/></TextBlock>
+                                            <Image Source="/CSU_RECON_BANCARIA;component/Resources/Images/validar_erro.jpg" x:Name="ImageValidado" />
 
 
 
@@ -146,7 +147,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width ="*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <DataGrid x:Name="dgExtratoBancario" AutoGenerateColumns="False"  Grid.Row="1" SelectionMode="Single">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Binding="{Binding DataMovimento}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Data Movimento"/>
@@ -157,23 +158,31 @@
 
                                     <DataGridTextColumn Binding="{Binding daValorDebito}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Débito"/>
                                     <DataGridTextColumn Binding="{Binding daValorCredito}" IsReadOnly="True" ClipboardContentBinding="{x:Null}" Header="Crédito"/>
-                                   
+
                                 </DataGrid.Columns>
                             </DataGrid>
 
                         </Grid>
                     </TabItem>
+                    <TabItem Header="excell">
+                        <Grid>
+
+                            <local:ExcelViewCrtl x:Name="excelHelperView" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+                        </Grid>
+
+                    </TabItem>
                 </TabControl>
-                
+
                 <Controls:ProgressRing x:Name="progressRing" Grid.Column="1" IsActive="False" Width="50" Height="50"  Visibility="Visible"/>
 
             </Grid>
-            
-            
 
-                   
-            
-           
-        </DockPanel >
+
+
+
+
+
+        </DockPanel>
     </StackPanel>
 </UserControl>

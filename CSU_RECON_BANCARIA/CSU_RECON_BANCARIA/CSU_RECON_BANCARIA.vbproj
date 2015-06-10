@@ -286,7 +286,10 @@
     <Compile Include="View\Imobilizado\ImobilizadoCrtl.xaml.vb">
       <DependentUpon>ImobilizadoCrtl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ImportExtBancoCrtl.xaml.vb">
+    <Compile Include="View\Importacao Extrato Bancario\ExcelViewCrtl.xaml.vb">
+      <DependentUpon>ExcelViewCrtl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Importacao Extrato Bancario\ImportExtBancoCrtl.xaml.vb">
       <DependentUpon>ImportExtBancoCrtl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ImportFormatoMagneticoCtrl.xaml.vb">
@@ -339,7 +342,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ImportExtBancoCrtl.xaml">
+    <Page Include="View\Importacao Extrato Bancario\ExcelViewCrtl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Importacao Extrato Bancario\ImportExtBancoCrtl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

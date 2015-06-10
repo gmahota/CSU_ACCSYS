@@ -312,7 +312,7 @@ Sair:
 
                                                     Valor = daDouble(daValorExcell(i, linhas.Coluna), formatoBancario.SeparadorMilhares, formatoBancario.SeparadorDecimal)
                                                     MovBnc = IIf(Valor > 0, "DVC", "DVD")
-                                                    Natureza = IIf(Valor > 0, "D", "C")
+                                                    Natureza = IIf(Valor > 0, "C", "D")
                                                     'IIf(Convert.ToDouble(temp) < 0, Convert.ToDouble(temp) * -1, Convert.ToDouble(temp))
 
                                             End Select
@@ -810,8 +810,8 @@ Sair:
             temp = RemoveExtraText(valorExcell.ToString())
             temp = Replace(temp, separadorMilhares, "")
             temp = Replace(temp, sepraradorDecimal, ",")
-            temp = Replace(temp, "-", "")
-            temp = Replace(temp, "+", "")
+            'temp = Replace(temp, "-", "")
+            'temp = Replace(temp, "+", "")
             Return Convert.ToDouble(temp) 
         Catch ex As Exception
             Return 0
@@ -821,7 +821,7 @@ Sair:
 
     Private Function RemoveExtraText(value As String) As String
 
-        Dim allowedChars = "01234567890.,"
+        Dim allowedChars = "-+01234567890.,"
         Return New String(value.Where(Function(c) allowedChars.Contains(c)).ToArray())
     End Function
 
