@@ -17,9 +17,7 @@ namespace CSU_CRM_WEB.Controllers
     {
         private CRM_MITEntities db = new CRM_MITEntities();
         private PRIEmpresasEntities dbEmpresaPrimavera = new PRIEmpresasEntities();
-
         
-
         private void abreEmpresaPrimavera()
         {
             

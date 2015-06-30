@@ -183,12 +183,6 @@
       <DependentUpon>Clientes.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Content\Reports\Extrato.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Extrato.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -197,21 +191,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201505220917151_inicial_migration.cs" />
-    <Compile Include="Migrations\201505220917151_inicial_migration.Designer.cs">
-      <DependentUpon>201505220917151_inicial_migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505220918174_config_dados_empresa.cs" />
-    <Compile Include="Migrations\201505220918174_config_dados_empresa.Designer.cs">
-      <DependentUpon>201505220918174_config_dados_empresa.cs</DependentUpon>
+    <Compile Include="Migrations\201504132014081_update dos campos da bd.cs" />
+    <Compile Include="Migrations\201504132014081_update dos campos da bd.Designer.cs">
+      <DependentUpon>201504132014081_update dos campos da bd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201505290827046_update dados.cs" />
     <Compile Include="Migrations\201505290827046_update dados.Designer.cs">
       <DependentUpon>201505290827046_update dados.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506021529063_remove the asp.net roles.cs" />
-    <Compile Include="Migrations\201506021529063_remove the asp.net roles.Designer.cs">
-      <DependentUpon>201506021529063_remove the asp.net roles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -238,21 +224,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CRM_MIT.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\CRM_PRI_EMPRESA.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CRM_PRI_EMPRESA.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CRM_PRI_EMPRESA.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CRM_PRI_EMPRESA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CRM_PRI_EMPRESA.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CRM_PRI_EMPRESA.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Empresas.cs">
       <DependentUpon>CRM_MIT.tt</DependentUpon>
     </Compile>
@@ -260,15 +231,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModel.cs" />
-    <Compile Include="Models\View_Bancos_Cobrancas.cs">
-      <DependentUpon>CRM_PRI_EMPRESA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\View_Lista_Contactos_Pendentes.cs">
-      <DependentUpon>CRM_PRI_EMPRESA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\View_Pendentes_Doc_Clientes.cs">
-      <DependentUpon>CRM_PRI_EMPRESA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -341,16 +303,6 @@
       <DependentUpon>CRM_MIT.edmx</DependentUpon>
       <LastGenOutput>CRM_MIT.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\CRM_PRI_EMPRESA.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CRM_PRI_EMPRESA.edmx</DependentUpon>
-      <LastGenOutput>CRM_PRI_EMPRESA.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CRM_PRI_EMPRESA.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CRM_PRI_EMPRESA.edmx</DependentUpon>
-      <LastGenOutput>CRM_PRI_EMPRESA.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\CRM_MIT.edmx">
@@ -408,13 +360,6 @@
     <Content Include="Content\boostrap_sb\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\boostrap_sb\LICENSE" />
     <Content Include="Content\boostrap_sb\README.md" />
-    <EntityDeploy Include="Models\CRM_PRI_EMPRESA.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CRM_PRI_EMPRESA.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\CRM_PRI_EMPRESA.edmx.diagram">
-      <DependentUpon>CRM_PRI_EMPRESA.edmx</DependentUpon>
-    </Content>
     <Content Include="Models\ClientesDataSet.xsc">
       <DependentUpon>ClientesDataSet.xsd</DependentUpon>
     </Content>
@@ -516,21 +461,11 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Clientes.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Content\Reports\Extrato.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Extrato.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505220917151_inicial_migration.resx">
-      <DependentUpon>201505220917151_inicial_migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505220918174_config_dados_empresa.resx">
-      <DependentUpon>201505220918174_config_dados_empresa.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504132014081_update dos campos da bd.resx">
+      <DependentUpon>201504132014081_update dos campos da bd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505290827046_update dados.resx">
       <DependentUpon>201505290827046_update dados.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506021529063_remove the asp.net roles.resx">
-      <DependentUpon>201506021529063_remove the asp.net roles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
