@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CRM_MITModelStoreContainer" CdmEntityContainer="CRM_MITEntities">
+    <EntitySetMapping Name="Empresas">
+      <EntityTypeMapping TypeName="CRM_MITModel.Empresas">
+        <MappingFragment StoreEntitySet="Empresas">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="NuitEmpresa" ColumnName="NuitEmpresa" />
+          <ScalarProperty Name="TelefoneEmpresa" ColumnName="TelefoneEmpresa" />
+          <ScalarProperty Name="LocalidadeEmpresa" ColumnName="LocalidadeEmpresa" />
+          <ScalarProperty Name="MoradaEmpresa" ColumnName="MoradaEmpresa" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodEmpresa" ColumnName="CodEmpresa" />
+          <ScalarProperty Name="CodEmpresaPri" ColumnName="CodEmpresaPri" />
+          <ScalarProperty Name="NomeEmpresa" ColumnName="NomeEmpresa" />
+          <ScalarProperty Name="LogoTipo" ColumnName="LogoTipo" />
+          <ScalarProperty Name="Conexao" ColumnName="Conexao" />
+          <ScalarProperty Name="EmpresaPrimavera" ColumnName="EmpresaPrimavera" />
+          <ScalarProperty Name="TipoEmpresa" ColumnName="TipoEmpresa" />
+          <ScalarProperty Name="UseDefaultCredentials" ColumnName="UseDefaultCredentials" />
+          <ScalarProperty Name="Credentials" ColumnName="Credentials" />
+          <ScalarProperty Name="Port" ColumnName="Port" />
+          <ScalarProperty Name="EnableSsl" ColumnName="EnableSsl" />
+          <ScalarProperty Name="Host" ColumnName="Host" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="CRM_MITModel.AspNetUsers">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

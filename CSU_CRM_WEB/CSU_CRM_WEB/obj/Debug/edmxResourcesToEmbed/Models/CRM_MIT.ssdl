@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CRM_MITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="EmailID" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Empresas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodEmpresa" Type="nvarchar(max)" />
+    <Property Name="CodEmpresaPri" Type="nvarchar(max)" />
+    <Property Name="NomeEmpresa" Type="nvarchar(max)" />
+    <Property Name="LogoTipo" Type="varbinary(max)" />
+    <Property Name="Conexao" Type="nvarchar(max)" />
+    <Property Name="EmpresaPrimavera" Type="bit" />
+    <Property Name="TipoEmpresa" Type="nvarchar(max)" />
+    <Property Name="UseDefaultCredentials" Type="bit" />
+    <Property Name="Credentials" Type="nvarchar(max)" />
+    <Property Name="Port" Type="int" />
+    <Property Name="EnableSsl" Type="bit" />
+    <Property Name="Host" Type="nvarchar(max)" />
+    <Property Name="MoradaEmpresa" Type="nvarchar(max)" />
+    <Property Name="LocalidadeEmpresa" Type="nvarchar(max)" />
+    <Property Name="TelefoneEmpresa" Type="nvarchar(max)" />
+    <Property Name="NuitEmpresa" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityContainer Name="CRM_MITModelStoreContainer">
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

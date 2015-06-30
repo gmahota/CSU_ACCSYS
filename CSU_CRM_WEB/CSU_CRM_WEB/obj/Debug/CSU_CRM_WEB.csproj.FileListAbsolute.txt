@@ -1,0 +1,4 @@
+C:\Users\gmahota\Source\Repos\CSU_ACCSYS\CSU_CRM_WEB\CSU_CRM_WEB\obj\Debug\CSU_CRM_WEB.Migrations.updatedoscamposdabd.resources
+C:\Users\gmahota\Source\Repos\CSU_ACCSYS\CSU_CRM_WEB\CSU_CRM_WEB\obj\Debug\CSU_CRM_WEB.Migrations.updatedados.resources
+C:\Users\gmahota\Source\Repos\CSU_ACCSYS\CSU_CRM_WEB\CSU_CRM_WEB\obj\Debug\CSU_CRM_WEB.csproj.GenerateResource.Cache
+C:\Users\gmahota\Source\Repos\CSU_ACCSYS\CSU_CRM_WEB\CSU_CRM_WEB\obj\Debug\CSU_CRM_WEB.csprojResolveAssemblyReference.cache
