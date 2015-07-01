@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PRIEmpresasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PRIACC.dbo.View_Bancos_Cobrancas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Bancos_Cobrancas">
+          <Key>
+            <PropertyRef Name="Banco" />
+          </Key>
+          <Property Name="tipoconta" Type="smallint" />
+          <Property Name="Banco" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar" MaxLength="35" />
+          <Property Name="numconta" Type="nvarchar" MaxLength="24" />
+          <Property Name="nib" Type="nvarchar" MaxLength="24" />
+          <Property Name="IBAN" Type="nvarchar" MaxLength="34" />
+          <Property Name="SWIFT" Type="nvarchar" MaxLength="11" />
+          <Property Name="Moeda" Type="nvarchar" MaxLength="3" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PRIACC.dbo.View_Lista_Contactos_Pendentes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Lista_Contactos_Pendentes">
+          <Key>
+            <PropertyRef Name="Cliente" />
+            <PropertyRef Name="tipoContacto" />
+          </Key>
+          <Property Name="Cliente" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fac_Mor" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fac_Local" Type="nvarchar" MaxLength="50" />
+          <Property Name="NumContrib" Type="nvarchar" MaxLength="20" />
+          <Property Name="Pais" Type="nvarchar" MaxLength="2" />
+          <Property Name="Fac_Tel" Type="nvarchar" MaxLength="20" />
+          <Property Name="Moeda" Type="nvarchar" MaxLength="3" />
+          <Property Name="CDU_ContaRec" Type="nvarchar" MaxLength="10" />
+          <Property Name="CDU_EnviaCobranca" Type="bit" />
+          <Property Name="PrimeiroNome" Type="varchar" MaxLength="50" />
+          <Property Name="UltimoNome" Type="varchar" MaxLength="50" />
+          <Property Name="Titulo" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="EmailAssist" Type="varchar" MaxLength="100" />
+          <Property Name="tipoContacto" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="ValorPendente" Type="float" />
+          <Property Name="ValorTotal" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PRIACC.dbo.View_Pendentes_Clientes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PRIACC.dbo.View_Pendentes_Doc_Clientes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Pendentes_Doc_Clientes">
+          <Key>
+            <PropertyRef Name="Modulo" />
+            <PropertyRef Name="TipoEntidade" />
+            <PropertyRef Name="TipoDoc" />
+            <PropertyRef Name="NumDocInt" />
+            <PropertyRef Name="NumPrestacao" />
+            <PropertyRef Name="Serie" />
+          </Key>
+          <Property Name="Modulo" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="TipoEntidade" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="Entidade" Type="nvarchar" MaxLength="12" />
+          <Property Name="TipoDoc" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="NumDoc" Type="nvarchar" MaxLength="20" />
+          <Property Name="NumDocInt" Type="int" Nullable="false" />
+          <Property Name="DataDoc" Type="datetime" />
+          <Property Name="DataVenc" Type="datetime" />
+          <Property Name="ValorTotal" Type="float" />
+          <Property Name="ValorPendente" Type="float" />
+          <Property Name="Moeda" Type="nvarchar" MaxLength="3" />
+          <Property Name="Cambio" Type="float" />
+          <Property Name="NumAvisos" Type="smallint" />
+          <Property Name="NumPrestacao" Type="smallint" Nullable="false" />
+          <Property Name="Serie" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Conta" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityContainer Name="PRIEmpresasModelStoreContainer">
+          <EntitySet Name="View_Bancos_Cobrancas" EntityType="Self.View_Bancos_Cobrancas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Bancos_Cobrancas].[tipoconta] AS [tipoconta], 
+    [View_Bancos_Cobrancas].[Banco] AS [Banco], 
+    [View_Bancos_Cobrancas].[Descricao] AS [Descricao], 
+    [View_Bancos_Cobrancas].[numconta] AS [numconta], 
+    [View_Bancos_Cobrancas].[nib] AS [nib], 
+    [View_Bancos_Cobrancas].[IBAN] AS [IBAN], 
+    [View_Bancos_Cobrancas].[SWIFT] AS [SWIFT], 
+    [View_Bancos_Cobrancas].[Moeda] AS [Moeda]
+    FROM [dbo].[View_Bancos_Cobrancas] AS [View_Bancos_Cobrancas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_Lista_Contactos_Pendentes" EntityType="Self.View_Lista_Contactos_Pendentes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Lista_Contactos_Pendentes].[Cliente] AS [Cliente], 
+    [View_Lista_Contactos_Pendentes].[Nome] AS [Nome], 
+    [View_Lista_Contactos_Pendentes].[Fac_Mor] AS [Fac_Mor], 
+    [View_Lista_Contactos_Pendentes].[Fac_Local] AS [Fac_Local], 
+    [View_Lista_Contactos_Pendentes].[NumContrib] AS [NumContrib], 
+    [View_Lista_Contactos_Pendentes].[Pais] AS [Pais], 
+    [View_Lista_Contactos_Pendentes].[Fac_Tel] AS [Fac_Tel], 
+    [View_Lista_Contactos_Pendentes].[Moeda] AS [Moeda], 
+    [View_Lista_Contactos_Pendentes].[CDU_ContaRec] AS [CDU_ContaRec], 
+    [View_Lista_Contactos_Pendentes].[CDU_EnviaCobranca] AS [CDU_EnviaCobranca], 
+    [View_Lista_Contactos_Pendentes].[PrimeiroNome] AS [PrimeiroNome], 
+    [View_Lista_Contactos_Pendentes].[UltimoNome] AS [UltimoNome], 
+    [View_Lista_Contactos_Pendentes].[Titulo] AS [Titulo], 
+    [View_Lista_Contactos_Pendentes].[Email] AS [Email], 
+    [View_Lista_Contactos_Pendentes].[EmailAssist] AS [EmailAssist], 
+    [View_Lista_Contactos_Pendentes].[tipoContacto] AS [tipoContacto], 
+    [View_Lista_Contactos_Pendentes].[ValorPendente] AS [ValorPendente], 
+    [View_Lista_Contactos_Pendentes].[ValorTotal] AS [ValorTotal]
+    FROM [dbo].[View_Lista_Contactos_Pendentes] AS [View_Lista_Contactos_Pendentes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_Pendentes_Doc_Clientes" EntityType="Self.View_Pendentes_Doc_Clientes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Pendentes_Doc_Clientes].[Modulo] AS [Modulo], 
+    [View_Pendentes_Doc_Clientes].[TipoEntidade] AS [TipoEntidade], 
+    [View_Pendentes_Doc_Clientes].[Entidade] AS [Entidade], 
+    [View_Pendentes_Doc_Clientes].[TipoDoc] AS [TipoDoc], 
+    [View_Pendentes_Doc_Clientes].[NumDoc] AS [NumDoc], 
+    [View_Pendentes_Doc_Clientes].[NumDocInt] AS [NumDocInt], 
+    [View_Pendentes_Doc_Clientes].[DataDoc] AS [DataDoc], 
+    [View_Pendentes_Doc_Clientes].[DataVenc] AS [DataVenc], 
+    [View_Pendentes_Doc_Clientes].[ValorTotal] AS [ValorTotal], 
+    [View_Pendentes_Doc_Clientes].[ValorPendente] AS [ValorPendente], 
+    [View_Pendentes_Doc_Clientes].[Moeda] AS [Moeda], 
+    [View_Pendentes_Doc_Clientes].[Cambio] AS [Cambio], 
+    [View_Pendentes_Doc_Clientes].[NumAvisos] AS [NumAvisos], 
+    [View_Pendentes_Doc_Clientes].[NumPrestacao] AS [NumPrestacao], 
+    [View_Pendentes_Doc_Clientes].[Serie] AS [Serie], 
+    [View_Pendentes_Doc_Clientes].[Conta] AS [Conta]
+    FROM [dbo].[View_Pendentes_Doc_Clientes] AS [View_Pendentes_Doc_Clientes]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PRIEmpresasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="View_Bancos_Cobrancas">
+          <Key>
+            <PropertyRef Name="Banco" />
+          </Key>
+          <Property Name="tipoconta" Type="Int16" />
+          <Property Name="Banco" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="numconta" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="nib" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="IBAN" Type="String" MaxLength="34" FixedLength="false" Unicode="true" />
+          <Property Name="SWIFT" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Moeda" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="View_Lista_Contactos_Pendentes">
+          <Key>
+            <PropertyRef Name="Cliente" />
+            <PropertyRef Name="tipoContacto" />
+          </Key>
+          <Property Name="Cliente" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fac_Mor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fac_Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumContrib" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Pais" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Fac_Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Moeda" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="CDU_ContaRec" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CDU_EnviaCobranca" Type="Boolean" />
+          <Property Name="PrimeiroNome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UltimoNome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAssist" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tipoContacto" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ValorPendente" Type="Double" />
+          <Property Name="ValorTotal" Type="Double" />
+        </EntityType>
+        <EntityContainer Name="PRIEmpresasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="View_Bancos_Cobrancas" EntityType="Self.View_Bancos_Cobrancas" />
+          <EntitySet Name="View_Lista_Contactos_Pendentes" EntityType="Self.View_Lista_Contactos_Pendentes" />
+          <EntitySet Name="View_Pendentes_Doc_Clientes" EntityType="PRIEmpresasModel.View_Pendentes_Doc_Clientes" />
+        </EntityContainer>
+        <EntityType Name="View_Pendentes_Doc_Clientes">
+          <Key>
+            <PropertyRef Name="Modulo" />
+            <PropertyRef Name="TipoEntidade" />
+            <PropertyRef Name="TipoDoc" />
+            <PropertyRef Name="NumDocInt" />
+            <PropertyRef Name="NumPrestacao" />
+            <PropertyRef Name="Serie" />
+          </Key>
+          <Property Name="Modulo" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="TipoEntidade" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Entidade" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="TipoDoc" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="NumDoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NumDocInt" Type="Int32" Nullable="false" />
+          <Property Name="DataDoc" Type="DateTime" Precision="3" />
+          <Property Name="DataVenc" Type="DateTime" Precision="3" />
+          <Property Name="ValorTotal" Type="Double" />
+          <Property Name="ValorPendente" Type="Double" />
+          <Property Name="Moeda" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Cambio" Type="Double" />
+          <Property Name="NumAvisos" Type="Int16" />
+          <Property Name="NumPrestacao" Type="Int16" Nullable="false" />
+          <Property Name="Serie" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Conta" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PRIEmpresasModelStoreContainer" CdmEntityContainer="PRIEmpresasEntities">
+          <EntitySetMapping Name="View_Bancos_Cobrancas">
+            <EntityTypeMapping TypeName="PRIEmpresasModel.View_Bancos_Cobrancas">
+              <MappingFragment StoreEntitySet="View_Bancos_Cobrancas">
+                <ScalarProperty Name="tipoconta" ColumnName="tipoconta" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="numconta" ColumnName="numconta" />
+                <ScalarProperty Name="nib" ColumnName="nib" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+                <ScalarProperty Name="SWIFT" ColumnName="SWIFT" />
+                <ScalarProperty Name="Moeda" ColumnName="Moeda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Lista_Contactos_Pendentes">
+            <EntityTypeMapping TypeName="PRIEmpresasModel.View_Lista_Contactos_Pendentes">
+              <MappingFragment StoreEntitySet="View_Lista_Contactos_Pendentes">
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Fac_Mor" ColumnName="Fac_Mor" />
+                <ScalarProperty Name="Fac_Local" ColumnName="Fac_Local" />
+                <ScalarProperty Name="NumContrib" ColumnName="NumContrib" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Fac_Tel" ColumnName="Fac_Tel" />
+                <ScalarProperty Name="Moeda" ColumnName="Moeda" />
+                <ScalarProperty Name="CDU_ContaRec" ColumnName="CDU_ContaRec" />
+                <ScalarProperty Name="CDU_EnviaCobranca" ColumnName="CDU_EnviaCobranca" />
+                <ScalarProperty Name="PrimeiroNome" ColumnName="PrimeiroNome" />
+                <ScalarProperty Name="UltimoNome" ColumnName="UltimoNome" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailAssist" ColumnName="EmailAssist" />
+                <ScalarProperty Name="tipoContacto" ColumnName="tipoContacto" />
+                <ScalarProperty Name="ValorPendente" ColumnName="ValorPendente" />
+                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Pendentes_Doc_Clientes">
+            <EntityTypeMapping TypeName="PRIEmpresasModel.View_Pendentes_Doc_Clientes">
+              <MappingFragment StoreEntitySet="View_Pendentes_Doc_Clientes">
+                <ScalarProperty Name="Conta" ColumnName="Conta" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="NumPrestacao" ColumnName="NumPrestacao" />
+                <ScalarProperty Name="NumAvisos" ColumnName="NumAvisos" />
+                <ScalarProperty Name="Cambio" ColumnName="Cambio" />
+                <ScalarProperty Name="Moeda" ColumnName="Moeda" />
+                <ScalarProperty Name="ValorPendente" ColumnName="ValorPendente" />
+                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+                <ScalarProperty Name="DataVenc" ColumnName="DataVenc" />
+                <ScalarProperty Name="DataDoc" ColumnName="DataDoc" />
+                <ScalarProperty Name="NumDocInt" ColumnName="NumDocInt" />
+                <ScalarProperty Name="NumDoc" ColumnName="NumDoc" />
+                <ScalarProperty Name="TipoDoc" ColumnName="TipoDoc" />
+                <ScalarProperty Name="Entidade" ColumnName="Entidade" />
+                <ScalarProperty Name="TipoEntidade" ColumnName="TipoEntidade" />
+                <ScalarProperty Name="Modulo" ColumnName="Modulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -177,7 +177,8 @@ namespace CSU_CRM_WEB.Controllers
 
             abreEmpresaPrimavera();
 
-            var facturasPendentes = dbEmpresaPrimavera.Database.SqlQuery<int>("select  count (DISTINCT IdHistorico) from Pendentes where Modulo = 'V' ").ToList().First();
+            var facturasPendentes = 0;
+            dbEmpresaPrimavera.Database.SqlQuery<int>("select  count (DISTINCT IdHistorico) from Pendentes where Modulo = 'V' ").ToList().First();
 
             ViewBag.FacturasPendentes = facturasPendentes;
 
@@ -200,7 +201,7 @@ namespace CSU_CRM_WEB.Controllers
                 var temp = dbEmpresaPrimavera.View_Lista_Contactos_Pendentes;
                 try
                 {
-                    return PartialView(temp.ToList().Where(p => p.CDU_EnviaCobranca == true));
+                    return PartialView(temp.ToList());
                 }
                 catch
                 {
@@ -230,7 +231,7 @@ namespace CSU_CRM_WEB.Controllers
                 var temp = dbEmpresaPrimavera.View_Lista_Contactos_Pendentes;
                 try
                 {
-                    return PartialView( temp.ToList().Where(p => p.CDU_EnviaCobranca == true));
+                    return PartialView( temp.ToList());
                 }
                 catch
                 {
@@ -250,6 +251,7 @@ namespace CSU_CRM_WEB.Controllers
         public ActionResult ListaPendentesClientes(FormCollection frm,string tipoExtrato, IEnumerable<string> CDU_EnviaCobranca, IEnumerable<HttpPostedFileBase> files)
         {
             string codEmpresaPrimavera;
+            
             if (Session["Empresa"] != null)
             {
                 codEmpresaPrimavera = Session["EmpresaCodigoPrimavera"].ToString();
@@ -262,14 +264,14 @@ namespace CSU_CRM_WEB.Controllers
                 {
                     EmailHelper envia_email = new EmailHelper(Session["Empresa"].ToString());
                     envia_email.db = dbEmpresaPrimavera;
+                    envia_email.empresadb = db.Empresas.ToList().Where(p => p.CodEmpresa == Session["Empresa"].ToString()).First();
                     
                     
                     foreach (string cliente in CDU_EnviaCobranca)
                     {
                         
-
-
                         AspNetUsers currentUser = db.AspNetUsers.FirstOrDefault(x => x.UserName == User.Identity.Name);
+                        envia_email.user = currentUser;
                         envia_email.enviaEmailComRelatorio(cliente, files, tipoExtrato, currentUser.Email);
                         
                     }
