@@ -407,6 +407,7 @@
       <DependentUpon>PRIEmpresas.edmx</DependentUpon>
       <LastGenOutput>PRIEmpresas.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\Meridian32.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
@@ -464,7 +465,6 @@
     <Content Include="Views\Empresas\Index.cshtml" />
     <Content Include="Views\Empresas\ListaPendentesClientes.cshtml" />
     <Content Include="Views\Empresas\_ListaEmpresas.cshtml" />
-    <Content Include="Views\Empresas\ListaExtratoClientes.cshtml" />
     <Content Include="Views\Empresas\Create.cshtml" />
     <Content Include="Views\Empresas\Edit.cshtml" />
     <Content Include="Views\Empresas\Details.cshtml" />

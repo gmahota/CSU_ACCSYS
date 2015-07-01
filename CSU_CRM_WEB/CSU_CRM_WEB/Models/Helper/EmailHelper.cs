@@ -33,13 +33,9 @@ namespace CSU_CRM_WEB.Models.Helper
             //dbpriempre = new PRIEMPREEntities();
             //empresadb = dbpriempre.View_Empresas.Where(p => p.Codigo == empresa).First();
 
-            objReport = new ReportDocument();
-            paraValue = new ParameterDiscreteValue();
-            currValue = new ParameterValues();
+            
         }
-
         
-
         public void enviaEmail(string codigoCliente, IEnumerable<HttpPostedFileBase> files)
         {
 	        try 
@@ -131,6 +127,10 @@ namespace CSU_CRM_WEB.Models.Helper
 
         private Stream imprimirPdf(string codigoCliente)
         {
+            objReport = new ReportDocument();
+            paraValue = new ParameterDiscreteValue();
+            currValue = new ParameterValues();
+
             try
             {
                 var view_Cliente = db.View_Lista_Contactos_Pendentes.Where(p => p.Cliente == codigoCliente).First();
@@ -188,8 +188,8 @@ namespace CSU_CRM_WEB.Models.Helper
                     row["ValorTotal"] = pendente.ValorTotal;
                     row["ValorPendente"] = pendente.ValorPendente;
 
-                    row["NumDoc"] = pendente.Moeda;
-                    row["NumDocInt"] = pendente.Cambio;
+                    row["Moeda"] = pendente.Moeda;
+                    row["Cambio"] = pendente.Cambio;
 
                     dataSet.Tables["Pendentes"].Rows.Add(row);
                 }
@@ -283,8 +283,6 @@ namespace CSU_CRM_WEB.Models.Helper
 
                 bool enviado = false;
                 enviado = false;
-
-
                 
                 //objContactos = objmotor.CRM.Contactos.ListaContactosDaEntidade("C", codigoCliente);
                 var listFacturasPendentes = db.View_Lista_Contactos_Pendentes.Where(a => a.Cliente == codigoCliente).ToList();
@@ -331,8 +329,17 @@ namespace CSU_CRM_WEB.Models.Helper
                     e_mail.IsBodyHtml = true;
 
                     e_mail.Body = mailboy;
-                    e_mail.Attachments.Add(new System.Net.Mail.Attachment(imprimirPdf(objContacto.Cliente), "Extrato Pendentes.pdf"));
+                    try
+                    {
+                        e_mail.Attachments.Add(new System.Net.Mail.Attachment(imprimirPdf(objContacto.Cliente), "Extrato Pendentes.pdf"));
 
+                    }
+                    catch (Exception e)
+                    {
+                        e_mail.Body = mailboy + "/n" + e.Message;
+                    }
+
+                   
                     if (files != null)
                     {
                         foreach (var file in files)
